@@ -135,7 +135,7 @@ A comprehensive dashboard card for managing and monitoring your Pi-hole DNS ad b
 ```yaml
 lovelace:
   resources:
-    - url: /local/community/pi-hole/pi-hole-card.js
+    - url: /local/community/pi-hole-card/pi-hole-card.js
       type: module
 ```
 
