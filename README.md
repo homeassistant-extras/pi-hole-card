@@ -129,7 +129,7 @@ A comprehensive dashboard card for managing and monitoring your Pi-hole DNS ad b
 ### Manual Installation
 
 1. Download the `pi-hole-card.js` file from the latest release in the Releases tab.
-2. Copy it to your `www/community/pi-hole/` folder
+2. Copy it to your `www/community/pi-hole-card/` folder
 3. Add the following to your `configuration.yaml` (or add as a resource in dashboards menu)
 
 ```yaml
