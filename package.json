@@ -33,7 +33,7 @@
     "jsdom": "^26.1.0",
     "mocha": "^11.2.2",
     "nyc": "^17.1.0",
-    "parcel": "^2.14.4",
+    "parcel": "^2.15.0",
     "prettier": "3.5.3",
     "prettier-plugin-organize-imports": "^4.1.0",
     "proxyquire": "^2.1.3",
