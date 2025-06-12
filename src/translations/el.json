@@ -1,0 +1,22 @@
+{
+  "card": {
+    "stats": {
+      "total_queries": "Συνολικά ερωτήματα",
+      "active_clients": "{number} ενεργοί πελάτες",
+      "queries_blocked": "Αποκλεισμένα Ερωτήματα",
+      "list_blocked_queries": "Λίστα αποκλεισμένων ερωτημάτων",
+      "percentage_blocked": "Ποσοστό που αποκλείστηκε",
+      "list_all_queries": "Λίστα όλων των ερωτημάτων",
+      "domains_on_lists": "Τομείς στις Λίστες",
+      "manage_lists": "Διαχείριση Λιστών"
+    },
+    "sections": {
+      "pause": "Παύση Αποκλεισμού Διαφημίσεων",
+      "switches": "Διακόπτες",
+      "actions": "Ενέργειες"
+    },
+    "units": {
+      "seconds": "δευτερόλεπτα"
+    }
+  }
+}
