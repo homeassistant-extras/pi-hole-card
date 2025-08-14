@@ -22,6 +22,12 @@ export const mapEntitiesByTranslationKey = (
     ftl_info_message_count: 'info_message_count',
     status: 'status',
     action_ftl_purge_diagnosis_messages: 'purge_diagnosis_messages',
+
+    // backwards compatibility for HA integration
+    dns_queries: 'dns_queries_today',
+    ads_blocked: 'ads_blocked_today',
+    percent_ads_blocked: 'ads_percentage_blocked_today',
+    domains_being_blocked: 'domains_blocked',
   };
 
   const key = entity.translation_key;
