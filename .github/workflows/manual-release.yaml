@@ -45,6 +45,8 @@ jobs:
       - name: Generate release notes
         id: create-release-notes
         uses: johnyherangi/create-release-notes@main
+        with:
+          head-ref: ${{ github.ref_name }}
         env:
           GITHUB_TOKEN: ${{ github.token }}
 
