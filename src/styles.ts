@@ -327,9 +327,23 @@ export const styles = css`
   /* Pause buttons */
   .pause {
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .pause-controls {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .pause-buttons {
+    display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: center;
+    gap: 8px;
   }
 
   .pause mwc-button {

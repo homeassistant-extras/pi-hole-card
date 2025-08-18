@@ -44,6 +44,9 @@ export interface Config {
 
   /** Style for the switches */
   switch_spacing?: SwitchSpacing;
+
+  /** Options to enable disable features */
+  features?: Features[];
 }
 
 export type SwitchSpacing = 'flex' | 'space-around' | 'space-between';
@@ -56,6 +59,9 @@ export type Sections =
   | 'statistics'
   | 'sensors'
   | 'switches';
+
+/** Features to enable or disable functionality */
+export type Features = 'group_pausing';
 
 export interface SectionConfig {
   /** Action to perform on tap */

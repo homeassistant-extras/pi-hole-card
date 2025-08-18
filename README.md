@@ -257,6 +257,7 @@ If you're unsure what your Pi-hole device ID is, here are several ways to find i
 | entity_order       | list            | _none_       | Custom order for switch, button, sensor entities or dividers.      |
 | collapsed_sections | list            | _none_       | Sections to be initially collapsed. See below.                     |
 | switch_spacing     | string          | flex         | Layout style for switches: flex, space-around, space-between       |
+| features           | list            | See below    | Optional flags to toggle different features                        |
 
 ### Action Configuration
 
@@ -368,6 +369,33 @@ pause_durations:
 The UI will automatically display these in human-readable format (e.g., "5 minutes", "1 hour").
 
 ![Pause Ad-Blocking](assets/custom-pause.png)
+
+## Feature Flags
+
+Use feature flags to customize card behavior:
+
+```yaml
+features:
+  - group_pausing
+```
+
+| Feature       | Description          |
+| ------------- | -------------------- | --- |
+| group_pausing | Enable group pausing |     |
+
+### Group Pausing Feature
+
+When the `group_pausing` feature is enabled, the pause section will show a dropdown to select which pi or client group to pause, allowing you to pause individual instances or client groups. This is useful for targeting specific Pi-hole instances or client groups. When disabled (default), the pause buttons will pause all Pi-hole devices using the device-based service call.
+
+```yaml
+type: custom:pi-hole
+device_id: pi_hole_device_1
+features:
+  - group_pausing
+pause_durations:
+  - 300
+  - 900
+```
 
 ### Excluding Sections & Entities
 

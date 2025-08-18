@@ -132,7 +132,7 @@ const SCHEMA: HaFormSchema[] = [
     selector: {
       device: {
         filter: PI_HOLE_INTEGRATION_FILTER,
-        multiple: true,
+        //multiple: true, breaks the drop down?
       },
     },
     required: true,
@@ -300,6 +300,32 @@ const SCHEMA: HaFormSchema[] = [
         type: 'expandable',
         icon: 'mdi:remote',
         schema: ACTION_SCHEMA,
+      },
+    ],
+  },
+  {
+    name: 'features',
+    label: 'Features',
+    type: 'expandable' as const,
+    flatten: true,
+    icon: 'mdi:list-box',
+    schema: [
+      {
+        name: 'features',
+        label: 'Features',
+        required: false,
+        selector: {
+          select: {
+            multiple: true,
+            mode: 'list' as const,
+            options: [
+              {
+                label: 'Enable group pausing',
+                value: 'group_pausing',
+              },
+            ],
+          },
+        },
       },
     ],
   },
