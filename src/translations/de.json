@@ -1,0 +1,27 @@
+{
+  "card": {
+    "stats": {
+      "total_queries": "Gesamtanzahl der Anfragen",
+      "active_clients": "{number} aktive Clients",
+      "queries_blocked": "Blockierte Anfragen",
+      "list_blocked_queries": "Blockierte Anfragen anzeigen",
+      "percentage_blocked": "Prozentual blockiert",
+      "list_all_queries": "Alle Anfragen anzeigen",
+      "domains_on_lists": "Domains auf Listen",
+      "manage_lists": "Listen verwalten"
+    },
+    "sections": {
+      "pause": "Werbeblockierung pausieren",
+      "switches": "Schalter",
+      "actions": "Aktionen"
+    },
+    "units": {
+      "seconds": "Sekunden",
+      "second": "Sekunde",
+      "minutes": "Minuten",
+      "minute": "Minute",
+      "hours": "Stunden",
+      "hour": "Stunde"
+    }
+  }
+}

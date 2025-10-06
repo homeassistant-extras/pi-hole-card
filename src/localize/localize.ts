@@ -4,6 +4,7 @@ import type { TranslationKey } from '@type/locale';
 import * as el from '../translations/el.json';
 import * as en from '../translations/en.json';
 import * as es from '../translations/es.json';
+import * as de from '../translations/de.json';
 // Import other languages as needed above this line and in order
 
 // Define supported languages
@@ -11,6 +12,8 @@ const languages: Record<string, any> = {
   el: el,
   en: en,
   es: es,
+  de: de,
+  'de-DE': de,
   // Add more languages here in order
 };
 
