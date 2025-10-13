@@ -13,7 +13,6 @@ const languages: Record<string, any> = {
   en: en,
   es: es,
   de: de,
-  'de-DE': de,
   // Add more languages here in order
 };
 
