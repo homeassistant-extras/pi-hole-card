@@ -1,0 +1,68 @@
+{
+  "card": {
+    "stats": {
+      "total_queries": "Requêtes totales",
+      "active_clients": "{number} clients actifs",
+      "queries_blocked": "Requêtes bloquées",
+      "list_blocked_queries": "Liste des requêtes bloquées",
+      "percentage_blocked": "Pourcentage bloqué",
+      "list_all_queries": "Liste de toutes les requêtes",
+      "domains_on_lists": "Domaines listés",
+      "manage_lists": "Gérer les listes"
+    },
+    "sections": {
+      "pause": "Pause du bloqueur de pubs",
+      "switches": "Interrupteurs",
+      "actions": "Actions"
+    },
+    "units": {
+      "seconds": "secondes",
+      "second": "seconde",
+      "minutes": "minutes",
+      "minute": "minute",
+      "hours": "heures",
+      "hour": "heure"
+    },
+    "ui": {
+      "select_pi_or_group": "Sélectionner un Pi-hole ou un groupe",
+      "partial": "Partiel"
+    }
+  },
+  "editor": {
+    "space_around": "Espace autour",
+    "space_between": "Espace entre",
+    "actions": "Actions",
+    "footer": "Pied de page",
+    "header": "En-tête",
+    "pause_buttons": "Boutons de pause",
+    "statistics": "Statistiques",
+    "sensors": "Capteurs",
+    "switches": "Interrupteurs",
+    "tap_action": "Action sur un appui court",
+    "hold_action": "Action sur un appui long",
+    "double_tap_action": "Action sur un double appui",
+    "content": "Contenu",
+    "card_title": "Titre de la carte",
+    "card_icon": "Icône de la carte",
+    "layout": "Disposition",
+    "sections_to_exclude": "Sections à exclure",
+    "sections_collapsed_by_default": "Sections repliées par défaut",
+    "style_for_switches": "Style des interrupteurs",
+    "entities_to_exclude": "Entités à exclure",
+    "styles": "Styles",
+    "switch_spacing": "Espacement des interrupteurs",
+    "interactions": "Interactions",
+    "pause_durations": "Durées de pause",
+    "badge": "Badge",
+    "information": "Informations",
+    "controls": "Contrôles",
+    "features": "Fonctionnalités",
+    "disable_group_pausing": "Désactiver la pause de groupe",
+    "pause_60_seconds": "60 secondes",
+    "pause_5_minutes": "5 minutes",
+    "pause_15_minutes": "15 minutes",
+    "pi_hole_device": "Appareil Pi-hole",
+    "entity_display_order": "Ordre d'affichage des entités (cliquer dans l'ordre)",
+    "flex_default": "Flexible (par défaut)"
+  }
+}
