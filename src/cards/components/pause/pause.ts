@@ -84,7 +84,7 @@ export class PauseComponent extends HassUpdateMixin(LitElement) {
     return html`
       <div class="pause-controls">
         <ha-select
-          .label=${'Select Pi or Group'}
+          .label=${localize(this.hass!, 'card.ui.select_pi_or_group')}
           .value=${this.selectedEntityId}
           @selected=${this._handleSelectChange}
           fixedMenuPosition

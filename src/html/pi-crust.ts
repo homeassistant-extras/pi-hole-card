@@ -1,6 +1,7 @@
 import { show } from '@common/show-section';
 import { stateActive } from '@hass/common/entity/state_active';
 import type { HomeAssistant } from '@hass/types';
+import { localize } from '@localize/localize';
 import type { Config } from '@type/config';
 import type { PiHoleSetup } from '@type/types';
 import { html, nothing, type TemplateResult } from 'lit';
@@ -63,7 +64,9 @@ export const createCardHeader = (
         <ha-icon
           icon="${activeCount > 0 ? 'mdi:check-circle' : 'mdi:close-circle'}"
         ></ha-icon>
-        ${mixedStatus ? html`Partial` : stateDisplay(hass, primary.status!)}
+        ${mixedStatus
+          ? html`${localize(hass, 'card.ui.partial')}`
+          : stateDisplay(hass, primary.status!)}
         ${activeCount <= 0 && hasRemainingTime
           ? html`${stateDisplay(
               hass,

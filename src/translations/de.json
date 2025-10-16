@@ -22,6 +22,47 @@
       "minute": "Minute",
       "hours": "Stunden",
       "hour": "Stunde"
+    },
+    "ui": {
+      "select_pi_or_group": "Pi oder Gruppe auswählen",
+      "partial": "Teilweise"
     }
+  },
+  "editor": {
+    "space_around": "Platz umher",
+    "space_between": "Platz dazwischen",
+    "actions": "Aktionen",
+    "footer": "Fußzeile",
+    "header": "Kopfzeile",
+    "pause_buttons": "Pause-Tasten",
+    "statistics": "Statistiken",
+    "sensors": "Sensoren",
+    "switches": "Schalter",
+    "tap_action": "Tipp-Aktion",
+    "hold_action": "Halte-Aktion",
+    "double_tap_action": "Doppel-Tipp-Aktion",
+    "content": "Inhalt",
+    "card_title": "Karten-Titel",
+    "card_icon": "Karten-Symbol",
+    "layout": "Layout",
+    "sections_to_exclude": "Auszuschließende Abschnitte",
+    "sections_collapsed_by_default": "Standardmäßig eingeklappte Abschnitte",
+    "style_for_switches": "Stil für Schalter",
+    "entities_to_exclude": "Auszuschließende Entitäten",
+    "styles": "Stile",
+    "switch_spacing": "Schalter-Abstand",
+    "interactions": "Interaktionen",
+    "pause_durations": "Pause-Dauern",
+    "badge": "Abzeichen",
+    "information": "Informationen",
+    "controls": "Steuerungen",
+    "features": "Funktionen",
+    "disable_group_pausing": "Gruppen-Pausierung deaktivieren",
+    "pause_60_seconds": "60 Sekunden",
+    "pause_5_minutes": "5 Minuten",
+    "pause_15_minutes": "15 Minuten",
+    "pi_hole_device": "Pi-hole Gerät",
+    "entity_display_order": "Entitäts-Anzeigereihenfolge (in Reihenfolge klicken)",
+    "flex_default": "Flex (Standard)"
   }
 }

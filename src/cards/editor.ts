@@ -1,7 +1,10 @@
 import { fireEvent } from '@hass/common/dom/fire_event';
 import type { HaFormSchema } from '@hass/components/ha-form/types';
+import type { SelectOption } from '@hass/data/selector';
 import type { HomeAssistant } from '@hass/types';
+import { localize } from '@localize/localize';
 import type { Config, SectionConfig } from '@type/config';
+import type { TranslationKey } from '@type/locale';
 import { html, LitElement, nothing, type TemplateResult } from 'lit';
 import { state } from 'lit/decorators.js';
 
@@ -26,310 +29,325 @@ const PI_HOLE_ENTITY_FILTER = [
   },
 ];
 
-const SWITCH_SPACING_OPTIONS = [
-  {
-    label: 'Flex (default)',
-    value: 'flex',
-  },
-  {
-    label: 'Space Around',
-    value: 'space-around',
-  },
-  {
-    label: 'Space Between',
-    value: 'space-between',
-  },
-];
+const getSwitchSpacingOptions = (hass: HomeAssistant): SelectOption[] => {
+  const l = (label: TranslationKey) => localize(hass, label);
+  return [
+    {
+      label: l('editor.flex_default'),
+      value: 'flex',
+    },
+    {
+      label: l('editor.space_around'),
+      value: 'space-around',
+    },
+    {
+      label: l('editor.space_between'),
+      value: 'space-between',
+    },
+  ];
+};
 
-const SECTION_EXCLUDE_OPTIONS = [
-  {
-    label: 'Actions',
-    value: 'actions',
-  },
-  {
-    label: 'Footer',
-    value: 'footer',
-  },
-  {
-    label: 'Header',
-    value: 'header',
-  },
-  {
-    label: 'Pause Buttons',
-    value: 'pause',
-  },
-  {
-    label: 'Statistics',
-    value: 'statistics',
-  },
-  {
-    label: 'Sensors',
-    value: 'sensors',
-  },
-  {
-    label: 'Switches',
-    value: 'switches',
-  },
-];
+const getSectionExcludeOptions = (hass: HomeAssistant): SelectOption[] => {
+  const l = (label: TranslationKey) => localize(hass, label);
+  return [
+    {
+      label: l('editor.actions'),
+      value: 'actions',
+    },
+    {
+      label: l('editor.footer'),
+      value: 'footer',
+    },
+    {
+      label: l('editor.header'),
+      value: 'header',
+    },
+    {
+      label: l('editor.pause_buttons'),
+      value: 'pause',
+    },
+    {
+      label: l('editor.statistics'),
+      value: 'statistics',
+    },
+    {
+      label: l('editor.sensors'),
+      value: 'sensors',
+    },
+    {
+      label: l('editor.switches'),
+      value: 'switches',
+    },
+  ];
+};
 
-const COLLAPSED_SECTION_OPTIONS = [
-  {
-    label: 'Pause Buttons',
-    value: 'pause',
-  },
-  {
-    label: 'Switches',
-    value: 'switches',
-  },
-  {
-    label: 'Actions',
-    value: 'actions',
-  },
-];
+const getCollapsedSectionOptions = (hass: HomeAssistant): SelectOption[] => {
+  const l = (label: TranslationKey) => localize(hass, label);
+  return [
+    {
+      label: l('editor.pause_buttons'),
+      value: 'pause',
+    },
+    {
+      label: l('editor.switches'),
+      value: 'switches',
+    },
+    {
+      label: l('editor.actions'),
+      value: 'actions',
+    },
+  ];
+};
 
-const PAUSE_DURATION_OPTIONS = [
-  {
-    label: '60 seconds',
-    value: '60s',
-  },
-  {
-    label: '5 minutes',
-    value: '5m',
-  },
-  {
-    label: '15 minutes',
-    value: '15m',
-  },
-];
+const getPauseDurationOptions = (hass: HomeAssistant): SelectOption[] => {
+  const l = (label: TranslationKey) => localize(hass, label);
+  return [
+    {
+      label: l('editor.pause_60_seconds'),
+      value: '60s',
+    },
+    {
+      label: l('editor.pause_5_minutes'),
+      value: '5m',
+    },
+    {
+      label: l('editor.pause_15_minutes'),
+      value: '15m',
+    },
+  ];
+};
 
 const ACTION_SCHEMA = [
   {
     name: 'tap_action',
-    label: 'Tap Action',
+    label: 'editor.tap_action',
     selector: {
       ui_action: {},
     },
   },
   {
     name: 'hold_action',
-    label: 'Hold Action',
+    label: 'editor.hold_action',
     selector: {
       ui_action: {},
     },
   },
   {
     name: 'double_tap_action',
-    label: 'Double Tap Action',
+    label: 'editor.double_tap_action',
     selector: {
       ui_action: {},
     },
   },
 ];
 
-const SCHEMA: HaFormSchema[] = [
-  {
-    name: 'device_id',
-    selector: {
-      device: {
-        filter: PI_HOLE_INTEGRATION_FILTER,
-        //multiple: true, breaks the drop down?
+const getSchema = (hass: HomeAssistant): HaFormSchema[] => {
+  const l = (label: TranslationKey) => localize(hass, label);
+  return [
+    {
+      name: 'device_id',
+      selector: {
+        device: {
+          filter: PI_HOLE_INTEGRATION_FILTER,
+          //multiple: true, breaks the drop down?
+        },
       },
+      required: true,
+      label: 'editor.pi_hole_device',
     },
-    required: true,
-    label: `Pi-hole Device`,
-  },
-  {
-    name: 'content',
-    label: 'Content',
-    type: 'expandable',
-    flatten: true,
-    icon: 'mdi:text-short',
-    schema: [
-      {
-        name: 'title',
-        required: false,
-        label: 'Card Title',
-        selector: {
-          text: {},
-        },
-      },
-      {
-        name: 'icon',
-        required: false,
-        label: 'Card Icon',
-        selector: {
-          icon: {
-            placeholder: 'mdi:pi-hole',
+    {
+      name: 'content',
+      label: 'editor.content',
+      type: 'expandable',
+      flatten: true,
+      icon: 'mdi:text-short',
+      schema: [
+        {
+          name: 'title',
+          required: false,
+          label: 'editor.card_title',
+          selector: {
+            text: {},
           },
         },
-      },
-    ],
-  },
-  {
-    name: 'layout',
-    label: 'Layout',
-    type: 'expandable',
-    flatten: true,
-    icon: 'mdi:view-grid-plus',
-    schema: [
-      {
-        name: 'exclude_sections',
-        label: 'Sections to exclude',
-        required: false,
-        selector: {
-          select: {
-            multiple: true,
-            mode: 'list' as const,
-            options: SECTION_EXCLUDE_OPTIONS,
+        {
+          name: 'icon',
+          required: false,
+          label: 'editor.card_icon',
+          selector: {
+            icon: {
+              placeholder: 'mdi:pi-hole',
+            },
           },
         },
-      },
-      {
-        name: 'collapsed_sections',
-        label: 'Sections collapsed by default',
-        required: false,
-        selector: {
-          select: {
-            multiple: true,
-            mode: 'list' as const,
-            options: COLLAPSED_SECTION_OPTIONS,
+      ],
+    },
+    {
+      name: 'layout',
+      label: 'editor.layout',
+      type: 'expandable',
+      flatten: true,
+      icon: 'mdi:view-grid-plus',
+      schema: [
+        {
+          name: 'exclude_sections',
+          label: 'editor.sections_to_exclude',
+          required: false,
+          selector: {
+            select: {
+              multiple: true,
+              mode: 'list' as const,
+              options: getSectionExcludeOptions(hass),
+            },
           },
         },
-      },
-      {
-        name: 'switch_style',
-        label: 'Style for switches',
-        required: false,
-        selector: {
-          select: {
-            multiple: false,
-            mode: 'dropdown' as const,
-            options: SWITCH_SPACING_OPTIONS,
+        {
+          name: 'collapsed_sections',
+          label: 'editor.sections_collapsed_by_default',
+          required: false,
+          selector: {
+            select: {
+              multiple: true,
+              mode: 'list' as const,
+              options: getCollapsedSectionOptions(hass),
+            },
           },
         },
-      },
-      {
-        name: 'exclude_entities',
-        label: 'Entities to exclude',
-        required: false,
-        selector: {
-          entity: {
-            multiple: true,
-            filter: PI_HOLE_INTEGRATION_FILTER,
+        {
+          name: 'switch_style',
+          label: 'editor.style_for_switches',
+          required: false,
+          selector: {
+            select: {
+              multiple: false,
+              mode: 'dropdown' as const,
+              options: getSwitchSpacingOptions(hass),
+            },
           },
         },
-      },
-      {
-        name: 'entity_order',
-        label: 'Entity display order (click in order)',
-        required: false,
-        selector: {
-          entity: {
-            multiple: true,
-            filter: PI_HOLE_ENTITY_FILTER,
+        {
+          name: 'exclude_entities',
+          label: 'editor.entities_to_exclude',
+          required: false,
+          selector: {
+            entity: {
+              multiple: true,
+              filter: PI_HOLE_INTEGRATION_FILTER,
+            },
           },
         },
-      },
-    ],
-  },
-  {
-    name: 'styles',
-    label: 'Styles',
-    type: 'expandable',
-    flatten: true,
-    icon: 'mdi:brush-variant',
-    schema: [
-      {
-        name: 'switch_spacing',
-        label: 'Switch Spacing',
-        required: false,
-        selector: {
-          select: {
-            multiple: false,
-            mode: 'dropdown' as const,
-            options: SWITCH_SPACING_OPTIONS,
+        {
+          name: 'entity_order',
+          label: 'editor.entity_display_order',
+          required: false,
+          selector: {
+            entity: {
+              multiple: true,
+              filter: PI_HOLE_ENTITY_FILTER,
+            },
           },
         },
-      },
-    ],
-  },
-  {
-    name: 'interactions',
-    label: 'Interactions',
-    type: 'expandable',
-    flatten: true,
-    icon: 'mdi:gesture-tap',
-    schema: [
-      {
-        name: 'pause_durations',
-        label: 'Pause durations',
-        required: false,
-        selector: {
-          select: {
-            multiple: true,
-            custom_value: true,
-            mode: 'list' as const,
-            options: PAUSE_DURATION_OPTIONS,
+      ],
+    },
+    {
+      name: 'styles',
+      label: 'editor.styles',
+      type: 'expandable',
+      flatten: true,
+      icon: 'mdi:brush-variant',
+      schema: [
+        {
+          name: 'switch_spacing',
+          label: 'editor.switch_spacing',
+          required: false,
+          selector: {
+            select: {
+              multiple: false,
+              mode: 'dropdown' as const,
+              options: getSwitchSpacingOptions(hass),
+            },
           },
         },
-      },
-      {
-        name: 'badge',
-        label: 'Badge',
-        type: 'expandable',
-        icon: 'mdi:badge-account-horizontal',
-        schema: ACTION_SCHEMA,
-      },
-      {
-        name: 'stats',
-        label: 'Statistics',
-        type: 'expandable',
-        icon: 'mdi:counter',
-        schema: ACTION_SCHEMA,
-      },
-      {
-        name: 'info',
-        label: 'Information',
-        type: 'expandable',
-        icon: 'mdi:information-outline',
-        schema: ACTION_SCHEMA,
-      },
-      {
-        name: 'controls',
-        label: 'Controls',
-        type: 'expandable',
-        icon: 'mdi:remote',
-        schema: ACTION_SCHEMA,
-      },
-    ],
-  },
-  {
-    name: 'features',
-    label: 'Features',
-    type: 'expandable' as const,
-    flatten: true,
-    icon: 'mdi:list-box',
-    schema: [
-      {
-        name: 'features',
-        label: 'Features',
-        required: false,
-        selector: {
-          select: {
-            multiple: true,
-            mode: 'list' as const,
-            options: [
-              {
-                label: 'Disable group pausing',
-                value: 'disable_group_pausing',
-              },
-            ],
+      ],
+    },
+    {
+      name: 'interactions',
+      label: 'editor.interactions',
+      type: 'expandable',
+      flatten: true,
+      icon: 'mdi:gesture-tap',
+      schema: [
+        {
+          name: 'pause_durations',
+          label: 'editor.pause_durations',
+          required: false,
+          selector: {
+            select: {
+              multiple: true,
+              custom_value: true,
+              mode: 'list' as const,
+              options: getPauseDurationOptions(hass),
+            },
           },
         },
-      },
-    ],
-  },
-];
+        {
+          name: 'badge',
+          label: 'editor.badge',
+          type: 'expandable',
+          icon: 'mdi:badge-account-horizontal',
+          schema: ACTION_SCHEMA,
+        },
+        {
+          name: 'stats',
+          label: 'editor.statistics',
+          type: 'expandable',
+          icon: 'mdi:counter',
+          schema: ACTION_SCHEMA,
+        },
+        {
+          name: 'info',
+          label: 'editor.information',
+          type: 'expandable',
+          icon: 'mdi:information-outline',
+          schema: ACTION_SCHEMA,
+        },
+        {
+          name: 'controls',
+          label: 'editor.controls',
+          type: 'expandable',
+          icon: 'mdi:remote',
+          schema: ACTION_SCHEMA,
+        },
+      ],
+    },
+    {
+      name: 'features',
+      label: 'editor.features',
+      type: 'expandable' as const,
+      flatten: true,
+      icon: 'mdi:list-box',
+      schema: [
+        {
+          name: 'features',
+          label: 'editor.features',
+          required: false,
+          selector: {
+            select: {
+              multiple: true,
+              mode: 'list' as const,
+              options: [
+                {
+                  label: l('editor.disable_group_pausing'),
+                  value: 'disable_group_pausing',
+                },
+              ],
+            },
+          },
+        },
+      ],
+    },
+  ];
+};
 
 export class PiHoleCardEditor extends LitElement {
   /**
@@ -357,8 +375,9 @@ export class PiHoleCardEditor extends LitElement {
       <ha-form
         .hass=${this.hass}
         .data=${this._config}
-        .schema=${SCHEMA}
-        .computeLabel=${(s: HaFormSchema) => s.label}
+        .schema=${getSchema(this.hass)}
+        .computeLabel=${(s: HaFormSchema) =>
+          localize(this.hass, s.label as any)}
         @value-changed=${this._valueChanged}
       ></ha-form>
     `;

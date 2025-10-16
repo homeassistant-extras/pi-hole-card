@@ -22,6 +22,47 @@
       "minute": "λεπτό",
       "hours": "ώρες",
       "hour": "ώρα"
+    },
+    "ui": {
+      "select_pi_or_group": "Επιλέξτε Pi ή Ομάδα",
+      "partial": "Μερικό"
     }
+  },
+  "editor": {
+    "space_around": "Χώρος Γύρω",
+    "space_between": "Χώρος Ανάμεσα",
+    "actions": "Ενέργειες",
+    "footer": "Υποσέλιδο",
+    "header": "Κεφαλίδα",
+    "pause_buttons": "Κουμπιά Παύσης",
+    "statistics": "Στατιστικά",
+    "sensors": "Αισθητήρες",
+    "switches": "Διακόπτες",
+    "tap_action": "Ενέργεια Αφής",
+    "hold_action": "Ενέργεια Κράτησης",
+    "double_tap_action": "Ενέργεια Διπλής Αφής",
+    "content": "Περιεχόμενο",
+    "card_title": "Τίτλος Κάρτας",
+    "card_icon": "Εικονίδιο Κάρτας",
+    "layout": "Διάταξη",
+    "sections_to_exclude": "Ενότητες προς εξαίρεση",
+    "sections_collapsed_by_default": "Ενότητες που συμπτύσσονται από προεπιλογή",
+    "style_for_switches": "Στυλ για διακόπτες",
+    "entities_to_exclude": "Οντότητες προς εξαίρεση",
+    "styles": "Στυλ",
+    "switch_spacing": "Διάστημα Διακοπτών",
+    "interactions": "Αλληλεπιδράσεις",
+    "pause_durations": "Διάρκειες παύσης",
+    "badge": "Σήμα",
+    "information": "Πληροφορίες",
+    "controls": "Έλεγχοι",
+    "features": "Χαρακτηριστικά",
+    "disable_group_pausing": "Απενεργοποίηση παύσης ομάδας",
+    "pause_60_seconds": "60 δευτερόλεπτα",
+    "pause_5_minutes": "5 λεπτά",
+    "pause_15_minutes": "15 λεπτά",
+    "pi_hole_device": "Συσκευή Pi-hole",
+    "entity_display_order": "Σειρά εμφάνισης οντοτήτων (κάντε κλικ με σειρά)",
+    "flex_default": "Flex (προεπιλογή)"
   }
 }

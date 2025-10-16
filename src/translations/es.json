@@ -22,6 +22,47 @@
       "minute": "minuto",
       "hours": "horas",
       "hour": "hora"
+    },
+    "ui": {
+      "select_pi_or_group": "Seleccionar Pi o Grupo",
+      "partial": "Parcial"
     }
+  },
+  "editor": {
+    "space_around": "Espacio Alrededor",
+    "space_between": "Espacio Entre",
+    "actions": "Acciones",
+    "footer": "Pie de Página",
+    "header": "Encabezado",
+    "pause_buttons": "Botones de Pausa",
+    "statistics": "Estadísticas",
+    "sensors": "Sensores",
+    "switches": "Interruptores",
+    "tap_action": "Acción de Toque",
+    "hold_action": "Acción de Mantener",
+    "double_tap_action": "Acción de Doble Toque",
+    "content": "Contenido",
+    "card_title": "Título de la Tarjeta",
+    "card_icon": "Icono de la Tarjeta",
+    "layout": "Diseño",
+    "sections_to_exclude": "Secciones a excluir",
+    "sections_collapsed_by_default": "Secciones colapsadas por defecto",
+    "style_for_switches": "Estilo para interruptores",
+    "entities_to_exclude": "Entidades a excluir",
+    "styles": "Estilos",
+    "switch_spacing": "Espaciado de Interruptores",
+    "interactions": "Interacciones",
+    "pause_durations": "Duración de pausas",
+    "badge": "Insignia",
+    "information": "Información",
+    "controls": "Controles",
+    "features": "Características",
+    "disable_group_pausing": "Deshabilitar pausa de grupo",
+    "pause_60_seconds": "60 segundos",
+    "pause_5_minutes": "5 minutos",
+    "pause_15_minutes": "15 minutos",
+    "pi_hole_device": "Dispositivo Pi-hole",
+    "entity_display_order": "Orden de visualización de entidades (hacer clic en orden)",
+    "flex_default": "Flex (predeterminado)"
   }
 }

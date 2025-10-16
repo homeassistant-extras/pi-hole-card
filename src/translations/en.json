@@ -22,6 +22,47 @@
       "minute": "minute",
       "hours": "hours",
       "hour": "hour"
+    },
+    "ui": {
+      "select_pi_or_group": "Select Pi or Group",
+      "partial": "Partial"
     }
+  },
+  "editor": {
+    "space_around": "Space Around",
+    "space_between": "Space Between",
+    "actions": "Actions",
+    "footer": "Footer",
+    "header": "Header",
+    "pause_buttons": "Pause Buttons",
+    "statistics": "Statistics",
+    "sensors": "Sensors",
+    "switches": "Switches",
+    "tap_action": "Tap Action",
+    "hold_action": "Hold Action",
+    "double_tap_action": "Double Tap Action",
+    "content": "Content",
+    "card_title": "Card Title",
+    "card_icon": "Card Icon",
+    "layout": "Layout",
+    "sections_to_exclude": "Sections to exclude",
+    "sections_collapsed_by_default": "Sections collapsed by default",
+    "style_for_switches": "Style for switches",
+    "entities_to_exclude": "Entities to exclude",
+    "styles": "Styles",
+    "switch_spacing": "Switch Spacing",
+    "interactions": "Interactions",
+    "pause_durations": "Pause durations",
+    "badge": "Badge",
+    "information": "Information",
+    "controls": "Controls",
+    "features": "Features",
+    "disable_group_pausing": "Disable group pausing",
+    "pause_60_seconds": "60 seconds",
+    "pause_5_minutes": "5 minutes",
+    "pause_15_minutes": "15 minutes",
+    "pi_hole_device": "Pi-hole Device",
+    "entity_display_order": "Entity display order (click in order)",
+    "flex_default": "Flex (default)"
   }
 }
