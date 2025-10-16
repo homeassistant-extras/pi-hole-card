@@ -12,7 +12,7 @@ export const numberFormatToLocale = (
     case NumberFormat.comma_decimal:
       return ['en-US', 'en']; // Use United States with fallback to English formatting 1,234,567.89
     case NumberFormat.decimal_comma:
-      return ['de', 'es', 'it']; // Use German with fallback to Spanish then Italian formatting 1.234.567,89
+      return ['de', 'es', 'it', 'bg']; // Use German with fallback to Spanish then Italian formatting 1.234.567,89
     case NumberFormat.space_comma:
       return ['fr', 'sv', 'cs']; // Use French with fallback to Swedish and Czech formatting 1 234 567,89
     case NumberFormat.system:
