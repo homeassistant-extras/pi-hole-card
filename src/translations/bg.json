@@ -1,0 +1,27 @@
+{
+  "card": {
+    "stats": {
+      "total_queries": "Общ брой заявки",
+      "active_clients": "{number} активни клиенти",
+      "queries_blocked": "Блокирани заявки",
+      "list_blocked_queries": "Списък с блокирани заявки",
+      "percentage_blocked": "Процент блокирани",
+      "list_all_queries": "Списък с всички заявки",
+      "domains_on_lists": "Списък с домейни",
+      "manage_lists": "Управление на списъци"
+    },
+    "sections": {
+      "pause": "Пауза на блокирането на реклами",
+      "switches": "Ключове",
+      "actions": "Действия"
+    },
+    "units": {
+      "seconds": "секунди",
+      "second": "секунда",
+      "minutes": "минути",
+      "minute": "минута",
+      "hours": "часове",
+      "hour": "час"
+    }
+  }
+}
