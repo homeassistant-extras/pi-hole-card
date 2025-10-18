@@ -1,0 +1,68 @@
+{
+  "card": {
+    "stats": {
+      "total_queries": "Richieste totali",
+      "active_clients": "{number} clienti attivi",
+      "queries_blocked": "Richieste bloccate",
+      "list_blocked_queries": "Elenco richieste bloccate",
+      "percentage_blocked": "Percentuale bloccate",
+      "list_all_queries": "Elenca tutte le richieste",
+      "domains_on_lists": "Domini in elenco",
+      "manage_lists": "Gestisci le liste"
+    },
+    "sections": {
+      "pause": "Metti in pausa gli Ad-Blocking",
+      "switches": "Opzioni",
+      "actions": "Azioni"
+    },
+    "units": {
+      "seconds": "secondi",
+      "second": "secondo",
+      "minutes": "minuti",
+      "minute": "minuto",
+      "hours": "ore",
+      "hour": "ora"
+    },
+    "ui": {
+      "select_pi_or_group": "Seleziona Pi o Gruppo",
+      "partial": "Parziale"
+    }
+  },
+  "editor": {
+    "space_around": "Spazi prima e dopo",
+    "space_between": "Spazi in mezzo",
+    "actions": "Azioni",
+    "footer": "Piè di pagina",
+    "header": "Intestazione",
+    "pause_buttons": "Pulsanti di pausa",
+    "statistics": "Statistiche",
+    "sensors": "Sensori",
+    "switches": "Opzioni",
+    "tap_action": "Azione con Tap",
+    "hold_action": "Azione con Hold",
+    "double_tap_action": "Azione con Doppio Tap",
+    "content": "Contenunto",
+    "card_title": "Titolo della Card",
+    "card_icon": "Icona della Card",
+    "layout": "Layout",
+    "sections_to_exclude": "Sezioni da escludere",
+    "sections_collapsed_by_default": "Sezioni nascoste di default",
+    "style_for_switches": "Stile degli switch",
+    "entities_to_exclude": "Entità da escludere",
+    "styles": "Stili",
+    "switch_spacing": "Spaziatura Switch",
+    "interactions": "Interazioni",
+    "pause_durations": "Durata delle pause",
+    "badge": "Badge",
+    "information": "Informazioni",
+    "controls": "Controlli",
+    "features": "Opzioni",
+    "disable_group_pausing": "Disabilita la pausa per i gruppi",
+    "pause_60_seconds": "60 secondi",
+    "pause_5_minutes": "5 minuti",
+    "pause_15_minutes": "15 minuti",
+    "pi_hole_device": "Dispositivo Pi-hole",
+    "entity_display_order": "Ordine delle Entità (cliccare in ordine)",
+    "flex_default": "Flex (default)"
+  }
+}
