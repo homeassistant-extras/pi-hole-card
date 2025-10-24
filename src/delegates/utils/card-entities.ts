@@ -30,7 +30,7 @@ export const getDeviceEntities = (
       const name =
         state.attributes.friendly_name === deviceName
           ? deviceName
-          : state.attributes.friendly_name.replace(deviceName, '').trim();
+          : state.attributes.friendly_name?.replace(deviceName, '').trim();
       return {
         entity_id: entity.entity_id,
         translation_key: entity.translation_key,
