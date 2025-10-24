@@ -648,6 +648,7 @@ The Pi-hole card supports multiple languages to provide a better experience for 
 - English
 - Spanish
 - Greek
+- Italian
 
 Want to contribute a translation? See our [translation guide](TRANSLATIONS.md) for instructions.
 
