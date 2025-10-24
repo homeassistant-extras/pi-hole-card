@@ -4,10 +4,13 @@ Thank you for your interest in helping translate the Pi-hole Card! Translations 
 
 ## Currently Supported Languages
 
+- Bulgarian (bg)
+- German (de)
 - English (en)
 - Spanish (es)
 - Greek (el)
 - Italian (it)
+- French (fr)
 - _Your language could be next!_
 
 ## How to Add a Translation

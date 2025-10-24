@@ -1,20 +1,24 @@
 import type { HomeAssistant } from '@hass/types';
 import type { TranslationKey } from '@type/locale';
 
+import * as bg from '../translations/bg.json';
 import * as el from '../translations/el.json';
 import * as en from '../translations/en.json';
 import * as es from '../translations/es.json';
 import * as de from '../translations/de.json';
 import * as it from '../translations/it.json';
+import * as fr from '../translations/fr.json';
 // Import other languages as needed above this line and in order
 
 // Define supported languages
 const languages: Record<string, any> = {
+  bg: bg,
   el: el,
   en: en,
   es: es,
   de: de,
   it: it,
+  fr: fr,
   // Add more languages here in order
 };
 
