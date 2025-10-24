@@ -93,11 +93,11 @@ describe('editor.ts', () => {
             },
           },
           required: true,
-          label: `Pi-hole Device`,
+          label: `editor.pi_hole_device`,
         },
         {
           name: 'content',
-          label: 'Content',
+          label: 'editor.content',
           type: 'expandable',
           flatten: true,
           icon: 'mdi:text-short',
@@ -105,7 +105,7 @@ describe('editor.ts', () => {
             {
               name: 'title',
               required: false,
-              label: 'Card Title',
+              label: 'editor.card_title',
               selector: {
                 text: {},
               },
@@ -113,7 +113,7 @@ describe('editor.ts', () => {
             {
               name: 'icon',
               required: false,
-              label: 'Card Icon',
+              label: 'editor.card_icon',
               selector: {
                 icon: {
                   placeholder: 'mdi:pi-hole',
@@ -124,14 +124,14 @@ describe('editor.ts', () => {
         },
         {
           name: 'layout',
-          label: 'Layout',
+          label: 'editor.layout',
           type: 'expandable',
           flatten: true,
           icon: 'mdi:view-grid-plus',
           schema: [
             {
               name: 'exclude_sections',
-              label: 'Sections to exclude',
+              label: 'editor.sections_to_exclude',
               required: false,
               selector: {
                 select: {
@@ -172,7 +172,7 @@ describe('editor.ts', () => {
             },
             {
               name: 'collapsed_sections',
-              label: 'Sections collapsed by default',
+              label: 'editor.sections_collapsed_by_default',
               required: false,
               selector: {
                 select: {
@@ -198,7 +198,7 @@ describe('editor.ts', () => {
             },
             {
               name: 'switch_style',
-              label: 'Style for switches',
+              label: 'editor.style_for_switches',
               required: false,
               selector: {
                 select: {
@@ -223,7 +223,7 @@ describe('editor.ts', () => {
             },
             {
               name: 'exclude_entities',
-              label: 'Entities to exclude',
+              label: 'editor.entities_to_exclude',
               required: false,
               selector: {
                 entity: {
@@ -241,7 +241,7 @@ describe('editor.ts', () => {
             },
             {
               name: 'entity_order',
-              label: 'Entity display order (click in order)',
+              label: 'editor.entity_display_order',
               required: false,
               selector: {
                 entity: {
@@ -264,14 +264,14 @@ describe('editor.ts', () => {
         },
         {
           name: 'styles',
-          label: 'Styles',
+          label: 'editor.styles',
           type: 'expandable',
           flatten: true,
           icon: 'mdi:brush-variant',
           schema: [
             {
               name: 'switch_spacing',
-              label: 'Switch Spacing',
+              label: 'editor.switch_spacing',
               required: false,
               selector: {
                 select: {
@@ -298,14 +298,14 @@ describe('editor.ts', () => {
         },
         {
           name: 'interactions',
-          label: 'Interactions',
+          label: 'editor.interactions',
           type: 'expandable',
           flatten: true,
           icon: 'mdi:gesture-tap',
           schema: [
             {
               name: 'pause_durations',
-              label: 'Pause durations',
+              label: 'editor.pause_durations',
               required: false,
               selector: {
                 select: {
@@ -331,27 +331,27 @@ describe('editor.ts', () => {
             },
             {
               name: 'badge',
-              label: 'Badge',
+              label: 'editor.badge',
               type: 'expandable',
               icon: 'mdi:badge-account-horizontal',
               schema: [
                 {
                   name: 'tap_action',
-                  label: 'Tap Action',
+                  label: 'editor.tap_action',
                   selector: {
                     ui_action: {},
                   },
                 },
                 {
                   name: 'hold_action',
-                  label: 'Hold Action',
+                  label: 'editor.hold_action',
                   selector: {
                     ui_action: {},
                   },
                 },
                 {
                   name: 'double_tap_action',
-                  label: 'Double Tap Action',
+                  label: 'editor.double_tap_action',
                   selector: {
                     ui_action: {},
                   },
@@ -360,27 +360,27 @@ describe('editor.ts', () => {
             },
             {
               name: 'stats',
-              label: 'Statistics',
+              label: 'editor.statistics',
               type: 'expandable',
               icon: 'mdi:counter',
               schema: [
                 {
                   name: 'tap_action',
-                  label: 'Tap Action',
+                  label: 'editor.tap_action',
                   selector: {
                     ui_action: {},
                   },
                 },
                 {
                   name: 'hold_action',
-                  label: 'Hold Action',
+                  label: 'editor.hold_action',
                   selector: {
                     ui_action: {},
                   },
                 },
                 {
                   name: 'double_tap_action',
-                  label: 'Double Tap Action',
+                  label: 'editor.double_tap_action',
                   selector: {
                     ui_action: {},
                   },
@@ -389,27 +389,27 @@ describe('editor.ts', () => {
             },
             {
               name: 'info',
-              label: 'Information',
+              label: 'editor.information',
               type: 'expandable',
               icon: 'mdi:information-outline',
               schema: [
                 {
                   name: 'tap_action',
-                  label: 'Tap Action',
+                  label: 'editor.tap_action',
                   selector: {
                     ui_action: {},
                   },
                 },
                 {
                   name: 'hold_action',
-                  label: 'Hold Action',
+                  label: 'editor.hold_action',
                   selector: {
                     ui_action: {},
                   },
                 },
                 {
                   name: 'double_tap_action',
-                  label: 'Double Tap Action',
+                  label: 'editor.double_tap_action',
                   selector: {
                     ui_action: {},
                   },
@@ -418,27 +418,27 @@ describe('editor.ts', () => {
             },
             {
               name: 'controls',
-              label: 'Controls',
+              label: 'editor.controls',
               type: 'expandable',
               icon: 'mdi:remote',
               schema: [
                 {
                   name: 'tap_action',
-                  label: 'Tap Action',
+                  label: 'editor.tap_action',
                   selector: {
                     ui_action: {},
                   },
                 },
                 {
                   name: 'hold_action',
-                  label: 'Hold Action',
+                  label: 'editor.hold_action',
                   selector: {
                     ui_action: {},
                   },
                 },
                 {
                   name: 'double_tap_action',
-                  label: 'Double Tap Action',
+                  label: 'editor.double_tap_action',
                   selector: {
                     ui_action: {},
                   },
@@ -450,14 +450,14 @@ describe('editor.ts', () => {
 
         {
           name: 'features',
-          label: 'Features',
+          label: 'editor.features',
           type: 'expandable' as const,
           flatten: true,
           icon: 'mdi:list-box',
           schema: [
             {
               name: 'features',
-              label: 'Features',
+              label: 'editor.features',
               required: false,
               selector: {
                 select: {

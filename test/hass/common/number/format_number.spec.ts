@@ -22,7 +22,7 @@ describe('format_number.ts', () => {
         number_format: NumberFormat.decimal_comma,
       } as any;
       const result = numberFormatToLocale(localeOptions);
-      expect(result).to.deep.equal(['de', 'es', 'it']);
+      expect(result).to.deep.equal(['de', 'es', 'it', 'bg']);
     });
 
     it('should return correct locale for space_comma format', () => {
@@ -139,7 +139,7 @@ describe('format_number.ts', () => {
         number_format: NumberFormat.decimal_comma,
       } as any;
       const result = formatNumber('123.45', localeOptions);
-      expect(result).to.include('formatted:123.45:[\"de\",\"es\",\"it\"]');
+      expect(result).to.include('formatted:123.45:[\"de\",\"es\",\"it\",\"bg\"]');
     });
 
     it('should return the original string for non-numeric strings', () => {

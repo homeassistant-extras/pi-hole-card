@@ -64,6 +64,6 @@ describe('round.ts', () => {
   it('should handle negative precision (although uncommon)', () => {
     expect(round(1234, -2)).to.equal(1200);
     expect(round(5678, -3)).to.equal(6000);
-    expect(round(54321, -4)).to.equal(50000.00000000001); //? lol
+    expect(round(54321, -4)).to.equal(50000);
   });
 });
