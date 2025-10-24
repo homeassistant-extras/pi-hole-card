@@ -6,6 +6,7 @@ import * as el from '../translations/el.json';
 import * as en from '../translations/en.json';
 import * as es from '../translations/es.json';
 import * as de from '../translations/de.json';
+import * as fr from '../translations/fr.json';
 // Import other languages as needed above this line and in order
 
 // Define supported languages
@@ -15,6 +16,7 @@ const languages: Record<string, any> = {
   en: en,
   es: es,
   de: de,
+  fr: fr,
   // Add more languages here in order
 };
 
