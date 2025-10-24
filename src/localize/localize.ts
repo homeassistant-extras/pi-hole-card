@@ -5,7 +5,7 @@ import * as el from '../translations/el.json';
 import * as en from '../translations/en.json';
 import * as es from '../translations/es.json';
 import * as de from '../translations/de.json';
-import * as de from '../translations/it.json';
+import * as it from '../translations/it.json';
 // Import other languages as needed above this line and in order
 
 // Define supported languages
