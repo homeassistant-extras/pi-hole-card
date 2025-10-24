@@ -1,0 +1,68 @@
+{
+  "card": {
+    "stats": {
+      "total_queries": "Общ брой заявки",
+      "active_clients": "{number} активни клиенти",
+      "queries_blocked": "Блокирани заявки",
+      "list_blocked_queries": "Списък с блокирани заявки",
+      "percentage_blocked": "Процент блокирани",
+      "list_all_queries": "Списък с всички заявки",
+      "domains_on_lists": "Списък с домейни",
+      "manage_lists": "Управление на списъци"
+    },
+    "sections": {
+      "pause": "Пауза на блокирането на реклами",
+      "switches": "Ключове",
+      "actions": "Действия"
+    },
+    "units": {
+      "seconds": "секунди",
+      "second": "секунда",
+      "minutes": "минути",
+      "minute": "минута",
+      "hours": "часове",
+      "hour": "час"
+    },
+    "ui": {
+      "select_pi_or_group": "Изберете Pi или Група",
+      "partial": "Частичен"
+    }
+  },
+  "editor": {
+    "space_around": "Пространство около",
+    "space_between": "Пространство между",
+    "actions": "Действия",
+    "footer": "Долна част",
+    "header": "Горна част",
+    "pause_buttons": "Бутони за пауза",
+    "statistics": "Статистика",
+    "sensors": "Сензори",
+    "switches": "Ключове",
+    "tap_action": "Действие при натискане",
+    "hold_action": "Действие при задържане",
+    "double_tap_action": "Действие при двойно натискане",
+    "content": "Съдържание",
+    "card_title": "Заглавие на картата",
+    "card_icon": "Икона на картата",
+    "layout": "Подредба",
+    "sections_to_exclude": "Секции за изключване",
+    "sections_collapsed_by_default": "Свити секции по подразбиране",
+    "style_for_switches": "Стил на ключове",
+    "entities_to_exclude": "Обекти за изключване",
+    "styles": "Стилове",
+    "switch_spacing": "Разстояние между ключовете",
+    "interactions": "Взаимодействия",
+    "pause_durations": "Продължителност на пауза",
+    "badge": "Значка",
+    "information": "Информация",
+    "controls": "Контроли",
+    "features": "Функции",
+    "disable_group_pausing": "Деактивиране на паузата за групи",
+    "pause_60_seconds": "60 секунди",
+    "pause_5_minutes": "5 минути",
+    "pause_15_minutes": "15 минути",
+    "pi_hole_device": "Pi-hole устройство",
+    "entity_display_order": "Ред на показване на обектите (кликване в ред)",
+    "flex_default": "Flex (по подразбиране)"
+  }
+}
