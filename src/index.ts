@@ -1,12 +1,14 @@
 import { PiHoleCard } from '@cards/card';
 import { PauseComponent } from '@cards/components/pause/pause';
 import { PiHoleCardEditor } from '@cards/editor';
+import { SystemMetricsGraph } from '@html/components/system-metrics-graph';
 import { version } from '../package.json';
 
 // Register the custom elements with the browser
 customElements.define('pi-hole', PiHoleCard);
 customElements.define('pi-hole-editor', PiHoleCardEditor);
 customElements.define('pause-component', PauseComponent);
+customElements.define('system-metrics-graph', SystemMetricsGraph);
 
 // Ensure the customCards array exists on the window object
 window.customCards = window.customCards || [];

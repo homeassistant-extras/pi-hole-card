@@ -55,6 +55,10 @@ const getSectionExcludeOptions = (hass: HomeAssistant): SelectOption[] => {
       value: 'actions',
     },
     {
+      label: l('editor.chart'),
+      value: 'chart',
+    },
+    {
       label: l('editor.footer'),
       value: 'footer',
     },
@@ -317,6 +321,43 @@ const getSchema = (hass: HomeAssistant): HaFormSchema[] => {
           type: 'expandable',
           icon: 'mdi:remote',
           schema: ACTION_SCHEMA,
+        },
+      ],
+    },
+    {
+      name: 'chart',
+      label: 'editor.chart',
+      type: 'expandable' as const,
+      icon: 'mdi:chart-line',
+      schema: [
+        {
+          name: 'line_type',
+          label: 'editor.chart_line_type',
+          required: false,
+          selector: {
+            select: {
+              multiple: false,
+              mode: 'dropdown' as const,
+              options: [
+                {
+                  label: l('editor.chart_line_type_normal'),
+                  value: 'normal',
+                },
+                {
+                  label: l('editor.chart_line_type_gradient'),
+                  value: 'gradient',
+                },
+                {
+                  label: l('editor.chart_line_type_gradient_no_fill'),
+                  value: 'gradient_no_fill',
+                },
+                {
+                  label: l('editor.chart_line_type_no_fill'),
+                  value: 'no_fill',
+                },
+              ],
+            },
+          },
         },
       ],
     },

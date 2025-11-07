@@ -57,6 +57,18 @@ A comprehensive dashboard card for managing and monitoring your Pi-hole DNS ad b
 
 ![Additional Metrics](assets/additional-metrics-wide.png)
 
+### System Metrics Chart
+
+- **CPU and Memory Usage Graph** - Visualize your Pi-hole's system resource usage over the last 24 hours:
+  - Real-time CPU usage tracking
+  - Memory consumption monitoring
+  - Historical data visualization
+  - Customizable line styles (normal, gradient, no fill)
+- **Automatic Data Fetching** - Chart automatically loads statistics data from Home Assistant's recorder
+- **Responsive Design** - Chart adapts to card width and displays smoothly on all devices
+
+![Chart](assets/chart.gif)
+
 ### Direct Controls
 
 - **Enable/Disable Controls** - Toggle Pi-hole filtering with a single click as well as Group Default
@@ -257,6 +269,7 @@ If you're unsure what your Pi-hole device ID is, here are several ways to find i
 | entity_order       | list            | _none_       | Custom order for switch, button, sensor entities or dividers.      |
 | collapsed_sections | list            | _none_       | Sections to be initially collapsed. See below.                     |
 | switch_spacing     | string          | flex         | Layout style for switches: flex, space-around, space-between       |
+| chart              | object          | _none_       | Chart configuration options. See below.                            |
 | features           | list            | See below    | Optional flags to toggle different features                        |
 
 ### Action Configuration
@@ -282,6 +295,7 @@ Actions can be configured to perform various operations such as:
 The following section names can be used with `exclude_sections`:
 
 - actions
+- chart
 - footer
 - header
 - pause
@@ -304,6 +318,21 @@ The `switch_spacing` option controls how switches are arranged in the switches s
 - flex (default): Switches flow naturally with standard flexbox behavior
 - space-around: Equal space around each switch
 - space-between: Maximum space between switches, no space at edges
+
+### Chart Configuration
+
+The `chart` option allows you to customize the appearance of the system metrics chart:
+
+| Name      | Type   | Default | Description                                                                    |
+| --------- | ------ | ------- | ------------------------------------------------------------------------------ |
+| line_type | string | normal  | Chart line style. Options: `normal`, `gradient`, `gradient_no_fill`, `no_fill` |
+
+**Chart Line Types:**
+
+- `normal` (default): Standard solid lines with filled areas
+- `gradient`: Gradient-colored lines with gradient-filled areas
+- `gradient_no_fill`: Gradient-colored lines without fill
+- `no_fill`: Solid lines without fill areas
 
 ### Auto-discovery
 
@@ -580,6 +609,24 @@ collapsed_sections:
   - pause # Start with pause section collapsed
 ```
 
+### Chart Configuration
+
+```yaml
+type: custom:pi-hole
+device_id: pi_hole_device_1
+chart:
+  line_type: gradient # Options: normal, gradient, gradient_no_fill, no_fill
+```
+
+### Excluding Chart Section
+
+```yaml
+type: custom:pi-hole
+device_id: pi_hole_device_1
+exclude_sections:
+  - chart # Hide the system metrics chart
+```
+
 ## Project Roadmap
 
 - [x] **`Initial design`**: create initial card design
@@ -605,6 +652,7 @@ collapsed_sections:
 - [x] **`Enhanced pause durations`**: flexible time formats and human-readable display for pause buttons - thanks @moshoari
 - [x] **`Backwards compatibility`**: maintained Home Assistant integration backwards compatibility - thanks @ccheath
 - [x] **`Group pause feature`**: enhanced pause functionality with group support - thanks @bastgau
+- [x] **`System metrics chart`**: visualize CPU and memory usage over time with customizable line styles - thanks me!
 
 ## Contributing
 

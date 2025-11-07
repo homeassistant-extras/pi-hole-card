@@ -179,4 +179,88 @@ describe('pi-toppings.ts', () => {
     // Verify that undefined was passed for info config
     expect(createAdditionalStatStub.firstCall.args[2]).to.be.undefined;
   });
+
+  it('should filter out graph sensors when chart section is shown (not excluded)', async () => {
+    // Configure show to return true for chart section (chart is enabled, so filter out graph sensors)
+    showSectionStub.withArgs(mockConfig, 'chart').returns(true);
+
+    // Add graph sensors to the device
+    const createSensor = (entity_id: string) => ({
+      entity_id,
+      state: '42',
+      attributes: {},
+      translation_key: 'test_key',
+    });
+
+    mockDevice.sensors = [
+      createSensor('sensor.seen_clients'),
+      createSensor('sensor.pi_hole_cpu_use'), // Graph sensor
+      createSensor('sensor.dns_unique_domains'),
+      createSensor('sensor.pi_hole_memory_use'), // Graph sensor
+      createSensor('sensor.dns_queries_cached'),
+    ];
+
+    const result = createAdditionalStats(
+      mockElement,
+      mockHass,
+      mockDevice,
+      mockConfig,
+    );
+    await fixture(result as TemplateResult);
+
+    // Should only call createAdditionalStat for non-graph sensors (3 out of 5)
+    expect(createAdditionalStatStub.callCount).to.equal(3);
+
+    // Verify that graph sensors were not passed to createAdditionalStat
+    const calledEntityIds = createAdditionalStatStub
+      .getCalls()
+      .map((call) => call.args[3].entity_id);
+    expect(calledEntityIds).to.not.include('sensor.pi_hole_cpu_use');
+    expect(calledEntityIds).to.not.include('sensor.pi_hole_memory_use');
+    expect(calledEntityIds).to.include('sensor.seen_clients');
+    expect(calledEntityIds).to.include('sensor.dns_unique_domains');
+    expect(calledEntityIds).to.include('sensor.dns_queries_cached');
+  });
+
+  it('should include all sensors including graph sensors when chart section is excluded', async () => {
+    // Configure show to return false for chart section (chart is excluded, so include all sensors)
+    showSectionStub.withArgs(mockConfig, 'chart').returns(false);
+
+    // Add graph sensors to the device
+    const createSensor = (entity_id: string) => ({
+      entity_id,
+      state: '42',
+      attributes: {},
+      translation_key: 'test_key',
+    });
+
+    mockDevice.sensors = [
+      createSensor('sensor.seen_clients'),
+      createSensor('sensor.pi_hole_cpu_use'), // Graph sensor
+      createSensor('sensor.dns_unique_domains'),
+      createSensor('sensor.pi_hole_memory_use'), // Graph sensor
+      createSensor('sensor.dns_queries_cached'),
+    ];
+
+    const result = createAdditionalStats(
+      mockElement,
+      mockHass,
+      mockDevice,
+      mockConfig,
+    );
+    await fixture(result as TemplateResult);
+
+    // Should call createAdditionalStat for all sensors (5 out of 5)
+    expect(createAdditionalStatStub.callCount).to.equal(5);
+
+    // Verify that graph sensors were included
+    const calledEntityIds = createAdditionalStatStub
+      .getCalls()
+      .map((call) => call.args[3].entity_id);
+    expect(calledEntityIds).to.include('sensor.pi_hole_cpu_use');
+    expect(calledEntityIds).to.include('sensor.pi_hole_memory_use');
+    expect(calledEntityIds).to.include('sensor.seen_clients');
+    expect(calledEntityIds).to.include('sensor.dns_unique_domains');
+    expect(calledEntityIds).to.include('sensor.dns_queries_cached');
+  });
 });

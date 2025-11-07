@@ -45,6 +45,9 @@ export interface Config {
   /** Style for the switches */
   switch_spacing?: SwitchSpacing;
 
+  /** Chart configuration */
+  chart?: ChartConfig;
+
   /** Options to enable disable features */
   features?: Features[];
 }
@@ -53,6 +56,7 @@ export type SwitchSpacing = 'flex' | 'space-around' | 'space-between';
 export type CollapsibleSections = 'actions' | 'pause' | 'switches';
 export type Sections =
   | 'actions'
+  | 'chart'
   | 'footer'
   | 'header'
   | 'pause'
@@ -62,6 +66,12 @@ export type Sections =
 
 /** Features to enable or disable functionality */
 export type Features = 'disable_group_pausing';
+
+/** Chart configuration */
+export interface ChartConfig {
+  /** Line type for the chart */
+  line_type?: 'normal' | 'gradient' | 'gradient_no_fill' | 'no_fill';
+}
 
 export interface SectionConfig {
   /** Action to perform on tap */

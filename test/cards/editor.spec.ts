@@ -143,6 +143,10 @@ describe('editor.ts', () => {
                       value: 'actions',
                     },
                     {
+                      label: 'Chart',
+                      value: 'chart',
+                    },
+                    {
                       label: 'Footer',
                       value: 'footer',
                     },
@@ -447,7 +451,43 @@ describe('editor.ts', () => {
             },
           ],
         },
-
+        {
+          name: 'chart',
+          label: 'editor.chart',
+          type: 'expandable' as const,
+          icon: 'mdi:chart-line',
+          schema: [
+            {
+              name: 'line_type',
+              label: 'editor.chart_line_type',
+              required: false,
+              selector: {
+                select: {
+                  multiple: false,
+                  mode: 'dropdown' as const,
+                  options: [
+                    {
+                      label: 'Normal (Default)',
+                      value: 'normal',
+                    },
+                    {
+                      label: 'Gradient',
+                      value: 'gradient',
+                    },
+                    {
+                      label: 'Gradient No Fill',
+                      value: 'gradient_no_fill',
+                    },
+                    {
+                      label: 'No Fill',
+                      value: 'no_fill',
+                    },
+                  ],
+                },
+              },
+            },
+          ],
+        },
         {
           name: 'features',
           label: 'editor.features',

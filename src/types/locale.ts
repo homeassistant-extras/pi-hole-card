@@ -55,7 +55,13 @@ export type TranslationKey =
   | 'editor.pause_15_minutes'
   | 'editor.pi_hole_device'
   | 'editor.entity_display_order'
-  | 'editor.flex_default';
+  | 'editor.flex_default'
+  | 'editor.chart'
+  | 'editor.chart_line_type'
+  | 'editor.chart_line_type_normal'
+  | 'editor.chart_line_type_gradient'
+  | 'editor.chart_line_type_gradient_no_fill'
+  | 'editor.chart_line_type_no_fill';
 
 export interface Translation {
   /** The translation key */
