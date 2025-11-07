@@ -27,6 +27,7 @@ export const mapEntitiesByTranslationKey = (
     dns_queries: 'dns_queries_today',
     ads_blocked: 'ads_blocked_today',
     percent_ads_blocked: 'ads_percentage_blocked_today',
+    ads_percentage_today: 'ads_percentage_blocked_today',
     domains_being_blocked: 'domains_blocked',
   };
 
