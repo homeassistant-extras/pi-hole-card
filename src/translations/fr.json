@@ -63,6 +63,12 @@
     "pause_15_minutes": "15 minutes",
     "pi_hole_device": "Appareil Pi-hole",
     "entity_display_order": "Ordre d'affichage des entités (cliquer dans l'ordre)",
-    "flex_default": "Flexible (par défaut)"
+    "flex_default": "Flexible (par défaut)",
+    "chart": "Graphique",
+    "chart_line_type": "Type de ligne",
+    "chart_line_type_normal": "Normal (par défaut)",
+    "chart_line_type_gradient": "Dégradé",
+    "chart_line_type_gradient_no_fill": "Dégradé sans remplissage",
+    "chart_line_type_no_fill": "Sans remplissage"
   }
 }

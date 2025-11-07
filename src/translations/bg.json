@@ -63,6 +63,12 @@
     "pause_15_minutes": "15 минути",
     "pi_hole_device": "Pi-hole устройство",
     "entity_display_order": "Ред на показване на обектите (кликване в ред)",
-    "flex_default": "Flex (по подразбиране)"
+    "flex_default": "Flex (по подразбиране)",
+    "chart": "Графика",
+    "chart_line_type": "Тип линия",
+    "chart_line_type_normal": "Нормална (по подразбиране)",
+    "chart_line_type_gradient": "Градиент",
+    "chart_line_type_gradient_no_fill": "Градиент без запълване",
+    "chart_line_type_no_fill": "Без запълване"
   }
 }

@@ -63,6 +63,12 @@
     "pause_15_minutes": "15 λεπτά",
     "pi_hole_device": "Συσκευή Pi-hole",
     "entity_display_order": "Σειρά εμφάνισης οντοτήτων (κάντε κλικ με σειρά)",
-    "flex_default": "Flex (προεπιλογή)"
+    "flex_default": "Flex (προεπιλογή)",
+    "chart": "Διάγραμμα",
+    "chart_line_type": "Τύπος Γραμμής",
+    "chart_line_type_normal": "Κανονικό (Προεπιλογή)",
+    "chart_line_type_gradient": "Κλίση",
+    "chart_line_type_gradient_no_fill": "Κλίση Χωρίς Γέμισμα",
+    "chart_line_type_no_fill": "Χωρίς Γέμισμα"
   }
 }
