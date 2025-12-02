@@ -408,9 +408,10 @@ features:
   - disable_group_pausing
 ```
 
-| Feature               | Description                   |
-| --------------------- | ----------------------------- |
-| disable_group_pausing | Disable group pausing feature |
+| Feature               | Description                                                      |
+| --------------------- | ---------------------------------------------------------------- |
+| disable_group_pausing | Disable group pausing feature                                    |
+| ha_integration        | Use Home Assistant built-in Pi-hole integration (pi_hole domain) |
 
 ### Group Pausing Feature
 
@@ -436,6 +437,23 @@ device_id: pi_hole_device_1
 features:
   - disable_group_pausing
 ```
+
+### Home Assistant Integration Feature
+
+By default, the card uses the `pi_hole_v6` domain for pause operations. If you're using the built-in Home Assistant Pi-hole integration instead of the Pi-hole v6 integration, you can enable the `ha_integration` feature flag to use the `pi_hole` domain:
+
+```yaml
+type: custom:pi-hole
+device_id: pi_hole_device_1
+features:
+  - ha_integration
+```
+
+> [!NOTE]  
+> **When to use**: Enable this feature if you're using the built-in Home Assistant Pi-hole integration (`pi_hole` domain) instead of the Pi-hole v6 integration (`pi_hole_v6` domain).
+
+> [!WARNING]  
+> **Domain Selection**: When `ha_integration` is enabled, all pause operations will use the `pi_hole` domain. Ensure your Home Assistant instance has the built-in Pi-hole integration configured.
 
 ### Excluding Sections & Entities
 
