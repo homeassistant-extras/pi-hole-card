@@ -58,6 +58,7 @@
     "controls": "Controles",
     "features": "Características",
     "disable_group_pausing": "Deshabilitar pausa de grupo",
+    "ha_integration": "Usar integración de Home Assistant",
     "pause_60_seconds": "60 segundos",
     "pause_5_minutes": "5 minutos",
     "pause_15_minutes": "15 minutos",

@@ -508,6 +508,10 @@ describe('editor.ts', () => {
                       label: 'Disable group pausing',
                       value: 'disable_group_pausing',
                     },
+                    {
+                      label: 'Use Home Assistant integration',
+                      value: 'ha_integration',
+                    },
                   ],
                 },
               },

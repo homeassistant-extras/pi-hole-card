@@ -173,4 +173,3 @@ describe('get-cpu-gradient.ts', () => {
     });
   });
 });
-

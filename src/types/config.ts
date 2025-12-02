@@ -65,7 +65,7 @@ export type Sections =
   | 'switches';
 
 /** Features to enable or disable functionality */
-export type Features = 'disable_group_pausing';
+export type Features = 'disable_group_pausing' | 'ha_integration';
 
 /** Chart configuration */
 export interface ChartConfig {

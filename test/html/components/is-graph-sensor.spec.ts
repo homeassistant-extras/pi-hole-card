@@ -36,4 +36,3 @@ describe('is-graph-sensor.ts', () => {
     });
   });
 });
-

@@ -50,6 +50,7 @@ export type TranslationKey =
   | 'editor.controls'
   | 'editor.features'
   | 'editor.disable_group_pausing'
+  | 'editor.ha_integration'
   | 'editor.pause_60_seconds'
   | 'editor.pause_5_minutes'
   | 'editor.pause_15_minutes'

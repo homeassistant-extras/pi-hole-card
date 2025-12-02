@@ -54,7 +54,13 @@ export class PauseComponent extends HassUpdateMixin(LitElement) {
     const targetEntityId = this.isGroupPausingEnabled
       ? this.selectedEntityId
       : undefined;
-    handlePauseClick(this.hass!, this.setup, seconds, targetEntityId);
+    handlePauseClick(
+      this.hass!,
+      this.setup,
+      seconds,
+      this.config,
+      targetEntityId,
+    );
   };
 
   private _renderPauseButtons() {

@@ -284,7 +284,8 @@ describe('PauseComponent', () => {
     expect(handlePauseClickStub.firstCall.args[0]).to.equal(mockHass);
     expect(handlePauseClickStub.firstCall.args[1]).to.equal(mockSetup);
     expect(handlePauseClickStub.firstCall.args[2]).to.equal(60);
-    expect(handlePauseClickStub.firstCall.args[3]).to.be.undefined; // No target entity when group pausing disabled
+    expect(handlePauseClickStub.firstCall.args[3]).to.equal(mockConfig);
+    expect(handlePauseClickStub.firstCall.args[4]).to.be.undefined; // No target entity when group pausing disabled
   });
 
   it('should handle pause button clicks with target entity when group pausing enabled', async () => {
@@ -305,6 +306,7 @@ describe('PauseComponent', () => {
     // Verify handlePauseClick was called with target entity
     expect(handlePauseClickStub.calledOnce).to.be.true;
     // When group pausing is enabled and switches are available, it should auto-select the first switch
-    expect(handlePauseClickStub.firstCall.args[3]).to.equal('switch.pihole_1');
+    expect(handlePauseClickStub.firstCall.args[3]).to.equal(mockConfig);
+    expect(handlePauseClickStub.firstCall.args[4]).to.equal('switch.pihole_1');
   });
 });

@@ -58,6 +58,7 @@
     "controls": "Έλεγχοι",
     "features": "Χαρακτηριστικά",
     "disable_group_pausing": "Απενεργοποίηση παύσης ομάδας",
+    "ha_integration": "Χρήση ενσωμάτωσης Home Assistant",
     "pause_60_seconds": "60 δευτερόλεπτα",
     "pause_5_minutes": "5 λεπτά",
     "pause_15_minutes": "15 λεπτά",

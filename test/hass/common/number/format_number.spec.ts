@@ -139,7 +139,9 @@ describe('format_number.ts', () => {
         number_format: NumberFormat.decimal_comma,
       } as any;
       const result = formatNumber('123.45', localeOptions);
-      expect(result).to.include('formatted:123.45:[\"de\",\"es\",\"it\",\"bg\"]');
+      expect(result).to.include(
+        'formatted:123.45:[\"de\",\"es\",\"it\",\"bg\"]',
+      );
     });
 
     it('should return the original string for non-numeric strings', () => {

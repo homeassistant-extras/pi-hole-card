@@ -53,7 +53,11 @@ describe('get-memory-gradient.ts', () => {
         bottom: 200,
       };
 
-      const gradient = getMemoryGradient(mockCtx, chartArea, 'gradient_no_fill');
+      const gradient = getMemoryGradient(
+        mockCtx,
+        chartArea,
+        'gradient_no_fill',
+      );
 
       expect(gradient).to.exist;
       expect(gradient).to.have.property('addColorStop');
@@ -118,7 +122,11 @@ describe('get-memory-gradient.ts', () => {
 
       const gradient1 = getMemoryGradient(mockCtx, chartArea, 'normal');
       const gradient2 = getMemoryGradient(mockCtx, chartArea, 'gradient');
-      const gradient3 = getMemoryGradient(mockCtx, chartArea, 'gradient_no_fill');
+      const gradient3 = getMemoryGradient(
+        mockCtx,
+        chartArea,
+        'gradient_no_fill',
+      );
 
       expect(gradient1).to.not.equal(gradient2);
       expect(gradient2).to.not.equal(gradient3);
@@ -173,4 +181,3 @@ describe('get-memory-gradient.ts', () => {
     });
   });
 });
-

@@ -9,4 +9,3 @@ export const isGraphSensor = (entityId: string): boolean => {
     entityId === 'sensor.pi_hole_memory_use'
   );
 };
-

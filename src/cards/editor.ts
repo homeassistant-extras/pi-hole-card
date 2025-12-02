@@ -381,6 +381,10 @@ const getSchema = (hass: HomeAssistant): HaFormSchema[] => {
                   label: l('editor.disable_group_pausing'),
                   value: 'disable_group_pausing',
                 },
+                {
+                  label: l('editor.ha_integration'),
+                  value: 'ha_integration',
+                },
               ],
             },
           },

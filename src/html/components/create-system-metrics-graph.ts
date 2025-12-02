@@ -39,4 +39,3 @@ export const createSystemMetricsGraph = (
     ></system-metrics-graph>
   `;
 };
-
