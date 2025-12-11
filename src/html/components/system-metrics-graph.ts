@@ -7,7 +7,6 @@ import { LitElement, css, html, nothing } from 'lit';
 import { property, state } from 'lit/decorators.js';
 import { getCpuGradient } from './get-cpu-gradient';
 import { getMemoryGradient } from './get-memory-gradient';
-import { isGraphSensor } from './is-graph-sensor';
 
 // Register Chart.js components
 Chart.register(...registerables);
@@ -151,16 +150,16 @@ export class SystemMetricsGraph extends LitElement {
   }
 
   private async _fetchStatisticsData(showLoading = true) {
-    const graphSensors = this.device.sensors.filter((sensor) =>
-      isGraphSensor(sensor.entity_id),
-    );
-
-    if (graphSensors.length === 0) {
+    // Check if CPU and memory sensors are available
+    if (!this.device.cpu_use || !this.device.memory_use) {
       this._loading = false;
       return;
     }
 
-    const entityIds = graphSensors.map((sensor) => sensor.entity_id);
+    const entityIds = [
+      this.device.cpu_use.entity_id,
+      this.device.memory_use.entity_id,
+    ];
 
     try {
       // Only show loading state on initial load
@@ -203,6 +202,13 @@ export class SystemMetricsGraph extends LitElement {
     const cpuData: StatisticsDataPoint[] = [];
     const memoryData: StatisticsDataPoint[] = [];
 
+    if (!this.device.cpu_use || !this.device.memory_use) {
+      return;
+    }
+
+    const cpuEntityId = this.device.cpu_use.entity_id;
+    const memoryEntityId = this.device.memory_use.entity_id;
+
     entityIds.forEach((entityId) => {
       const entityStats = response[entityId];
 
@@ -210,7 +216,7 @@ export class SystemMetricsGraph extends LitElement {
         return;
       }
 
-      const isCpu = entityId === 'sensor.pi_hole_cpu_use';
+      const isCpu = entityId === cpuEntityId;
       const dataArray = isCpu ? cpuData : memoryData;
 
       entityStats.forEach((stat) => {
@@ -439,11 +445,8 @@ export class SystemMetricsGraph extends LitElement {
       return nothing;
     }
 
-    const graphSensors = this.device.sensors.filter((sensor) =>
-      isGraphSensor(sensor.entity_id),
-    );
-
-    if (graphSensors.length === 0) {
+    // Check if CPU and memory sensors are available
+    if (!this.device.cpu_use || !this.device.memory_use) {
       return nothing;
     }
 

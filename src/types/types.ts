@@ -40,6 +40,12 @@ export interface PiHoleDevice {
   /** Status of Pi-hole */
   status?: EntityInformation;
 
+  /** CPU usage sensor */
+  cpu_use?: EntityInformation;
+
+  /** Memory usage sensor */
+  memory_use?: EntityInformation;
+
   /** Sensors for the Pi-hole */
   sensors: EntityInformation[];
 

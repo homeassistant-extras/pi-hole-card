@@ -3,7 +3,6 @@ import type { HomeAssistant } from '@hass/types';
 import type { Config } from '@type/config';
 import type { PiHoleDevice } from '@type/types';
 import { html, nothing, type TemplateResult } from 'lit';
-import { isGraphSensor } from './is-graph-sensor';
 
 /**
  * Creates a history graph card for CPU and memory usage sensors
@@ -22,12 +21,8 @@ export const createSystemMetricsGraph = (
     return nothing;
   }
 
-  // Find CPU and memory sensors
-  const graphSensors = device.sensors.filter((sensor) =>
-    isGraphSensor(sensor.entity_id),
-  );
-
-  if (graphSensors.length === 0) {
+  // Check if CPU and memory sensors are available
+  if (!device.cpu_use || !device.memory_use) {
     return nothing;
   }
 

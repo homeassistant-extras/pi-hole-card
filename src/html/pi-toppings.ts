@@ -4,7 +4,6 @@ import type { Config } from '@type/config';
 import type { PiHoleDevice } from '@type/types';
 import { html, nothing, type TemplateResult } from 'lit';
 import { createAdditionalStat } from './components/additional-stat';
-import { isGraphSensor } from './components/is-graph-sensor';
 
 /**
  * Creates the additional stats section for the Pi-hole card
@@ -22,18 +21,9 @@ export const createAdditionalStats = (
 ): TemplateResult | typeof nothing => {
   if (!show(config, 'sensors')) return nothing;
 
-  // Filter out CPU and memory sensors that will be displayed in a graph
-  // Only filter them out if the chart section is shown (not excluded)
-  const regularSensors = device.sensors.filter((sensor) => {
-    if (show(config, 'chart')) {
-      return !isGraphSensor(sensor.entity_id);
-    }
-    return true;
-  });
-
   return html`
     <div class="additional-stats">
-      ${regularSensors.map((sensor) => {
+      ${device.sensors.map((sensor) => {
         return createAdditionalStat(hass, element, config.info, sensor);
       })}
     </div>

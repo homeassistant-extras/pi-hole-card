@@ -28,21 +28,19 @@ describe('create-system-metrics-graph.ts', () => {
 
     mockHass = {} as HomeAssistant;
 
-    // Create mock device with graph sensors
-    const createSensor = (entity_id: string) => ({
+    // Create mock device with CPU and memory sensors as first-class properties
+    const createSensor = (entity_id: string, translation_key?: string) => ({
       entity_id,
       state: '42',
       attributes: {},
-      translation_key: 'test_key',
+      translation_key: translation_key || 'test_key',
     });
 
     mockDevice = {
       device_id: 'pi_hole_device',
-      sensors: [
-        createSensor('sensor.pi_hole_cpu_use'),
-        createSensor('sensor.pi_hole_memory_use'),
-        createSensor('sensor.seen_clients'),
-      ],
+      cpu_use: createSensor('sensor.pi_hole_cpu_use', 'cpu_use'),
+      memory_use: createSensor('sensor.pi_hole_memory_use', 'memory_use'),
+      sensors: [createSensor('sensor.seen_clients')],
     } as PiHoleDevice;
 
     mockConfig = {
@@ -64,6 +62,8 @@ describe('create-system-metrics-graph.ts', () => {
 
   it('should return nothing when no graph sensors are present', () => {
     showSectionStub.withArgs(mockConfig, 'chart').returns(true);
+    mockDevice.cpu_use = undefined;
+    mockDevice.memory_use = undefined;
     mockDevice.sensors = [
       {
         entity_id: 'sensor.seen_clients',
@@ -105,58 +105,50 @@ describe('create-system-metrics-graph.ts', () => {
 
   it('should work with only CPU sensor', async () => {
     showSectionStub.withArgs(mockConfig, 'chart').returns(true);
-    mockDevice.sensors = [
-      {
-        entity_id: 'sensor.pi_hole_cpu_use',
-        state: '42',
-        attributes: {},
-        translation_key: 'test_key',
-      },
-    ];
+    mockDevice.cpu_use = {
+      entity_id: 'sensor.pi_hole_cpu_use',
+      state: '42',
+      attributes: {},
+      translation_key: 'cpu_use',
+    };
+    mockDevice.memory_use = undefined;
 
     const result = createSystemMetricsGraph(mockHass, mockDevice, mockConfig);
 
-    expect(result).to.not.equal(nothing);
-    const el = await fixture(result as TemplateResult);
-    await customElements.whenDefined('system-metrics-graph');
-    expect(el.tagName.toLowerCase()).to.equal('system-metrics-graph');
+    // Should return nothing because both CPU and memory are required
+    expect(result).to.equal(nothing);
   });
 
   it('should work with only memory sensor', async () => {
     showSectionStub.withArgs(mockConfig, 'chart').returns(true);
-    mockDevice.sensors = [
-      {
-        entity_id: 'sensor.pi_hole_memory_use',
-        state: '42',
-        attributes: {},
-        translation_key: 'test_key',
-      },
-    ];
+    mockDevice.cpu_use = undefined;
+    mockDevice.memory_use = {
+      entity_id: 'sensor.pi_hole_memory_use',
+      state: '42',
+      attributes: {},
+      translation_key: 'memory_use',
+    };
 
     const result = createSystemMetricsGraph(mockHass, mockDevice, mockConfig);
 
-    expect(result).to.not.equal(nothing);
-    const el = await fixture(result as TemplateResult);
-    await customElements.whenDefined('system-metrics-graph');
-    expect(el.tagName.toLowerCase()).to.equal('system-metrics-graph');
+    // Should return nothing because both CPU and memory are required
+    expect(result).to.equal(nothing);
   });
 
   it('should work with both CPU and memory sensors', async () => {
     showSectionStub.withArgs(mockConfig, 'chart').returns(true);
-    mockDevice.sensors = [
-      {
-        entity_id: 'sensor.pi_hole_cpu_use',
-        state: '42',
-        attributes: {},
-        translation_key: 'test_key',
-      },
-      {
-        entity_id: 'sensor.pi_hole_memory_use',
-        state: '42',
-        attributes: {},
-        translation_key: 'test_key',
-      },
-    ];
+    mockDevice.cpu_use = {
+      entity_id: 'sensor.pi_hole_cpu_use',
+      state: '42',
+      attributes: {},
+      translation_key: 'cpu_use',
+    };
+    mockDevice.memory_use = {
+      entity_id: 'sensor.pi_hole_memory_use',
+      state: '42',
+      attributes: {},
+      translation_key: 'memory_use',
+    };
 
     const result = createSystemMetricsGraph(mockHass, mockDevice, mockConfig);
 
@@ -168,21 +160,21 @@ describe('create-system-metrics-graph.ts', () => {
 
   it('should filter out non-graph sensors correctly', async () => {
     showSectionStub.withArgs(mockConfig, 'chart').returns(true);
+    mockDevice.cpu_use = {
+      entity_id: 'sensor.pi_hole_cpu_use',
+      state: '42',
+      attributes: {},
+      translation_key: 'cpu_use',
+    };
+    mockDevice.memory_use = {
+      entity_id: 'sensor.pi_hole_memory_use',
+      state: '42',
+      attributes: {},
+      translation_key: 'memory_use',
+    };
     mockDevice.sensors = [
       {
-        entity_id: 'sensor.pi_hole_cpu_use',
-        state: '42',
-        attributes: {},
-        translation_key: 'test_key',
-      },
-      {
         entity_id: 'sensor.seen_clients',
-        state: '42',
-        attributes: {},
-        translation_key: 'test_key',
-      },
-      {
-        entity_id: 'sensor.pi_hole_memory_use',
         state: '42',
         attributes: {},
         translation_key: 'test_key',

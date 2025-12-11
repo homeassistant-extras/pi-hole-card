@@ -22,6 +22,8 @@ export const mapEntitiesByTranslationKey = (
     ftl_info_message_count: 'info_message_count',
     status: 'status',
     action_ftl_purge_diagnosis_messages: 'purge_diagnosis_messages',
+    cpu_use: 'cpu_use',
+    memory_use: 'memory_use',
 
     // backwards compatibility for HA integration
     dns_queries: 'dns_queries_today',

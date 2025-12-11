@@ -181,22 +181,25 @@ describe('pi-toppings.ts', () => {
   });
 
   it('should filter out graph sensors when chart section is shown (not excluded)', async () => {
-    // Configure show to return true for chart section (chart is enabled, so filter out graph sensors)
+    // Configure show to return true for chart section (chart is enabled)
     showSectionStub.withArgs(mockConfig, 'chart').returns(true);
 
-    // Add graph sensors to the device
-    const createSensor = (entity_id: string) => ({
+    // Add graph sensors as first-class properties (they won't be in sensors array)
+    const createSensor = (entity_id: string, translation_key?: string) => ({
       entity_id,
       state: '42',
       attributes: {},
-      translation_key: 'test_key',
+      translation_key: translation_key || 'test_key',
     });
 
+    mockDevice.cpu_use = createSensor('sensor.pi_hole_cpu_use', 'cpu_use');
+    mockDevice.memory_use = createSensor(
+      'sensor.pi_hole_memory_use',
+      'memory_use',
+    );
     mockDevice.sensors = [
       createSensor('sensor.seen_clients'),
-      createSensor('sensor.pi_hole_cpu_use'), // Graph sensor
       createSensor('sensor.dns_unique_domains'),
-      createSensor('sensor.pi_hole_memory_use'), // Graph sensor
       createSensor('sensor.dns_queries_cached'),
     ];
 
@@ -208,7 +211,8 @@ describe('pi-toppings.ts', () => {
     );
     await fixture(result as TemplateResult);
 
-    // Should only call createAdditionalStat for non-graph sensors (3 out of 5)
+    // Should call createAdditionalStat for all sensors in the array (3)
+    // CPU and memory sensors are first-class properties, not in sensors array
     expect(createAdditionalStatStub.callCount).to.equal(3);
 
     // Verify that graph sensors were not passed to createAdditionalStat
@@ -222,23 +226,27 @@ describe('pi-toppings.ts', () => {
     expect(calledEntityIds).to.include('sensor.dns_queries_cached');
   });
 
-  it('should include all sensors including graph sensors when chart section is excluded', async () => {
-    // Configure show to return false for chart section (chart is excluded, so include all sensors)
+  it('should include all sensors when chart section is excluded', async () => {
+    // Configure show to return false for chart section (chart is excluded)
     showSectionStub.withArgs(mockConfig, 'chart').returns(false);
 
-    // Add graph sensors to the device
-    const createSensor = (entity_id: string) => ({
+    // CPU and memory sensors are first-class properties, not in sensors array
+    const createSensor = (entity_id: string, translation_key?: string) => ({
       entity_id,
       state: '42',
       attributes: {},
-      translation_key: 'test_key',
+      translation_key: translation_key || 'test_key',
     });
 
+    mockDevice.cpu_use = createSensor('sensor.pi_hole_cpu_use', 'cpu_use');
+    mockDevice.memory_use = createSensor(
+      'sensor.pi_hole_memory_use',
+      'memory_use',
+    );
+    // CPU and memory sensors are not in sensors array since they're first-class properties
     mockDevice.sensors = [
       createSensor('sensor.seen_clients'),
-      createSensor('sensor.pi_hole_cpu_use'), // Graph sensor
       createSensor('sensor.dns_unique_domains'),
-      createSensor('sensor.pi_hole_memory_use'), // Graph sensor
       createSensor('sensor.dns_queries_cached'),
     ];
 
@@ -250,15 +258,14 @@ describe('pi-toppings.ts', () => {
     );
     await fixture(result as TemplateResult);
 
-    // Should call createAdditionalStat for all sensors (5 out of 5)
-    expect(createAdditionalStatStub.callCount).to.equal(5);
+    // Should call createAdditionalStat for all sensors in the array (3)
+    // CPU and memory sensors are first-class properties, not in sensors array
+    expect(createAdditionalStatStub.callCount).to.equal(3);
 
-    // Verify that graph sensors were included
+    // Verify that all sensors in the array were included
     const calledEntityIds = createAdditionalStatStub
       .getCalls()
       .map((call) => call.args[3].entity_id);
-    expect(calledEntityIds).to.include('sensor.pi_hole_cpu_use');
-    expect(calledEntityIds).to.include('sensor.pi_hole_memory_use');
     expect(calledEntityIds).to.include('sensor.seen_clients');
     expect(calledEntityIds).to.include('sensor.dns_unique_domains');
     expect(calledEntityIds).to.include('sensor.dns_queries_cached');
