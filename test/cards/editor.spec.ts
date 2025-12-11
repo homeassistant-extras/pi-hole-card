@@ -636,5 +636,62 @@ describe('editor.ts', () => {
       expect(dispatchStub.firstCall.args[0].detail.config.entity_order).to.be
         .undefined;
     });
+
+    it('should NOT remove section configs when at least one action is configured', () => {
+      const testConfig: Config = {
+        device_id: 'device_1',
+        badge: {
+          tap_action: {
+            action: 'toggle',
+          },
+        },
+        stats: {
+          tap_action: {
+            action: 'more-info',
+          },
+          hold_action: undefined,
+          double_tap_action: undefined,
+        },
+      };
+      card.setConfig(testConfig);
+
+      // Simulate value-changed event with actions configured
+      const detail = {
+        value: {
+          device_id: 'device_1',
+          badge: {
+            tap_action: {
+              action: 'toggle',
+            },
+          },
+          stats: {
+            tap_action: {
+              action: 'more-info',
+            },
+            hold_action: undefined,
+            double_tap_action: undefined,
+          },
+        },
+      };
+
+      const event = new CustomEvent('value-changed', { detail });
+      card['_valueChanged'](event);
+
+      // Verify event was dispatched with section configs preserved
+      expect(dispatchStub.calledOnce).to.be.true;
+      expect(dispatchStub.firstCall.args[0].type).to.equal('config-changed');
+      expect(dispatchStub.firstCall.args[0].detail.config.badge).to.deep.equal({
+        tap_action: {
+          action: 'toggle',
+        },
+      });
+      expect(dispatchStub.firstCall.args[0].detail.config.stats).to.deep.equal({
+        tap_action: {
+          action: 'more-info',
+        },
+        hold_action: undefined,
+        double_tap_action: undefined,
+      });
+    });
   });
 });

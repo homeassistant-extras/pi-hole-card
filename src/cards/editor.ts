@@ -441,7 +441,7 @@ export class PiHoleCardEditor extends LitElement {
 
     const shouldDelete = (obj: SectionConfig | undefined) =>
       obj &&
-      (Object.keys(obj).length === 0 || Object.values(obj).some((f) => !f));
+      (Object.keys(obj).length === 0 || Object.values(obj).every((f) => !f));
 
     if (shouldDelete(config.stats)) {
       delete config.stats;
