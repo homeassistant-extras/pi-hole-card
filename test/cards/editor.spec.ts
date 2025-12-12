@@ -42,6 +42,18 @@ describe('editor.ts', () => {
       };
 
       card.setConfig(testConfig);
+      // When multiple is enabled, string device_id is converted to array for form compatibility
+      expect(card['_config']).to.deep.equal({
+        device_id: ['device_1'],
+      });
+    });
+
+    it('should preserve array device_id as-is', () => {
+      const testConfig: Config = {
+        device_id: ['device_1', 'device_2'],
+      };
+
+      card.setConfig(testConfig);
       expect(card['_config']).to.deep.equal(testConfig);
     });
   });
@@ -70,7 +82,7 @@ describe('editor.ts', () => {
 
     it('should pass correct props to ha-form', async () => {
       const testConfig: Config = {
-        device_id: 'device_1',
+        device_id: ['device_1'],
       };
       card.setConfig(testConfig);
 
@@ -90,6 +102,7 @@ describe('editor.ts', () => {
                   integration: 'pi_hole',
                 },
               ],
+              multiple: true,
             },
           },
           required: true,
@@ -547,21 +560,45 @@ describe('editor.ts', () => {
       };
       card.setConfig(testConfig);
 
-      // Simulate value-changed event
+      // Simulate value-changed event (form returns array when multiple is enabled)
       const detail = {
         value: {
-          device_id: 'device_1',
+          device_id: ['device_1'],
         },
       };
 
       const event = new CustomEvent('value-changed', { detail });
       card['_valueChanged'](event);
 
-      // Verify event was dispatched with correct data
+      // Verify event was dispatched with correct data (normalized to string for single device)
       expect(dispatchStub.calledOnce).to.be.true;
       expect(dispatchStub.firstCall.args[0].type).to.equal('config-changed');
       expect(dispatchStub.firstCall.args[0].detail.config).to.deep.equal({
         device_id: 'device_1',
+      });
+    });
+
+    it('should preserve multiple device_ids as array', () => {
+      const testConfig: Config = {
+        device_id: ['device_1', 'device_2'],
+      };
+      card.setConfig(testConfig);
+
+      // Simulate value-changed event with multiple devices
+      const detail = {
+        value: {
+          device_id: ['device_1', 'device_2'],
+        },
+      };
+
+      const event = new CustomEvent('value-changed', { detail });
+      card['_valueChanged'](event);
+
+      // Verify event was dispatched with array preserved for multiple devices
+      expect(dispatchStub.calledOnce).to.be.true;
+      expect(dispatchStub.firstCall.args[0].type).to.equal('config-changed');
+      expect(dispatchStub.firstCall.args[0].detail.config).to.deep.equal({
+        device_id: ['device_1', 'device_2'],
       });
     });
 
@@ -571,17 +608,17 @@ describe('editor.ts', () => {
       };
       card.setConfig(testConfig);
 
-      // Simulate value-changed event without features
+      // Simulate value-changed event without features (form returns array when multiple is enabled)
       const detail = {
         value: {
-          device_id: 'device_1',
+          device_id: ['device_1'],
         },
       };
 
       const event = new CustomEvent('value-changed', { detail });
       card['_valueChanged'](event);
 
-      // Verify event was dispatched correctly
+      // Verify event was dispatched correctly (normalized to string for single device)
       expect(dispatchStub.calledOnce).to.be.true;
       expect(dispatchStub.firstCall.args[0].type).to.equal('config-changed');
       expect(dispatchStub.firstCall.args[0].detail.config).to.deep.equal({
@@ -599,10 +636,10 @@ describe('editor.ts', () => {
       };
       card.setConfig(testConfig);
 
-      // Simulate value-changed event with empty arrays
+      // Simulate value-changed event with empty arrays (form returns array when multiple is enabled)
       const detail = {
         value: {
-          device_id: 'device_2',
+          device_id: ['device_2'],
           stats: {},
           info: {},
           controls: {},
@@ -655,10 +692,10 @@ describe('editor.ts', () => {
       };
       card.setConfig(testConfig);
 
-      // Simulate value-changed event with actions configured
+      // Simulate value-changed event with actions configured (form returns array when multiple is enabled)
       const detail = {
         value: {
-          device_id: 'device_1',
+          device_id: ['device_1'],
           badge: {
             tap_action: {
               action: 'toggle',
