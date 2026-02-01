@@ -138,6 +138,12 @@ A comprehensive dashboard card for managing and monitoring your Pi-hole DNS ad b
 - **Centralized Control** - Manage multiple Pi-hole instances from a single card
 - **Aggregated Status** - See at a glance how many of your Pi-holes are active
 - **Unified Control** - Centralized access to all switches from your Pi-hole instances
+- **Combined Statistics** - Dashboard statistics are automatically combined across all Pi-hole instances:
+  - **Total DNS Queries** - Sum of all queries from all instances
+  - **Queries Blocked** - Sum of all blocked queries from all instances
+  - **Block Percentage** - Recalculated from combined totals: (total blocked / total queries) × 100, accounting for query volume from each instance
+  - **Domains on Blocklists** - Sum of domains blocked across all instances
+  - **Active Clients** - Sum of unique clients across all instances
 - **Intelligent Status Indicators** - Status automatically adjusts based on collective state:
   - Shows "Running" when all instances are active
   - Shows "Partial" when some instances are active and some are inactive
@@ -150,11 +156,12 @@ Example of all Running
 ![Multi Pi-hole All Running](assets/multi-pihole-running.png)
 
 > [!NOTE]  
-> The multi-Pi-hole feature currently has some limitations:
+> When using multiple Pi-hole instances:
 >
-> - Statistics shown are from the first Pi-hole in the list only
+> - Dashboard statistics are automatically combined/averaged across all instances
 > - All switches from all Pi-holes are displayed in a single list
-> - Only header status reflects the multi-Pi-hole state
+> - Header status reflects the multi-Pi-hole state
+> - Additional metrics, system charts, and other sections show data from the first Pi-hole instance
 
 ### Responsive Design
 
@@ -657,7 +664,7 @@ exclude_sections:
 - [x] **`Performance optimizations`**: improved code structure and efficiency
 - [x] **`Enhanced entity mapping`**: **⭐ First contributor ⭐** better entity identification with translation keys - thanks @bastgau
 - [x] **`Translations`**: ability to add translations - thanks @ajavibp
-- [x] **`Multi-Pi-hole support`**: manage and monitor multiple Pi-hole instances - thanks @Drudoo
+- [x] **`Multi-Pi-hole support`**: manage and monitor multiple Pi-hole instances - thanks @Drudoo, @heylers
 - [x] **`Collapsible sections`**: collapse/expand card sections to save space - thanks @Teleportist
 - [x] **`Additional visualization options`**: using HA native more-info, etc. - thanks @dunxd
 - [x] **`Pause ad-blocking`**: temporarily disable filtering for specified durations - thanks @StuartHaire, @VVRud

@@ -147,7 +147,7 @@ describe('bake-pi.ts', () => {
     expect(createDashboardStatsStub.calledOnce).to.be.true;
     expect(createDashboardStatsStub.firstCall.args[0]).to.equal(element);
     expect(createDashboardStatsStub.firstCall.args[1]).to.equal(mockHass);
-    expect(createDashboardStatsStub.firstCall.args[2]).to.equal(mockDevice);
+    expect(createDashboardStatsStub.firstCall.args[2]).to.equal(mockSetup);
     expect(createDashboardStatsStub.firstCall.args[3]).to.equal(mockConfig);
 
     // Verify createAdditionalStats was called with the correct parameters

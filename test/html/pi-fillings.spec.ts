@@ -5,7 +5,7 @@ import * as createStatBoxModule from '@html/components/stat-box';
 import { createDashboardStats } from '@html/pi-fillings';
 import { fixture } from '@open-wc/testing-helpers';
 import type { Config } from '@type/config';
-import type { PiHoleDevice } from '@type/types';
+import type { PiHoleDevice, PiHoleSetup } from '@type/types';
 import { expect } from 'chai';
 import { html, nothing, type TemplateResult } from 'lit';
 import { restore, stub } from 'sinon';
@@ -14,10 +14,12 @@ describe('pi-fillings.ts', () => {
   let mockElement: HTMLElement;
   let mockHass: HomeAssistant;
   let mockDevice: PiHoleDevice;
+  let mockSetup: PiHoleSetup;
   let mockConfig: Config;
   let createStatBoxStub: sinon.SinonStub;
   let showSectionStub: sinon.SinonStub;
   let getStatsStub: sinon.SinonStub;
+  let combineStatsStub: sinon.SinonStub;
   let mockDashboardStats: any[][];
 
   beforeEach(() => {
@@ -77,6 +79,9 @@ describe('pi-fillings.ts', () => {
     getStatsStub = stub(getStatsModule, 'getDashboardStats');
     getStatsStub.returns(mockDashboardStats);
 
+    // Create stub for combineStats
+    combineStatsStub = stub(getStatsModule, 'combineStats');
+
     // Create stub for createStatBox
     createStatBoxStub = stub(createStatBoxModule, 'createStatBox');
     // Configure the stub to return a simple template with identifiable class
@@ -123,6 +128,14 @@ describe('pi-fillings.ts', () => {
       },
     } as PiHoleDevice;
 
+    // Mock setup
+    mockSetup = {
+      holes: [mockDevice],
+    } as PiHoleSetup;
+
+    // Configure combineStats stub to return the device as-is for single device
+    combineStatsStub.returns(mockDevice);
+
     // Mock config
     mockConfig = {
       device_id: 'pi_hole_device',
@@ -145,12 +158,15 @@ describe('pi-fillings.ts', () => {
     const result = createDashboardStats(
       mockElement,
       mockHass,
-      mockDevice,
+      mockSetup,
       mockConfig,
     );
 
     // Assert that nothing is returned
     expect(result).to.equal(nothing);
+
+    // Verify that combineStatsStub was not called
+    expect(combineStatsStub.called).to.be.false;
 
     // Verify that getStatsStub was not called
     expect(getStatsStub.called).to.be.false;
@@ -159,9 +175,13 @@ describe('pi-fillings.ts', () => {
     expect(createStatBoxStub.called).to.be.false;
   });
 
-  it('should call getDashboardStats with correct unique clients count', async () => {
+  it('should call combineStats and getDashboardStats with correct parameters', async () => {
     // Call createDashboardStats
-    createDashboardStats(mockElement, mockHass, mockDevice, mockConfig);
+    createDashboardStats(mockElement, mockHass, mockSetup, mockConfig);
+
+    // Verify combineStats was called with the setup holes
+    expect(combineStatsStub.calledOnce).to.be.true;
+    expect(combineStatsStub.firstCall.args[0]).to.deep.equal(mockSetup.holes);
 
     // Verify getDashboardStats was called with the correct unique clients count
     expect(getStatsStub.calledOnce).to.be.true;
@@ -173,7 +193,7 @@ describe('pi-fillings.ts', () => {
     const result = createDashboardStats(
       mockElement,
       mockHass,
-      mockDevice,
+      mockSetup,
       mockConfig,
     );
 
@@ -206,11 +226,19 @@ describe('pi-fillings.ts', () => {
       ads_blocked_today: undefined,
     };
 
+    // Create setup with incomplete device
+    const incompleteSetup = {
+      holes: [incompleteDevice],
+    } as PiHoleSetup;
+
+    // Configure combineStats to return incomplete device
+    combineStatsStub.returns(incompleteDevice);
+
     // Call createDashboardStats
     const result = createDashboardStats(
       mockElement,
       mockHass,
-      incompleteDevice,
+      incompleteSetup,
       mockConfig,
     );
 
@@ -243,7 +271,7 @@ describe('pi-fillings.ts', () => {
     const result = createDashboardStats(
       mockElement,
       mockHass,
-      mockDevice,
+      mockSetup,
       mockConfig,
     );
 

@@ -220,6 +220,39 @@ describe('get-pi-setup.ts', () => {
       translation_key: undefined,
     };
 
+    const device2Stats = {
+      dns_queries_today: {
+        entity_id: 'sensor.pi_hole_2_dns_queries_today',
+        state: '2000',
+        attributes: {},
+        translation_key: 'dns_queries_today',
+      },
+      ads_blocked_today: {
+        entity_id: 'sensor.pi_hole_2_ads_blocked_today',
+        state: '200',
+        attributes: {},
+        translation_key: 'ads_blocked_today',
+      },
+      ads_percentage_blocked_today: {
+        entity_id: 'sensor.pi_hole_2_ads_percentage_blocked_today',
+        state: '10.0',
+        attributes: { unit_of_measurement: '%' },
+        translation_key: 'ads_percentage_blocked_today',
+      },
+      domains_blocked: {
+        entity_id: 'sensor.pi_hole_2_domains_blocked',
+        state: '50000',
+        attributes: {},
+        translation_key: 'domains_blocked',
+      },
+      dns_unique_clients: {
+        entity_id: 'sensor.pi_hole_2_dns_unique_clients',
+        state: '15',
+        attributes: {},
+        translation_key: 'dns_unique_clients',
+      },
+    };
+
     const device2 = {
       device_id: 'pi_hole_device_2',
       status: device2Status,
@@ -235,6 +268,7 @@ describe('get-pi-setup.ts', () => {
         attributes: {},
         translation_key: undefined,
       },
+      ...device2Stats,
       switches: [device2Switch1, device2Switch2],
       sensors: [
         {
@@ -291,7 +325,7 @@ describe('get-pi-setup.ts', () => {
     expect(result?.holes[0]?.controls).to.have.lengthOf(1);
     expect(result?.holes[0]?.updates).to.have.lengthOf(1);
 
-    // Check second device only has device_id, status, info_message_count, and purge_diagnosis_messages, with empty arrays for other properties
+    // Check second device has device_id, status, info_message_count, purge_diagnosis_messages, and stats sensors, with empty arrays for other properties
     expect(result?.holes[1]?.device_id).to.equal('pi_hole_device_2');
     expect(result?.holes[1]?.status).to.deep.equal(device2Status);
     expect(result?.holes[1]?.info_message_count).to.deep.equal(
@@ -299,6 +333,22 @@ describe('get-pi-setup.ts', () => {
     );
     expect(result?.holes[1]?.purge_diagnosis_messages).to.deep.equal(
       device2.purge_diagnosis_messages,
+    );
+    // Verify stats sensors are preserved for combining statistics
+    expect(result?.holes[1]?.dns_queries_today).to.deep.equal(
+      device2Stats.dns_queries_today,
+    );
+    expect(result?.holes[1]?.ads_blocked_today).to.deep.equal(
+      device2Stats.ads_blocked_today,
+    );
+    expect(result?.holes[1]?.ads_percentage_blocked_today).to.deep.equal(
+      device2Stats.ads_percentage_blocked_today,
+    );
+    expect(result?.holes[1]?.domains_blocked).to.deep.equal(
+      device2Stats.domains_blocked,
+    );
+    expect(result?.holes[1]?.dns_unique_clients).to.deep.equal(
+      device2Stats.dns_unique_clients,
     );
     expect(result?.holes[1]?.switches).to.be.an('array').with.lengthOf(0);
     expect(result?.holes[1]?.sensors).to.be.an('array').with.lengthOf(0);

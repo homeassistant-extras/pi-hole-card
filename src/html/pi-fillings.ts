@@ -1,8 +1,8 @@
-import { getDashboardStats } from '@common/get-stats';
+import { combineStats, getDashboardStats } from '@common/get-stats';
 import { show } from '@common/show-section';
 import type { HomeAssistant } from '@hass/types';
 import type { Config } from '@type/config';
-import type { EntityInformation, PiHoleDevice } from '@type/types';
+import type { EntityInformation, PiHoleSetup } from '@type/types';
 import { html, nothing, type TemplateResult } from 'lit';
 import { createStatBox } from './components/stat-box';
 
@@ -10,20 +10,23 @@ import { createStatBox } from './components/stat-box';
  * Creates the dashboard stats section of the Pi-hole card
  * @param element - The HTML element to render the card into
  * @param hass - The Home Assistant object
- * @param device - The Pi-hole device
+ * @param setup - The Pi-hole setup containing all devices
  * @param config - The card configuration
  * @returns TemplateResult
  */
 export const createDashboardStats = (
   element: HTMLElement,
   hass: HomeAssistant,
-  device: PiHoleDevice,
+  setup: PiHoleSetup,
   config: Config,
 ): TemplateResult | typeof nothing => {
   if (!show(config, 'statistics')) return nothing;
 
+  // Combine statistics from all Pi-hole devices
+  const combinedDevice = combineStats(setup.holes);
+
   // Get the unique clients count for the configuration
-  const uniqueClientsCount = device.dns_unique_clients?.state ?? '0';
+  const uniqueClientsCount = combinedDevice.dns_unique_clients?.state ?? '0';
 
   // Get the stats configuration with the unique clients count
   const statConfigs = getDashboardStats(uniqueClientsCount);
@@ -37,7 +40,9 @@ export const createDashboardStats = (
               createStatBox(
                 element,
                 hass,
-                device[statConfig.sensorKey] as EntityInformation | undefined,
+                combinedDevice[statConfig.sensorKey] as
+                  | EntityInformation
+                  | undefined,
                 config.stats,
                 statConfig,
               ),
