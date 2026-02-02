@@ -1,7 +1,7 @@
+import { SystemMetricsGraph } from '@cards/components/graph/system-metrics-graph';
 import * as showSectionModule from '@common/show-section';
 import type { HomeAssistant } from '@hass/types';
 import { createSystemMetricsGraph } from '@html/components/create-system-metrics-graph';
-import { SystemMetricsGraph } from '@html/components/system-metrics-graph';
 import { fixture } from '@open-wc/testing-helpers';
 import type { Config } from '@type/config';
 import type { PiHoleDevice } from '@type/types';

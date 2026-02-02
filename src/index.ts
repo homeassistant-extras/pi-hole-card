@@ -1,7 +1,7 @@
 import { PiHoleCard } from '@cards/card';
+import { SystemMetricsGraph } from '@cards/components/graph/system-metrics-graph';
 import { PauseComponent } from '@cards/components/pause/pause';
 import { PiHoleCardEditor } from '@cards/editor';
-import { SystemMetricsGraph } from '@html/components/system-metrics-graph';
 import { version } from '../package.json';
 
 // Register the custom elements with the browser
