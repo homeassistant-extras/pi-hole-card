@@ -92,7 +92,7 @@ A comprehensive dashboard card for managing and monitoring your Pi-hole DNS ad b
 
 ### Version Information
 
-- **Component Versions** - Display installed versions for all Pi-hole components:
+- **Component Versions** - Display installed versions and update versions for all Pi-hole components:
   - Core
   - Docker
   - FTL
@@ -101,6 +101,7 @@ A comprehensive dashboard card for managing and monitoring your Pi-hole DNS ad b
   - Last Refresh Time
 
 ![Version Information](assets/version-info.png)
+![Updates](assets/updates.png)
 
 ### Status Monitoring
 
@@ -658,7 +659,7 @@ exclude_sections:
 - [x] **`Auto-discovery`**: automatic detection of Pi-hole entities
 - [x] **`Dashboard statistics`**: visual representation of key metrics
 - [x] **`Control buttons`**: quick actions for common Pi-hole tasks
-- [x] **`Version info`**: display component versions
+- [x] **`Version info`**: display component versions and updates - thanks @IIIdefconIII!
 - [x] **`Custom actions`**: tap/hold/double-tap actions for all elements - thanks @dunxd
 - [x] **`Card customization`**: custom title and icon options
 - [x] **`Performance optimizations`**: improved code structure and efficiency

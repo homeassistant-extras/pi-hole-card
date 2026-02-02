@@ -236,9 +236,30 @@ export const styles = css`
     white-space: nowrap;
   }
 
+  .version-item.update-available {
+    border-left: 3px solid var(--warning-color, #ff9800);
+    padding-left: 8px;
+    margin-left: -8px;
+  }
+
   .version-label {
     margin-right: 4px;
     font-weight: 700;
+  }
+
+  .version-text {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .version-separator {
+    margin: 0 4px;
+    color: var(--secondary-text-color);
+  }
+
+  .version-latest {
+    color: var(--warning-color, #ff9800);
+    font-weight: 600;
   }
 
   /* Very small screen adjustments */
