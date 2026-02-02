@@ -15,7 +15,5 @@ export const shouldSkipEntity = (
     return false;
   }
 
-  return config.exclude_entities.some(
-    (entityId) => entity.entity_id === entityId,
-  );
+  return config.exclude_entities.includes(entity.entity_id);
 };

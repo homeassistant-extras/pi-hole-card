@@ -53,7 +53,7 @@ export const parseTimeToSeconds = (input: number | string): number => {
 
   // Check if it's a plain number string
   if (/^\d+$/.test(str)) {
-    return parseInt(str, 10);
+    return Number.parseInt(str, 10);
   }
 
   // Handle complex format like "4h:20m:69s"
@@ -62,9 +62,9 @@ export const parseTimeToSeconds = (input: number | string): number => {
     let totalSeconds = 0;
 
     for (const part of parts) {
-      const match = part.match(/^(\d+)([hms]?)$/);
-      if (match && match[1]) {
-        const value = parseInt(match[1], 10);
+      const match = /^(\d+)([hms]?)$/.exec(part);
+      if (match?.[1]) {
+        const value = Number.parseInt(match[1], 10);
         const unit = match[2] || 's'; // default to seconds if no unit
 
         switch (unit) {
@@ -84,9 +84,9 @@ export const parseTimeToSeconds = (input: number | string): number => {
   }
 
   // Handle simple format like "10s", "5m", "1h"
-  const match = str.match(/^(\d+)([hms])$/);
-  if (match && match[1] && match[2]) {
-    const value = parseInt(match[1], 10);
+  const match = /^(\d+)([hms])$/.exec(str);
+  if (match?.[1] && match?.[2]) {
+    const value = Number.parseInt(match[1], 10);
     const unit = match[2];
 
     switch (unit) {

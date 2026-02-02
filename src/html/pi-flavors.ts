@@ -40,6 +40,8 @@ const controls = (
 
   const switchCollapsed = isCollapsed(config, 'switches');
   const actionsCollapsed = isCollapsed(config, 'actions');
+  const actionsIcon = actionsCollapsed ? 'right' : 'down';
+  const actionsClass = actionsCollapsed ? 'hidden' : '';
 
   return html`${show(config, 'switches')
     ? html`<div class="collapsible-section">
@@ -91,10 +93,10 @@ const controls = (
           <span>${localize(hass, 'card.sections.actions')}</span>
           <ha-icon
             class="caret-icon"
-            icon="mdi:chevron-${actionsCollapsed ? 'right' : 'down'}"
+            icon="mdi:chevron-${actionsIcon}"
           ></ha-icon>
         </div>
-        <div class="actions ${actionsCollapsed ? 'hidden' : ''}">
+        <div class="actions ${actionsClass}">
           ${device.controls.map((control) => {
             return createActionButton(element, sectionConfig, control, '');
           })}

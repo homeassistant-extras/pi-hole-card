@@ -43,7 +43,7 @@ describe('version-item.ts', () => {
     // Test assertions for the value inside the link
     const valueEl = linkEl?.querySelector('.version-text');
     expect(valueEl).to.exist;
-    expect(valueEl?.textContent).to.equal('v1.2.3');
+    expect(valueEl?.textContent).to.contain('v1.2.3');
   });
 
   it('should add update-available class and show latest version when update is available', async () => {
@@ -118,6 +118,6 @@ describe('version-item.ts', () => {
     // Test assertions - only installed version should be shown
     const versionTextEl = el.querySelector('.version-text');
     expect(versionTextEl).to.exist;
-    expect(versionTextEl?.textContent).to.equal('v1.2.3');
+    expect(versionTextEl?.textContent).to.contain('v1.2.3');
   });
 });

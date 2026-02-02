@@ -11,7 +11,6 @@ export interface HassUpdateEvent {
 }
 
 declare global {
-  // eslint-disable-next-line
   interface HASSDomEvents {
     'hass-update': HassUpdateEvent;
   }
@@ -95,7 +94,7 @@ export const handleClickAction = (
       // Create configuration object for the action
       const config: ActionConfigParams = {
         entity: entity.entity_id,
-        ...(sectionConfig || {}),
+        ...sectionConfig,
       };
 
       // @ts-ignore

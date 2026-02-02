@@ -91,7 +91,7 @@ export class PiHoleCard extends LitElement {
       </ha-card>`;
     }
 
-    if (!this._setup || !this._setup.holes || this._setup.holes.length === 0) {
+    if (!this._setup?.holes?.length) {
       return html`<ha-card>
         <div class="card-content">
           <div class="no-setup">No instances found</div>
