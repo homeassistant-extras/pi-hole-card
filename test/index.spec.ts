@@ -12,9 +12,9 @@ describe('index.ts', () => {
     customElementsStub = stub(customElements, 'define');
     consoleInfoStub = stub(console, 'info');
 
-    // Create a stub for window.customCards
+    // Create a stub for globalThis.customCards (same as window in browser)
     customCardsStub = [];
-    Object.defineProperty(window, 'customCards', {
+    Object.defineProperty(globalThis, 'customCards', {
       get: () => customCardsStub,
       set: (value) => {
         customCardsStub = value;
@@ -42,20 +42,20 @@ describe('index.ts', () => {
     );
   });
 
-  it('should initialize window.customCards if undefined', () => {
+  it('should initialize globalThis.customCards if undefined', () => {
     customCardsStub = undefined;
     require('@/index.ts');
 
-    expect(window.customCards).to.be.an('array');
+    expect(globalThis.customCards).to.be.an('array');
   });
 
-  it('should add card configurations with all fields to window.customCards', () => {
+  it('should add card configurations with all fields to globalThis.customCards', () => {
     require('@/index.ts');
 
-    expect(window.customCards).to.have.lengthOf(1);
+    expect(globalThis.customCards).to.have.lengthOf(1);
 
     // Check device-card configuration
-    expect(window.customCards[0]).to.deep.equal({
+    expect(globalThis.customCards![0]).to.deep.equal({
       type: 'pi-hole',
       name: 'Pi-hole Card',
       description: 'A card to summarize and control your Pi-hole instance.',
@@ -66,7 +66,7 @@ describe('index.ts', () => {
 
   it('should preserve existing cards when adding new card', () => {
     // Add an existing card
-    window.customCards = [
+    (globalThis as { customCards?: Array<object> }).customCards = [
       {
         type: 'existing-card',
         name: 'Existing Card',
@@ -75,8 +75,8 @@ describe('index.ts', () => {
 
     require('@/index.ts');
 
-    expect(window.customCards).to.have.lengthOf(2);
-    expect(window.customCards[0]).to.deep.equal({
+    expect(globalThis.customCards).to.have.lengthOf(2);
+    expect(globalThis.customCards![0]).to.deep.equal({
       type: 'existing-card',
       name: 'Existing Card',
     });
@@ -86,7 +86,7 @@ describe('index.ts', () => {
     require('@/index.ts');
     require('@/index.ts');
 
-    expect(window.customCards).to.have.lengthOf(1);
+    expect(globalThis.customCards).to.have.lengthOf(1);
     expect(customElementsStub.callCount).to.equal(4); // Called once for each component
   });
 

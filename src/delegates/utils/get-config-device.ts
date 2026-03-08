@@ -20,10 +20,8 @@ export const getConfigDevice = async (
     return undefined;
   }
 
-  const devices = Object.values(hass.devices).filter(
+  return Object.values(hass.devices).find(
     (device: DeviceRegistryEntry) =>
       device.config_entries.includes(registry.entry_id),
   );
-
-  return devices[0];
 };

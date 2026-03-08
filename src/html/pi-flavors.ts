@@ -39,6 +39,7 @@ const controls = (
   };
 
   const switchCollapsed = isCollapsed(config, 'switches');
+  const switchIcon = switchCollapsed ? 'right' : 'down';
   const actionsCollapsed = isCollapsed(config, 'actions');
   const actionsIcon = actionsCollapsed ? 'right' : 'down';
   const actionsClass = actionsCollapsed ? 'hidden' : '';
@@ -52,7 +53,7 @@ const controls = (
           <span>${localize(hass, 'card.sections.switches')}</span>
           <ha-icon
             class="caret-icon"
-            icon="mdi:chevron-${switchCollapsed ? 'right' : 'down'}"
+            icon="mdi:chevron-${switchIcon}"
           ></ha-icon>
         </div>
         <div
@@ -61,7 +62,7 @@ const controls = (
             switchCollapsed ? 'hidden' : undefined,
             config.switch_spacing,
           ]
-            .filter((s) => s)
+            .filter(Boolean)
             .join(' ')}"
         >
           ${device.switches.map((piSwitch) => {

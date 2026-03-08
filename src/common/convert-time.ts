@@ -44,6 +44,11 @@ export const formatSecondsToHHMMSS = (totalSeconds: number) => {
  * parseTimeToSeconds("4h:20m:69s"); // Returns 15669
  * ```
  */
+const UNIT_TO_SECONDS: Record<string, number> = { h: 3600, m: 60, s: 1 };
+
+const parseUnitPart = (value: number, unit: string): number =>
+  value * (UNIT_TO_SECONDS[unit] ?? 1);
+
 export const parseTimeToSeconds = (input: number | string): number => {
   if (typeof input === 'number') {
     return input;
@@ -58,45 +63,21 @@ export const parseTimeToSeconds = (input: number | string): number => {
 
   // Handle complex format like "4h:20m:69s"
   if (str.includes(':')) {
-    const parts = str.split(':');
-    let totalSeconds = 0;
-
-    for (const part of parts) {
-      const match = /^(\d+)([hms]?)$/.exec(part);
-      if (match?.[1]) {
+    return str
+      .split(':')
+      .map((part) => /^(\d+)([hms]?)$/.exec(part))
+      .reduce((total, match) => {
+        if (!match?.[1]) return total;
         const value = Number.parseInt(match[1], 10);
-        const unit = match[2] || 's'; // default to seconds if no unit
-
-        switch (unit) {
-          case 'h':
-            totalSeconds += value * 3600;
-            break;
-          case 'm':
-            totalSeconds += value * 60;
-            break;
-          case 's':
-            totalSeconds += value;
-            break;
-        }
-      }
-    }
-    return totalSeconds;
+        const unit = match[2] || 's';
+        return total + parseUnitPart(value, unit);
+      }, 0);
   }
 
   // Handle simple format like "10s", "5m", "1h"
   const match = /^(\d+)([hms])$/.exec(str);
   if (match?.[1] && match?.[2]) {
-    const value = Number.parseInt(match[1], 10);
-    const unit = match[2];
-
-    switch (unit) {
-      case 'h':
-        return value * 3600;
-      case 'm':
-        return value * 60;
-      case 's':
-        return value;
-    }
+    return parseUnitPart(Number.parseInt(match[1], 10), match[2]);
   }
 
   // If we get here, the input is invalid

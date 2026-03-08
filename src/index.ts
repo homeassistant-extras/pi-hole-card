@@ -4,17 +4,21 @@ import { PauseComponent } from '@cards/components/pause/pause';
 import { PiHoleCardEditor } from '@cards/editor';
 import { version } from '../package.json';
 
+declare global {
+  var customCards: Array<object> | undefined;
+}
+
 // Register the custom elements with the browser
 customElements.define('pi-hole', PiHoleCard);
 customElements.define('pi-hole-editor', PiHoleCardEditor);
 customElements.define('pause-component', PauseComponent);
 customElements.define('system-metrics-graph', SystemMetricsGraph);
 
-// Ensure the customCards array exists on the window object
-window.customCards = window.customCards || [];
+// Ensure the customCards array exists on the global object
+globalThis.customCards = globalThis.customCards || [];
 
 // Register the cards with Home Assistant's custom card registry
-window.customCards.push({
+globalThis.customCards.push({
   // Unique identifier for the card type
   type: 'pi-hole',
 

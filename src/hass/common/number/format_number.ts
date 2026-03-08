@@ -102,7 +102,7 @@ export const getDefaultFormatOptions = (
     (options.minimumFractionDigits === undefined &&
       options.maximumFractionDigits === undefined)
   ) {
-    const digits = num.indexOf('.') > -1 ? num.split('.')[1]!.length : 0;
+    const digits = num.includes('.') ? num.split('.')[1]!.length : 0;
     defaultOptions.minimumFractionDigits = digits;
     defaultOptions.maximumFractionDigits = digits;
   }
