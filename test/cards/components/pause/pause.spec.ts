@@ -221,15 +221,15 @@ describe('PauseComponent', () => {
     const result = component.render();
     const el = await fixture(html`${result}`);
 
-    // Check that switch selector is rendered
-    const selector = el.querySelector('ha-select');
+    // Check that switch selector is rendered with options (HA 2026.3+ uses .options property)
+    const selector = el.querySelector('ha-select') as {
+      options?: Array<{ value: string; label: string }>;
+    };
     expect(selector).to.exist;
-
-    // Check that switch options are rendered
-    const listItems = el.querySelectorAll('ha-list-item');
-    expect(listItems.length).to.equal(2);
-    expect(listItems[0]?.textContent?.trim()).to.equal('Pi-hole 1');
-    expect(listItems[1]?.textContent?.trim()).to.equal('Pi-hole 2');
+    expect(selector?.options).to.deep.equal([
+      { value: 'switch.pihole_1', label: 'Pi-hole 1' },
+      { value: 'switch.pihole_2', label: 'Pi-hole 2' },
+    ]);
   });
 
   it('should not show switch selector when group pausing is disabled', async () => {

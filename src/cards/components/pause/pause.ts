@@ -46,8 +46,8 @@ export class PauseComponent extends HassUpdateMixin(LitElement) {
     return isCollapsed(this.config, 'pause');
   }
 
-  private _handleSelectChange(e: CustomEvent) {
-    this.selectedEntityId = (e.target as any).value;
+  private _handleSelectChange(e: CustomEvent<{ value: string }>) {
+    this.selectedEntityId = e.detail?.value ?? '';
   }
 
   private readonly _handlePauseClick = (seconds: number) => {
@@ -87,24 +87,18 @@ export class PauseComponent extends HassUpdateMixin(LitElement) {
       this.selectedEntityId = this.allSwitches[0]?.entity_id || '';
     }
 
+    // ha-select requires .options property for HA 2026.3+ (no longer accepts ha-list-item children)
     return html`
       <div class="pause-controls">
         <ha-select
           .label=${localize(this.hass!, 'card.ui.select_pi_or_group')}
           .value=${this.selectedEntityId}
+          .options=${this.allSwitches.map((s) => ({
+            value: s.entity_id,
+            label: s.attributes.friendly_name || s.entity_id,
+          }))}
           @selected=${this._handleSelectChange}
-          fixedMenuPosition
-          naturalMenuWidth
-        >
-          ${this.allSwitches.map(
-            (switchEntity) => html`
-              <ha-list-item .value=${switchEntity.entity_id}>
-                ${switchEntity.attributes.friendly_name ||
-                switchEntity.entity_id}
-              </ha-list-item>
-            `,
-          )}
-        </ha-select>
+        ></ha-select>
       </div>
     `;
   }
