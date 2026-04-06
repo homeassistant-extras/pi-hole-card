@@ -4,6 +4,7 @@
 
 import type { DeviceRegistryEntry } from './data/device_registry';
 import type { EntityRegistryDisplayEntry } from './data/entity_registry';
+import type { FrontendLocaleData } from './data/translations';
 import type { HassEntities, MessageBase } from './ws/types';
 
 export interface ServiceCallResponse {
@@ -27,6 +28,8 @@ export interface HomeAssistant {
   //   - browser language
   //   - english (en)
   language: string;
+  /** Language + number format from the HA frontend (Profile → Number format). */
+  locale?: FrontendLocaleData;
   callService(
     domain: ServiceCallRequest['domain'],
     service: ServiceCallRequest['service'],

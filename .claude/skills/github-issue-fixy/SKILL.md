@@ -151,25 +151,32 @@ This skill guides you through solving GitHub issues for the Home Assistant devic
 
 3. **Release notes content**:
    - **Bug fixes**: "Fixed [description] - fixes #[issue-number]"
-   - **New features**: "Added [feature name] - thanks @[username] - fixes #[issue-number]"
+   - **New features**: "Added [feature name] - fixes #[issue-number]" (or equivalent plain-language lead)
    - **Enhancements**: "Improved [description] - fixes #[issue-number]"
    - **Breaking changes**: Clearly mark with "⚠️ BREAKING CHANGE:" prefix
+   - **Do not thank contributors in release notes** — appreciation belongs in the README roadmap (Step 7), not in `RELEASE_NOTES.md`.
 
-4. **Example format**:
+4. **Tone and links**:
+   - Prefer short, user-facing copy; avoid deep technical detail (file names, internal APIs) unless necessary for migration.
+   - **Link where it helps**: [Home Assistant documentation](https://www.home-assistant.io/docs/), relevant integration pages, or this repo’s published docs (e.g. GitHub Pages) so users can go further.
+
+5. **Example format**:
 
    ```markdown
    # Hidden Entity Filtering & Dark Mode!🎉✨
 
    ## 🔍 Hidden Entity Filtering
 
-   Hidden entities are now automatically filtered out from device cards, matching Home Assistant's more-info popup behavior - thanks @warmfire540 - fixes #43
+   Hidden entities are now filtered out to match Home Assistant’s more-info behavior - fixes #43
 
    ## 🌙 Dark Mode Support
 
-   Added dark mode theme option for better visibility in low-light environments - thanks @username - fixes #123
+   Dark mode option for low-light dashboards - fixes #123
+
+   See [Home Assistant themes](https://www.home-assistant.io/integrations/frontend/) for related settings.
    ```
 
-5. **Home Assistant user-friendly language**:
+6. **Home Assistant user-friendly language**:
    - Write in clear, non-technical language
    - Focus on what users can do or what problems are solved
    - Avoid internal implementation details
@@ -231,7 +238,7 @@ Provide a summary of:
 - Ensure backward compatibility unless it's a breaking change
 - Consider Home Assistant version compatibility
 - Test with multiple browsers if UI changes are involved
-- Keep release notes user-friendly and focused on user benefits
+- **Release notes** (`RELEASE_NOTES.md`): user-facing, no contributor thanks (those go in the README roadmap); include links to Home Assistant or project docs where relevant; avoid unnecessary technical detail
 
 ## Plan Presentation Format
 
@@ -275,7 +282,7 @@ When presenting the plan, use this structure:
 ```markdown
 ## [Emoji] [Feature/Bug Name]
 
-Brief description, yaml example, doc links, etc.
+Brief description, optional YAML example, links to HA or project docs; no contributor thanks; fixes issue when applicable.
 ```
 ````
 
@@ -297,7 +304,7 @@ Brief description, yaml example, doc links, etc.
    - Files to modify: `src/cards/device-card/styles.ts`, `src/cards/device-card/types.ts`, `src/cards/device-card/editor.ts`
    - Tests: Update existing test in `test/cards/device-card/card.spec.ts` to include dark mode scenarios (prefer updating over creating new tests)
    - Documentation: Update README.md Features section, add config option to table
-   - Release notes draft: "## Dark Mode Support\n\nAdded dark mode theme option"
+   - Release notes draft: "## Dark Mode Support\n\nAdded dark mode theme option - fixes #123" (no thanks; link to HA docs if useful)
    - Roadmap draft: "- [ ] **`Dark mode support`**: Add dark mode theme option - thanks @username"
 4. **PRESENT PLAN TO USER** - Wait for approval
 5. **ONLY AFTER APPROVAL**: Implement code changes
