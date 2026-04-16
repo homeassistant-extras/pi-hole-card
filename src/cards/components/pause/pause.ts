@@ -4,6 +4,7 @@ import { formatSecondsToHuman, parseTimeToSeconds } from '@common/convert-time';
 import { show } from '@common/show-section';
 import { toggleSection } from '@common/toggle-section';
 import { hasFeature } from '@config/feature';
+import { getPauseDurations } from '@config/pause-settings';
 import { handlePauseClick } from '@delegates/utils/pause-hole';
 import { localize } from '@localize/localize';
 import type { Config } from '@type/config';
@@ -34,8 +35,7 @@ export class PauseComponent extends HassUpdateMixin(LitElement) {
   }
 
   private get pauseDurations(): number[] {
-    const durations = this.config.pause_durations ?? [60, 300, 900];
-    return durations.map(parseTimeToSeconds);
+    return getPauseDurations(this.config).map(parseTimeToSeconds);
   }
 
   private get isGroupPausingEnabled(): boolean {
@@ -60,6 +60,7 @@ export class PauseComponent extends HassUpdateMixin(LitElement) {
       seconds,
       this.config,
       targetEntityId,
+      this,
     );
   };
 

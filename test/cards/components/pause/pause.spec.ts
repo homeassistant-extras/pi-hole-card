@@ -127,8 +127,8 @@ describe('PauseComponent', () => {
   });
 
   it('should render pause section with default durations when pause_durations is not provided', async () => {
-    // Remove pause_durations from config
     delete mockConfig.pause_durations;
+    delete mockConfig.pause;
     component.config = mockConfig;
 
     // Ensure group pausing is disabled for this test
@@ -171,9 +171,23 @@ describe('PauseComponent', () => {
     expect(buttons[2]?.textContent?.trim()).to.equal('30 minutes');
   });
 
+  it('should use nested pause.durations when set', async () => {
+    delete mockConfig.pause_durations;
+    mockConfig.pause = { durations: [20] };
+    component.config = mockConfig;
+    hasFeatureStub.returns(true);
+
+    const result = component.render();
+    const el = await fixture(html`${result}`);
+    const buttons = el.querySelectorAll('mwc-button');
+    expect(buttons.length).to.equal(1);
+    expect(buttons[0]?.textContent?.trim()).to.equal('20 seconds');
+  });
+
   it('should handle string time formats in pause durations', async () => {
     // Update config with string formats
     mockConfig.pause_durations = ['60', '5m', '1h'];
+    delete mockConfig.pause;
     component.config = mockConfig;
 
     // Render component
@@ -286,6 +300,7 @@ describe('PauseComponent', () => {
     expect(handlePauseClickStub.firstCall.args[2]).to.equal(60);
     expect(handlePauseClickStub.firstCall.args[3]).to.equal(mockConfig);
     expect(handlePauseClickStub.firstCall.args[4]).to.be.undefined; // No target entity when group pausing disabled
+    expect(handlePauseClickStub.firstCall.args[5]).to.equal(component);
   });
 
   it('should handle pause button clicks with target entity when group pausing enabled', async () => {

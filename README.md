@@ -1,12 +1,8 @@
 # Pi-hole Card
 
-<p align="center">
-    <img src="assets/pihole-card.png" align="center" width="50%">
-</p>
-<p align="center"><h1 align="center">Pi-hole Card</h1></p>
-<p align="center">
-  <em>Complete Pi-hole monitoring and control for Home Assistant</em>
-</p>
+_Complete Pi-hole monitoring and control for Home Assistant_
+
+![Pi-hole Card](assets/pihole-card.png)
 
 ![Home Assistant](https://img.shields.io/badge/home%20assistant-%2341BDF5.svg?style=for-the-badge&logo=home-assistant&logoColor=white)
 [![hacs_badge](https://img.shields.io/badge/HACS-Default-orange.svg?style=for-the-badge)](https://github.com/hacs/integration)
@@ -21,15 +17,13 @@
 ![commits](https://img.shields.io/github/commit-activity/y/homeassistant-extras/pi-hole-card?style=for-the-badge)
 ![license](https://img.shields.io/github/license/homeassistant-extras/pi-hole-card?style=for-the-badge&logo=opensourceinitiative&logoColor=white&color=0080ff)
 
-<p align="center">Built with the tools and technologies:</p>
-<p align="center">
-  <img src="https://img.shields.io/badge/npm-CB3837.svg?style=for-the-badge&logo=npm&logoColor=white" alt="npm">
-  <img src="https://img.shields.io/badge/Prettier-F7B93E.svg?style=for-the-badge&logo=Prettier&logoColor=black" alt="Prettier">
-  <img src="https://img.shields.io/badge/TypeScript-3178C6.svg?style=for-the-badge&logo=TypeScript&logoColor=white" alt="TypeScript">
-  <img src="https://img.shields.io/badge/GitHub%20Actions-2088FF.svg?style=for-the-badge&logo=GitHub-Actions&logoColor=white" alt="GitHub%20Actions">
-  <img src="https://img.shields.io/badge/Lit-324FFF.svg?style=for-the-badge&logo=Lit&logoColor=white" alt="Lit">
-</p>
-<br>
+Built with the tools and technologies:
+
+![npm](https://img.shields.io/badge/npm-CB3837.svg?style=for-the-badge&logo=npm&logoColor=white)
+![Prettier](https://img.shields.io/badge/Prettier-F7B93E.svg?style=for-the-badge&logo=Prettier&logoColor=black)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6.svg?style=for-the-badge&logo=TypeScript&logoColor=white)
+![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-2088FF.svg?style=for-the-badge&logo=GitHub-Actions&logoColor=white)
+![Lit](https://img.shields.io/badge/Lit-324FFF.svg?style=for-the-badge&logo=Lit&logoColor=white)
 
 ## Overview
 
@@ -262,23 +256,23 @@ If you're unsure what your Pi-hole device ID is, here are several ways to find i
 
 ## Configuration Options
 
-| Name               | Type            | Default      | Description                                                        |
-| ------------------ | --------------- | ------------ | ------------------------------------------------------------------ |
-| device_id          | string or array | **Required** | The ID(s) of your Pi-hole device(s) in Home Assistant              |
-| title              | string          | Pi-Hole      | Custom title for the card header                                   |
-| icon               | string          | mdi:pi-hole  | Custom icon for the card header                                    |
-| badge              | object          | _none_       | Configure actions for the card icon/badge                          |
-| pause_durations    | array           | [60,300,900] | Durations for pause buttons (supports numbers, strings with units) |
-| stats              | object          | _none_       | Configure actions for statistics tiles                             |
-| info               | object          | _none_       | Configure actions for additional info items                        |
-| controls           | object          | _none_       | Configure actions for control buttons                              |
-| exclude_sections   | list            | _none_       | Sections of entities to exclude. See below.                        |
-| exclude_entities   | list            | _none_       | Entities to remove from the card.                                  |
-| entity_order       | list            | _none_       | Custom order for switch, button, sensor entities or dividers.      |
-| collapsed_sections | list            | _none_       | Sections to be initially collapsed. See below.                     |
-| switch_spacing     | string          | flex         | Layout style for switches: flex, space-around, space-between       |
-| chart              | object          | _none_       | Chart configuration options. See below.                            |
-| features           | list            | See below    | Optional flags to toggle different features                        |
+| Name                | Type            | Default      | Description                                                   |
+| ------------------- | --------------- | ------------ | ------------------------------------------------------------- |
+| device_id           | string or array | **Required** | The ID(s) of your Pi-hole device(s) in Home Assistant         |
+| title               | string          | Pi-Hole      | Custom title for the card header                              |
+| icon                | string          | mdi:pi-hole  | Custom icon for the card header                               |
+| badge               | object          | _none_       | Configure actions for the card icon/badge                     |
+| pause               | object          | [60,300,900] | Pause buttons config                                          |
+| stats               | object          | _none_       | Configure actions for statistics tiles                        |
+| info                | object          | _none_       | Configure actions for additional info items                   |
+| controls            | object          | _none_       | Configure actions for control buttons                         |
+| exclude\*sections   | list            | \_none\*     | Sections of entities to exclude. See below.                   |
+| exclude\*entities   | list            | \_none\*     | Entities to remove from the card.                             |
+| entity\*order       | list            | \_none\*     | Custom order for switch, button, sensor entities or dividers. |
+| collapsed\*sections | list            | \_none\*     | Sections to be initially collapsed. See below.                |
+| switch\*spacing     | string          | flex         | Layout style for switches: flex, space-around, space-between  |
+| chart               | object          | \_none\*     | Chart configuration options. See below.                       |
+| features            | list            | See below    | Optional flags to toggle different features                   |
 
 ### Action Configuration
 
@@ -382,18 +376,19 @@ icon: 'mdi:shield-check'
 
 ### With Custom Pause Durations
 
-The `pause_durations` configuration supports various formats for specifying time:
+`pause.durations` (or legacy `pause_durations`) supports various formats for specifying time:
 
 ```yaml
 type: custom:pi-hole
 device_id: pi_hole_device_1
-pause_durations:
-  - 60 # 1 minute
-  - 300 # 5 minutes
-  - 10s # 10 seconds
-  - 5m # 5 minutes
-  - 1h # 1 hour
-  - '4h:20m:69s' # 15669 seconds (complex format)
+pause:
+  durations:
+    - 60 # 1 minute
+    - 300 # 5 minutes
+    - 10s # 10 seconds
+    - 5m # 5 minutes
+    - 1h # 1 hour
+    - '4h:20m:69s' # 15669 seconds (complex format)
 ```
 
 **Supported time formats:**
@@ -406,6 +401,51 @@ pause_durations:
 The UI will automatically display these in human-readable format (e.g., "5 minutes", "1 hour").
 
 ![Pause Ad-Blocking](assets/custom-pause.png)
+
+### Custom pause button action
+
+If you set `pause.tap_action` (same idea as `tap_action` on badge, stats, etc.), each pause button dispatches that [dashboard action](https://www.home-assistant.io/dashboards/actions/) as a tap (toggle, perform-action / `call-service`, navigate, more-info, url, assist, fire-dom-event, etc.). Default Pi-hole pause behavior applies when no custom action is set.
+
+Inside `pause.tap_action` you can use **card-local placeholders** in strings so the clicked duration and card context flow into `perform-action` / `call-service` data (this is **not** Home Assistant Jinja—only the names below are replaced):
+
+| Placeholder           | Value                                                              |
+| --------------------- | ------------------------------------------------------------------ |
+| `{{ pause_seconds }}` | Seconds for the button that was clicked                            |
+| `{{ pause_minutes }}` | That duration in minutes (`pause_seconds / 60`, may be fractional) |
+| `{{ device_id }}`     | Card `device_id`; if you use a list, the **first** id is used      |
+| `{{ entity_id }}`     | Selected switch when group pausing is on; otherwise empty string   |
+
+If a value is **only** a single placeholder (optional surrounding whitespace), the card substitutes a **number** for `pause_seconds` / `pause_minutes` and a **string** for `device_id` / `entity_id`. Inside a longer string, replacements are stringified. Unknown `{{ names }}` are left as-is.
+
+See [Home Assistant actions](https://www.home-assistant.io/dashboards/actions/) for YAML shape.
+
+```yaml
+type: custom:pi-hole
+device_id: pi_hole_device_1
+pause:
+  durations:
+    - 60
+    - 300
+  tap_action:
+    action: perform-action
+    perform_action: script.your_pause_routine
+```
+
+Example passing minutes and device id into Control D integration:
+
+```yaml
+pause:
+  tap_action:
+    action: perform-action
+    perform_action: controld_manager.disable_profile
+    data:
+      minutes: '{{ pause_minutes }}'
+      profile_id:
+        - '{{ device_id }}'
+```
+
+> [!NOTE]  
+> **Same action per button**: Every pause duration button runs the same `pause.tap_action`. Use a single `durations` entry, or different scripts per button via multiple cards, if you need different behavior per label.
 
 ## Feature Flags
 
@@ -668,7 +708,7 @@ exclude_sections:
 - [x] **`Multi-Pi-hole support`**: manage and monitor multiple Pi-hole instances - thanks @Drudoo, @heylers
 - [x] **`Collapsible sections`**: collapse/expand card sections to save space - thanks @Teleportist
 - [x] **`Additional visualization options`**: using HA native more-info, etc. - thanks @dunxd
-- [x] **`Pause ad-blocking`**: temporarily disable filtering for specified durations - thanks @StuartHaire, @VVRud
+- [x] **`Pause ad-blocking`**: temporarily disable filtering for specified durations - thanks @StuartHaire, @VVRud, @ccpk1
 - [x] **`Entity ordering`**: customize the order of displayed entities - thanks @Teleportist
 - [x] **`Section hiding`**: ability to disable sections or entities - thanks @pcnate, @bastgau, @Anto79-ops
 - [x] **`Visual separators`**: add dividers for switches - thanks @Teleportist

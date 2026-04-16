@@ -1,5 +1,6 @@
 import { formatSecondsToHHMMSS } from '@common/convert-time';
 import { handlePauseClick } from '@delegates/utils/pause-hole';
+import * as fireEventModule from '@hass/common/dom/fire_event';
 import type { HomeAssistant } from '@hass/types';
 import type { Config } from '@type/config';
 import type { PiHoleSetup } from '@type/types';
@@ -12,6 +13,7 @@ describe('handle-pause-click.ts', () => {
   let mockConfig: Config;
   let callServiceStub: sinon.SinonStub;
   let formatTimeStub: sinon.SinonStub;
+  let fireEventStub: sinon.SinonStub;
 
   beforeEach(() => {
     // Create mock HomeAssistant object with a callService stub
@@ -37,12 +39,15 @@ describe('handle-pause-click.ts', () => {
     // Create a stub for formatSecondsToHHMMSS
     formatTimeStub = stub();
     (formatSecondsToHHMMSS as unknown) = formatTimeStub;
+
+    fireEventStub = stub(fireEventModule, 'fireEvent');
   });
 
   afterEach(() => {
     // Restore stubs after each test
     callServiceStub.reset();
     formatTimeStub.reset();
+    fireEventStub.restore();
   });
 
   it('should call service immediately when invoked', () => {
@@ -146,6 +151,74 @@ describe('handle-pause-click.ts', () => {
     expect(callServiceStub.calledOnce).to.be.true;
     expect(callServiceStub.firstCall.args[0]).to.equal('pi_hole');
     expect(callServiceStub.firstCall.args[1]).to.equal('disable');
+  });
+
+  it('should dispatch hass-action when pause.tap_action is set and node is provided', () => {
+    const host = document.createElement('div');
+    const action = {
+      action: 'perform-action' as const,
+      perform_action: 'script.turn_on',
+      data: { entity_id: 'script.test' },
+    };
+    mockConfig.pause = { tap_action: action };
+
+    handlePauseClick(
+      mockHass,
+      mockSetup,
+      60,
+      mockConfig,
+      'switch.pihole_1',
+      host,
+    );
+
+    expect(fireEventStub.calledOnce).to.be.true;
+    expect(fireEventStub.firstCall.args[0]).to.equal(host);
+    expect(fireEventStub.firstCall.args[1]).to.equal('hass-action');
+    expect(fireEventStub.firstCall.args[2]).to.deep.equal({
+      config: { tap_action: action },
+      action: 'tap',
+    });
+    expect(callServiceStub.called).to.be.false;
+    expect(formatTimeStub.called).to.be.false;
+  });
+
+  it('should substitute pause.tap_action placeholders before hass-action', () => {
+    const host = document.createElement('div');
+    const action = {
+      action: 'perform-action' as const,
+      perform_action: 'controld_manager.disable_profile',
+      data: {
+        minutes: '{{ pause_minutes }}',
+        profile_id: ['{{ device_id }}'],
+      },
+    };
+    mockConfig.pause = { tap_action: action };
+
+    handlePauseClick(mockHass, mockSetup, 900, mockConfig, undefined, host);
+
+    const payload = fireEventStub.firstCall.args[2] as {
+      config: {
+        tap_action: { data: { minutes: number; profile_id: string[] } };
+      };
+    };
+    expect(payload.config.tap_action.data.minutes).to.equal(15);
+    expect(payload.config.tap_action.data.profile_id).to.deep.equal([
+      'pi_hole_device_1',
+    ]);
+  });
+
+  it('should not call service or fire event when custom pause tap_action is set but node is missing', () => {
+    mockConfig.pause = {
+      tap_action: {
+        action: 'perform-action',
+        perform_action: 'script.turn_on',
+      },
+    };
+
+    handlePauseClick(mockHass, mockSetup, 60, mockConfig);
+
+    expect(fireEventStub.called).to.be.false;
+    expect(callServiceStub.called).to.be.false;
   });
 
   it('should use pi_hole domain with entityId when ha_integration feature is enabled', () => {

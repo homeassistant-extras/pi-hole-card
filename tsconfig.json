@@ -3,6 +3,7 @@
     /* Base Options: */
     "skipLibCheck": true,
     "target": "es2022",
+    "lib": ["es2021", "dom"],
     "moduleResolution": "node",
     "isolatedModules": true,
     "experimentalDecorators": true,
@@ -10,6 +11,7 @@
     "resolveJsonModule": true,
     "moduleDetection": "force",
     "verbatimModuleSyntax": true,
+    "ignoreDeprecations": "6.0",
 
     /* Strictness */
     "strict": true,

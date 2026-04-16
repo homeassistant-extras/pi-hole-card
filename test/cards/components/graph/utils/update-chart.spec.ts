@@ -152,9 +152,10 @@ describe('update-chart', () => {
       });
 
       expect(mockChart.data.labels).to.have.length(1);
-      expect(mockChart.data.labels[0]).to.be.a('string');
+      const label0 = mockChart.data.labels![0];
+      expect(label0).to.be.a('string');
       // Should be formatted as time (e.g., "3:45 PM")
-      expect(mockChart.data.labels[0]).to.match(/\d{1,2}:\d{2}\s?(AM|PM)/);
+      expect(label0).to.match(/\d{1,2}:\d{2}\s?(AM|PM)/);
     });
 
     it('should create datasets with correct line type', () => {

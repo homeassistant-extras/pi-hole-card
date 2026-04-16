@@ -321,30 +321,46 @@ describe('editor.ts', () => {
           icon: 'mdi:gesture-tap',
           schema: [
             {
-              name: 'pause_durations',
-              label: 'editor.pause_durations',
-              required: false,
-              selector: {
-                select: {
-                  multiple: true,
-                  custom_value: true,
-                  mode: 'list' as const,
-                  options: [
-                    {
-                      label: '60 seconds',
-                      value: '60s',
+              name: 'pause',
+              label: 'editor.pause',
+              type: 'expandable',
+              icon: 'mdi:pause-circle',
+              schema: [
+                {
+                  name: 'durations',
+                  label: 'editor.pause_durations',
+                  required: false,
+                  selector: {
+                    select: {
+                      multiple: true,
+                      custom_value: true,
+                      mode: 'list' as const,
+                      options: [
+                        {
+                          label: '60 seconds',
+                          value: '60s',
+                        },
+                        {
+                          label: '5 minutes',
+                          value: '5m',
+                        },
+                        {
+                          label: '15 minutes',
+                          value: '15m',
+                        },
+                      ],
                     },
-                    {
-                      label: '5 minutes',
-                      value: '5m',
-                    },
-                    {
-                      label: '15 minutes',
-                      value: '15m',
-                    },
-                  ],
+                  },
                 },
-              },
+                {
+                  name: 'tap_action',
+                  label: 'editor.pause_action',
+                  required: false,
+                  selector: {
+                    ui_action: {},
+                  },
+                },
+              ],
             },
             {
               name: 'badge',

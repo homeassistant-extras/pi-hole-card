@@ -39,7 +39,15 @@ export interface Config {
   /** Sections that should be collapsed by default */
   collapsed_sections?: CollapsibleSections[];
 
-  /** Custom pause durations (optional) - can be numbers in seconds or strings with time units */
+  /**
+   * Pause section: button durations and optional custom action.
+   * Prefer this over legacy {@link Config.pause_durations}.
+   */
+  pause?: PauseConfig;
+
+  /**
+   * @deprecated Use `pause.durations` instead. Still read when `pause.durations` is omitted.
+   */
   pause_durations?: (number | string)[];
 
   /** Style for the switches */
@@ -50,6 +58,15 @@ export interface Config {
 
   /** Options to enable disable features */
   features?: Features[];
+}
+
+/** Nested pause configuration (YAML `pause:`) */
+export interface PauseConfig {
+  /** Button durations */
+  durations?: (number | string)[];
+
+  /** Custom action dispatched as a tap (same as other sections’ `tap_action`) */
+  tap_action?: ActionConfig;
 }
 
 export type SwitchSpacing = 'flex' | 'space-around' | 'space-between';

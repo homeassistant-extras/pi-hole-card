@@ -97,9 +97,9 @@ describe('entity-filter.ts', () => {
       };
 
       // Act & Assert
-      expect(shouldSkipEntity(entities[0], config)).to.be.true; // sensor.entity1 should be skipped
-      expect(shouldSkipEntity(entities[1], config)).to.be.false; // sensor.entity2 should not be skipped
-      expect(shouldSkipEntity(entities[2], config)).to.be.true; // sensor.entity3 should be skipped
+      expect(shouldSkipEntity(entities[0]!, config)).to.be.true; // sensor.entity1 should be skipped
+      expect(shouldSkipEntity(entities[1]!, config)).to.be.false; // sensor.entity2 should not be skipped
+      expect(shouldSkipEntity(entities[2]!, config)).to.be.true; // sensor.entity3 should be skipped
     });
 
     it('should not match partial entity IDs', () => {

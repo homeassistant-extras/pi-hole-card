@@ -282,17 +282,33 @@ const getSchema = (hass: HomeAssistant): HaFormSchema[] => {
       icon: 'mdi:gesture-tap',
       schema: [
         {
-          name: 'pause_durations',
-          label: 'editor.pause_durations',
-          required: false,
-          selector: {
-            select: {
-              multiple: true,
-              custom_value: true,
-              mode: 'list' as const,
-              options: getPauseDurationOptions(hass),
+          name: 'pause',
+          label: 'editor.pause',
+          type: 'expandable',
+          icon: 'mdi:pause-circle',
+          schema: [
+            {
+              name: 'durations',
+              label: 'editor.pause_durations',
+              required: false,
+              selector: {
+                select: {
+                  multiple: true,
+                  custom_value: true,
+                  mode: 'list' as const,
+                  options: getPauseDurationOptions(hass),
+                },
+              },
             },
-          },
+            {
+              name: 'tap_action',
+              label: 'editor.pause_action',
+              required: false,
+              selector: {
+                ui_action: {},
+              },
+            },
+          ],
         },
         {
           name: 'badge',
@@ -434,11 +450,20 @@ export class PiHoleCardEditor extends LitElement {
    */
   setConfig(config: Config) {
     // Normalize device_id: convert string to array for multiple selector compatibility
-    if (typeof config.device_id === 'string') {
-      this._config = { ...config, device_id: [config.device_id] };
-    } else {
-      this._config = config;
+    let next: Config =
+      typeof config.device_id === 'string'
+        ? { ...config, device_id: [config.device_id] }
+        : { ...config };
+
+    // Normalize pause: merge legacy top-level pause_durations into pause for the form
+    if (!next.pause && next.pause_durations != null) {
+      next = {
+        ...next,
+        pause: { durations: next.pause_durations },
+      };
     }
+
+    this._config = next;
   }
 
   private _valueChanged(ev: CustomEvent) {
@@ -464,6 +489,20 @@ export class PiHoleCardEditor extends LitElement {
     }
     if (shouldDelete(config.badge)) {
       delete config.badge;
+    }
+
+    if (config.pause) {
+      if (!config.pause.tap_action?.action) {
+        delete config.pause.tap_action;
+      }
+      if (!config.pause.durations?.length) {
+        delete config.pause.durations;
+      }
+      if (Object.keys(config.pause).length === 0) {
+        delete config.pause;
+      } else {
+        delete config.pause_durations;
+      }
     }
 
     if (!config.exclude_entities?.length) {
