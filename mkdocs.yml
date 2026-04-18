@@ -1,0 +1,77 @@
+site_name: Pi-hole Card
+site_description: Complete Pi-hole monitoring and control for Home Assistant
+site_url: https://homeassistant-extras.github.io/pi-hole-card/
+repo_name: homeassistant-extras/pi-hole-card
+repo_url: https://github.com/homeassistant-extras/pi-hole-card
+edit_uri: edit/main/docs/
+
+theme:
+  name: material
+  palette:
+    - media: '(prefers-color-scheme: light)'
+      scheme: default
+      primary: blue
+      accent: light-blue
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: '(prefers-color-scheme: dark)'
+      scheme: slate
+      primary: blue
+      accent: light-blue
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+  icon:
+    repo: fontawesome/brands/github
+  logo: assets/pihole-card.png
+  favicon: assets/pihole-card.png
+
+plugins:
+  - search
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - attr_list
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+
+nav:
+  - Home: index.md
+  - Installation: INSTALLATION.md
+  - Features: FEATURES.md
+  - Configuration:
+      - Overview: CONFIGURATION.md
+      - Options: configuration/OPTIONS.md
+      - Actions: configuration/ACTIONS.md
+      - Sections & Ordering: configuration/SECTIONS.md
+      - Pause: configuration/PAUSE.md
+      - Chart: configuration/CHART.md
+      - Feature flags: configuration/FEATURE-FLAGS.md
+      - Examples: configuration/EXAMPLES.md
+  - Multi Pi-hole: MULTI-PIHOLE.md
+  - Troubleshooting: TROUBLESHOOTING.md
+  - Build: BUILD.md
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/homeassistant-extras/pi-hole-card
+    - icon: fontawesome/brands/discord
+      link: https://discord.gg/NpH4Pt8Jmr
