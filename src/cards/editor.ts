@@ -103,6 +103,20 @@ const getCollapsedSectionOptions = (hass: HomeAssistant): SelectOption[] => {
   ];
 };
 
+const getAggregationModeOptions = (hass: HomeAssistant): SelectOption[] => {
+  const l = (label: TranslationKey) => localize(hass, label);
+  return [
+    {
+      label: l('editor.aggregation_mode_load_balanced'),
+      value: 'load_balanced',
+    },
+    {
+      label: l('editor.aggregation_mode_mirrored'),
+      value: 'mirrored',
+    },
+  ];
+};
+
 const getPauseDurationOptions = (hass: HomeAssistant): SelectOption[] => {
   const l = (label: TranslationKey) => localize(hass, label);
   return [
@@ -378,6 +392,26 @@ const getSchema = (hass: HomeAssistant): HaFormSchema[] => {
       ],
     },
     {
+      name: 'aggregation',
+      label: 'editor.multi_pihole',
+      type: 'expandable' as const,
+      icon: 'mdi:server-network',
+      schema: [
+        {
+          name: 'mode',
+          label: 'editor.aggregation_mode',
+          required: false,
+          selector: {
+            select: {
+              multiple: false,
+              mode: 'dropdown' as const,
+              options: getAggregationModeOptions(hass),
+            },
+          },
+        },
+      ],
+    },
+    {
       name: 'features',
       label: 'editor.features',
       type: 'expandable' as const,
@@ -519,6 +553,16 @@ export class PiHoleCardEditor extends LitElement {
 
     if (!config.collapsed_sections?.length) {
       delete config.collapsed_sections;
+    }
+
+    // Aggregation block is only meaningful when `mode` is set to a non-default
+    // value. Drop the whole object otherwise so we do not leave noise in YAML.
+    if (
+      config.aggregation &&
+      (!config.aggregation.mode ||
+        config.aggregation.mode === 'load_balanced')
+    ) {
+      delete config.aggregation;
     }
 
     // @ts-ignore

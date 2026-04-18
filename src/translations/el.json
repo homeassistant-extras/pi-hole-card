@@ -72,6 +72,10 @@
     "chart_line_type_normal": "Κανονικό (Προεπιλογή)",
     "chart_line_type_gradient": "Κλίση",
     "chart_line_type_gradient_no_fill": "Κλίση Χωρίς Γέμισμα",
-    "chart_line_type_no_fill": "Χωρίς Γέμισμα"
+    "chart_line_type_no_fill": "Χωρίς Γέμισμα",
+    "multi_pihole": "Πολλαπλά Pi-hole",
+    "aggregation_mode": "Λειτουργία συγκέντρωσης πλακιδίων",
+    "aggregation_mode_load_balanced": "Εξισορρόπηση φορτίου",
+    "aggregation_mode_mirrored": "Καθρεπτισμένο"
   }
 }

@@ -1,4 +1,8 @@
-import type { DashboardStatConfig } from '@type/config';
+import type {
+  AggregationMode,
+  Config,
+  DashboardStatConfig,
+} from '@type/config';
 import type { EntityInformation, PiHoleDevice } from '@type/types';
 
 /**
@@ -13,11 +17,29 @@ const parseNumericState = (entity: EntityInformation | undefined): number => {
 };
 
 /**
- * Combines statistics from multiple Pi-hole devices into a single device
+ * Resolves the active aggregation mode from a card config.
+ * Defaults to `load_balanced` when unset, which matches pre-aggregation behavior.
+ */
+const resolveAggregationMode = (config?: Config): AggregationMode =>
+  config?.aggregation?.mode ?? 'load_balanced';
+
+/**
+ * Combines statistics from multiple Pi-hole devices into a single device.
+ *
+ * The `aggregation.mode` on the card config controls how the four dashboard
+ * tiles combine values:
+ * - `load_balanced` *(default)*: sum traffic metrics, weighted % Blocked.
+ * - `mirrored`: same as above, but Domains on Lists is averaged so identical
+ *   blocklists across instances do not double/triple-count.
+ *
  * @param holes - Array of Pi-hole devices to combine
+ * @param config - Optional card config used to resolve the aggregation mode
  * @returns A combined Pi-hole device with aggregated statistics
  */
-export const combineStats = (holes: PiHoleDevice[]): PiHoleDevice => {
+export const combineStats = (
+  holes: PiHoleDevice[],
+  config?: Config,
+): PiHoleDevice => {
   if (holes.length === 0) {
     throw new Error('Cannot combine stats from empty array');
   }
@@ -28,6 +50,7 @@ export const combineStats = (holes: PiHoleDevice[]): PiHoleDevice => {
   }
 
   const firstDevice = holes[0]!;
+  const mode = resolveAggregationMode(config);
 
   // Sum numeric stats: dns_queries_today, ads_blocked_today, domains_blocked, dns_unique_clients
   let dnsQueriesSum = 0;
@@ -47,6 +70,16 @@ export const combineStats = (holes: PiHoleDevice[]): PiHoleDevice => {
   const calculatedPercentage =
     dnsQueriesSum > 0 ? (adsBlockedSum / dnsQueriesSum) * 100 : 0;
 
+  // In mirrored topologies every Pi-hole has identical blocklists, so summing
+  // multiplies the real list size by the number of nodes. Average just that
+  // metric in mirrored mode; traffic counts and unique-client counts still
+  // sum (clients commonly only resolve through one Pi-hole at a time even when
+  // multiple are configured for failover, so summing approximates reality).
+  const domainsBlockedValue =
+    mode === 'mirrored'
+      ? Math.round(domainsBlockedSum / holes.length)
+      : domainsBlockedSum;
+
   // Create combined device using first device as base, with aggregated stats
   const combined: PiHoleDevice = {
     ...firstDevice,
@@ -65,7 +98,7 @@ export const combineStats = (holes: PiHoleDevice[]): PiHoleDevice => {
     domains_blocked: firstDevice.domains_blocked
       ? {
           ...firstDevice.domains_blocked,
-          state: domainsBlockedSum.toString(),
+          state: domainsBlockedValue.toString(),
         }
       : undefined,
     ads_percentage_blocked_today: firstDevice.ads_percentage_blocked_today

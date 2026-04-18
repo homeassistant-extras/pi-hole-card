@@ -18,6 +18,7 @@
 | collapsed_sections  | list            | _none_       | Sections to be initially collapsed                            |
 | switch_spacing      | string          | flex         | Layout style for switches: flex, space-around, space-between  |
 | chart               | object          | _none_       | Chart configuration options                                   |
+| aggregation         | object          | _none_       | Multi-Pi-hole tile aggregation ([see AGGREGATION](AGGREGATION.md)) |
 | features            | list            | See below    | Optional flags to toggle different features                   |
 
 ## Auto-discovery

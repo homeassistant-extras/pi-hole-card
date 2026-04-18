@@ -72,6 +72,10 @@
     "chart_line_type_normal": "Нормална (по подразбиране)",
     "chart_line_type_gradient": "Градиент",
     "chart_line_type_gradient_no_fill": "Градиент без запълване",
-    "chart_line_type_no_fill": "Без запълване"
+    "chart_line_type_no_fill": "Без запълване",
+    "multi_pihole": "Множество Pi-hole",
+    "aggregation_mode": "Режим на агрегиране на плочките",
+    "aggregation_mode_load_balanced": "Балансирано натоварване",
+    "aggregation_mode_mirrored": "Огледално"
   }
 }

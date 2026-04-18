@@ -518,6 +518,35 @@ describe('editor.ts', () => {
           ],
         },
         {
+          name: 'aggregation',
+          label: 'editor.multi_pihole',
+          type: 'expandable' as const,
+          icon: 'mdi:server-network',
+          schema: [
+            {
+              name: 'mode',
+              label: 'editor.aggregation_mode',
+              required: false,
+              selector: {
+                select: {
+                  multiple: false,
+                  mode: 'dropdown' as const,
+                  options: [
+                    {
+                      label: 'Load balanced',
+                      value: 'load_balanced',
+                    },
+                    {
+                      label: 'Mirrored',
+                      value: 'mirrored',
+                    },
+                  ],
+                },
+              },
+            },
+          ],
+        },
+        {
           name: 'features',
           label: 'editor.features',
           type: 'expandable' as const,
@@ -687,6 +716,62 @@ describe('editor.ts', () => {
       expect(dispatchStub.firstCall.args[0].detail.config.exclude_sections).to
         .be.undefined;
       expect(dispatchStub.firstCall.args[0].detail.config.entity_order).to.be
+        .undefined;
+    });
+
+    it('should preserve aggregation when mode is set to a non-default value', () => {
+      const testConfig: Config = { device_id: ['device_1', 'device_2'] };
+      card.setConfig(testConfig);
+
+      const detail = {
+        value: {
+          device_id: ['device_1', 'device_2'],
+          aggregation: { mode: 'mirrored' },
+        },
+      };
+
+      card['_valueChanged'](new CustomEvent('value-changed', { detail }));
+
+      expect(dispatchStub.calledOnce).to.be.true;
+      expect(
+        dispatchStub.firstCall.args[0].detail.config.aggregation,
+      ).to.deep.equal({ mode: 'mirrored' });
+    });
+
+    it('should drop aggregation when mode is unset or load_balanced (default)', () => {
+      const testConfig: Config = {
+        device_id: ['device_1', 'device_2'],
+        aggregation: { mode: 'mirrored' },
+      };
+      card.setConfig(testConfig);
+
+      // User picks the default mode in the editor → should clean up to nothing
+      card['_valueChanged'](
+        new CustomEvent('value-changed', {
+          detail: {
+            value: {
+              device_id: ['device_1', 'device_2'],
+              aggregation: { mode: 'load_balanced' },
+            },
+          },
+        }),
+      );
+      expect(dispatchStub.firstCall.args[0].detail.config.aggregation).to.be
+        .undefined;
+
+      // User clears the mode entirely → also cleaned up
+      dispatchStub.resetHistory();
+      card['_valueChanged'](
+        new CustomEvent('value-changed', {
+          detail: {
+            value: {
+              device_id: ['device_1', 'device_2'],
+              aggregation: { mode: undefined },
+            },
+          },
+        }),
+      );
+      expect(dispatchStub.firstCall.args[0].detail.config.aggregation).to.be
         .undefined;
     });
 

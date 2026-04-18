@@ -32,7 +32,7 @@ type: custom:pi-hole
 device_id: your_pihole_device_id
 ```
 
-The card discovers Pi-hole entities from your configured device(s). For multiple instances, use a list under `device_id`—see the [configuration guide](docs/CONFIGURATION.md).
+The card discovers Pi-hole entities from your configured device(s). For multiple instances, use a list under `device_id`; see the [configuration guide](docs/CONFIGURATION.md).
 
 ## Installation
 
@@ -100,7 +100,7 @@ This project is protected under the MIT License. For more details, refer to the 
 - [x] **`Performance optimizations`**: improved code structure and efficiency
 - [x] **`Enhanced entity mapping`**: **⭐ First contributor ⭐** better entity identification with translation keys - thanks @bastgau
 - [x] **`Translations`**: ability to add translations - thanks @ajavibp
-- [x] **`Multi-Pi-hole support`**: manage and monitor multiple Pi-hole instances - thanks @Drudoo, @heylers
+- [x] **`Multi-Pi-hole support`**: manage and monitor multiple Pi-hole instances - thanks @Drudoo, @heylers, @mtwhitley
 - [x] **`Collapsible sections`**: collapse/expand card sections to save space - thanks @Teleportist
 - [x] **`Additional visualization options`**: using HA native more-info, etc. - thanks @dunxd
 - [x] **`Pause ad-blocking`**: temporarily disable filtering for specified durations - thanks @StuartHaire, @VVRud, @ccpk1

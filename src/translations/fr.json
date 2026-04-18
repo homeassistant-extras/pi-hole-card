@@ -72,6 +72,10 @@
     "chart_line_type_normal": "Normal (par défaut)",
     "chart_line_type_gradient": "Dégradé",
     "chart_line_type_gradient_no_fill": "Dégradé sans remplissage",
-    "chart_line_type_no_fill": "Sans remplissage"
+    "chart_line_type_no_fill": "Sans remplissage",
+    "multi_pihole": "Multi Pi-hole",
+    "aggregation_mode": "Mode d'agrégation des tuiles",
+    "aggregation_mode_load_balanced": "Réparti",
+    "aggregation_mode_mirrored": "Miroir"
   }
 }

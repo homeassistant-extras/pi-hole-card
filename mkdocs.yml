@@ -63,6 +63,7 @@ nav:
       - Sections & Ordering: configuration/SECTIONS.md
       - Pause: configuration/PAUSE.md
       - Chart: configuration/CHART.md
+      - Aggregation: configuration/AGGREGATION.md
       - Feature flags: configuration/FEATURE-FLAGS.md
       - Examples: configuration/EXAMPLES.md
   - Multi Pi-hole: MULTI-PIHOLE.md

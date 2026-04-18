@@ -23,7 +23,7 @@ export const createDashboardStats = (
   if (!show(config, 'statistics')) return nothing;
 
   // Combine statistics from all Pi-hole devices
-  const combinedDevice = combineStats(setup.holes);
+  const combinedDevice = combineStats(setup.holes, config);
 
   // Get the unique clients count for the configuration
   const uniqueClientsCount = combinedDevice.dns_unique_clients?.state ?? '0';

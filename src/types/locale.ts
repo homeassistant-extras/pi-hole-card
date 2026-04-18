@@ -64,7 +64,11 @@ export type TranslationKey =
   | 'editor.chart_line_type_normal'
   | 'editor.chart_line_type_gradient'
   | 'editor.chart_line_type_gradient_no_fill'
-  | 'editor.chart_line_type_no_fill';
+  | 'editor.chart_line_type_no_fill'
+  | 'editor.multi_pihole'
+  | 'editor.aggregation_mode'
+  | 'editor.aggregation_mode_load_balanced'
+  | 'editor.aggregation_mode_mirrored';
 
 export interface Translation {
   /** The translation key */

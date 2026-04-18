@@ -56,8 +56,34 @@ export interface Config {
   /** Chart configuration */
   chart?: ChartConfig;
 
+  /**
+   * Aggregation configuration for multi-Pi-hole setups.
+   * Controls how the four main dashboard tiles combine values across instances.
+   */
+  aggregation?: AggregationConfig;
+
   /** Options to enable disable features */
   features?: Features[];
+}
+
+/**
+ * How multi-Pi-hole stats are combined on the dashboard tiles.
+ *
+ * - `load_balanced` *(default)*: tiles sum across Pi-holes; % Blocked is
+ *   weighted by real query volume. Use this when each DNS query hits only one
+ *   Pi-hole (round-robin, split-horizon, etc.).
+ * - `mirrored`: same as `load_balanced` but **Domains on Lists** and
+ *   **Active Clients** are averaged across instances. Use this when every
+ *   Pi-hole has identical blocklists and clients query all of them, so a plain
+ *   sum would double/triple-count.
+ *
+ * Per-metric overrides may be added in a future release.
+ */
+export type AggregationMode = 'load_balanced' | 'mirrored';
+
+export interface AggregationConfig {
+  /** Preset describing your multi-Pi-hole topology. Defaults to `load_balanced`. */
+  mode?: AggregationMode;
 }
 
 /** Nested pause configuration (YAML `pause:`) */

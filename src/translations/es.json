@@ -72,6 +72,10 @@
     "chart_line_type_normal": "Normal (Predeterminado)",
     "chart_line_type_gradient": "Gradiente",
     "chart_line_type_gradient_no_fill": "Gradiente Sin Relleno",
-    "chart_line_type_no_fill": "Sin Relleno"
+    "chart_line_type_no_fill": "Sin Relleno",
+    "multi_pihole": "Multi Pi-hole",
+    "aggregation_mode": "Modo de agregación de tarjetas",
+    "aggregation_mode_load_balanced": "Balanceado",
+    "aggregation_mode_mirrored": "Replicado"
   }
 }

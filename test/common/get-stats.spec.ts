@@ -1,4 +1,5 @@
 import { combineStats, getDashboardStats } from '@common/get-stats';
+import type { Config } from '@type/config';
 import type { Translation } from '@type/locale';
 import type { PiHoleDevice } from '@type/types';
 import { expect } from 'chai';
@@ -126,6 +127,144 @@ describe('dashboard-stats.ts', () => {
       expect(result.ads_percentage_blocked_today?.attributes).to.deep.equal({
         unit_of_measurement: '%',
       });
+    });
+
+    it('should average domains_blocked in mirrored mode while still summing other metrics', () => {
+      // In a mirrored setup every Pi-hole has identical blocklists, so the
+      // Domains on Lists tile should show the average rather than the
+      // (double/triple-counted) sum. Traffic tiles AND unique clients still
+      // sum: even with multiple Pi-holes configured, clients commonly only
+      // resolve through one at a time (the others act as failover), so summing
+      // unique clients across nodes approximates the real total better than
+      // averaging would.
+      const device1: PiHoleDevice = {
+        device_id: 'device1',
+        dns_queries_today: {
+          entity_id: 'sensor.device1_dns_queries_today',
+          state: '1000',
+          attributes: {},
+          translation_key: 'dns_queries_today',
+        },
+        ads_blocked_today: {
+          entity_id: 'sensor.device1_ads_blocked_today',
+          state: '100',
+          attributes: {},
+          translation_key: 'ads_blocked_today',
+        },
+        domains_blocked: {
+          entity_id: 'sensor.device1_domains_blocked',
+          state: '1300000',
+          attributes: {},
+          translation_key: 'domains_blocked',
+        },
+        dns_unique_clients: {
+          entity_id: 'sensor.device1_dns_unique_clients',
+          state: '40',
+          attributes: {},
+          translation_key: 'dns_unique_clients',
+        },
+        ads_percentage_blocked_today: {
+          entity_id: 'sensor.device1_ads_percentage_blocked_today',
+          state: '10.0',
+          attributes: { unit_of_measurement: '%' },
+          translation_key: 'ads_percentage_blocked_today',
+        },
+        sensors: [],
+        switches: [],
+        controls: [],
+        updates: [],
+      };
+
+      const device2: PiHoleDevice = {
+        ...device1,
+        device_id: 'device2',
+        dns_queries_today: {
+          ...device1.dns_queries_today!,
+          entity_id: 'sensor.device2_dns_queries_today',
+          state: '2000',
+        },
+        ads_blocked_today: {
+          ...device1.ads_blocked_today!,
+          entity_id: 'sensor.device2_ads_blocked_today',
+          state: '200',
+        },
+        domains_blocked: {
+          ...device1.domains_blocked!,
+          entity_id: 'sensor.device2_domains_blocked',
+          state: '1300001',
+        },
+        dns_unique_clients: {
+          ...device1.dns_unique_clients!,
+          entity_id: 'sensor.device2_dns_unique_clients',
+          state: '45',
+        },
+      };
+
+      const config: Config = {
+        device_id: ['device1', 'device2'],
+        aggregation: { mode: 'mirrored' },
+      };
+
+      const result = combineStats([device1, device2], config);
+
+      // Traffic metrics still sum
+      expect(result.dns_queries_today?.state).to.equal('3000');
+      expect(result.ads_blocked_today?.state).to.equal('300');
+
+      // % Blocked still weighted across combined totals: (300/3000)*100 = 10
+      expect(result.ads_percentage_blocked_today?.state).to.equal('10');
+
+      // Active clients still sum (clients tend to use one Pi-hole at a time)
+      expect(result.dns_unique_clients?.state).to.equal('85');
+
+      // Domains on Lists is the integer-rounded mean: round(2600001 / 2)
+      expect(result.domains_blocked?.state).to.equal('1300001');
+    });
+
+    it('should default to load_balanced (sum) when aggregation config is omitted', () => {
+      // Sanity check that passing a config without `aggregation` behaves
+      // identically to the existing sum behavior covered above.
+      const device1: PiHoleDevice = {
+        device_id: 'device1',
+        domains_blocked: {
+          entity_id: 'sensor.device1_domains_blocked',
+          state: '50000',
+          attributes: {},
+          translation_key: 'domains_blocked',
+        },
+        dns_unique_clients: {
+          entity_id: 'sensor.device1_dns_unique_clients',
+          state: '10',
+          attributes: {},
+          translation_key: 'dns_unique_clients',
+        },
+        sensors: [],
+        switches: [],
+        controls: [],
+        updates: [],
+      };
+
+      const device2: PiHoleDevice = {
+        ...device1,
+        device_id: 'device2',
+        domains_blocked: {
+          ...device1.domains_blocked!,
+          entity_id: 'sensor.device2_domains_blocked',
+          state: '60000',
+        },
+        dns_unique_clients: {
+          ...device1.dns_unique_clients!,
+          entity_id: 'sensor.device2_dns_unique_clients',
+          state: '15',
+        },
+      };
+
+      const config: Config = { device_id: ['device1', 'device2'] };
+
+      const result = combineStats([device1, device2], config);
+
+      expect(result.domains_blocked?.state).to.equal('110000');
+      expect(result.dns_unique_clients?.state).to.equal('25');
     });
 
     it('should handle missing stats gracefully', () => {

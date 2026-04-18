@@ -72,6 +72,10 @@
     "chart_line_type_normal": "Normal (Standard)",
     "chart_line_type_gradient": "Gradient",
     "chart_line_type_gradient_no_fill": "Gradient ohne Füllung",
-    "chart_line_type_no_fill": "Ohne Füllung"
+    "chart_line_type_no_fill": "Ohne Füllung",
+    "multi_pihole": "Multi Pi-hole",
+    "aggregation_mode": "Kachel-Aggregationsmodus",
+    "aggregation_mode_load_balanced": "Lastverteilt",
+    "aggregation_mode_mirrored": "Gespiegelt"
   }
 }

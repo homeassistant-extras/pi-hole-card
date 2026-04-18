@@ -179,9 +179,11 @@ describe('pi-fillings.ts', () => {
     // Call createDashboardStats
     createDashboardStats(mockElement, mockHass, mockSetup, mockConfig);
 
-    // Verify combineStats was called with the setup holes
+    // Verify combineStats was called with the setup holes and the card config
+    // (config is used by combineStats to resolve the aggregation mode)
     expect(combineStatsStub.calledOnce).to.be.true;
     expect(combineStatsStub.firstCall.args[0]).to.deep.equal(mockSetup.holes);
+    expect(combineStatsStub.firstCall.args[1]).to.equal(mockConfig);
 
     // Verify getDashboardStats was called with the correct unique clients count
     expect(getStatsStub.calledOnce).to.be.true;
