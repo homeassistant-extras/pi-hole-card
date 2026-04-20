@@ -35,12 +35,12 @@
     "mocha": "^11.7.5",
     "nyc": "^18.0.0",
     "parcel": "^2.16.4",
-    "prettier": "3.8.2",
+    "prettier": "3.8.3",
     "prettier-plugin-organize-imports": "^4.3.0",
     "sinon": "^21.1.2",
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
-    "typescript": "^6.0.2"
+    "typescript": "^6.0.3"
   },
   "dependencies": {
     "@lit/task": "^1.0.3",
