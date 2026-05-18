@@ -28,3 +28,8 @@ device_id: your_pihole_device_id
 - [Features](FEATURES.md)
 - [Multi Pi-hole](MULTI-PIHOLE.md)
 - [Troubleshooting](TROUBLESHOOTING.md)
+---
+
+<p align="center">
+    <em>Built and maintained by <a href="https://curiouscat.consulting/projects/ha-pi-hole-card?utm_source=github-pi-hole&utm_medium=docs-site&utm_campaign=oss-presence&utm_content=footer">Curious Cat Consulting</a></em>
+</p>
