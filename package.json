@@ -46,7 +46,7 @@
     "mocha": "^11.7.6",
     "nyc": "^18.0.0",
     "parcel": "^2.16.4",
-    "prettier": "3.9.5",
+    "prettier": "3.9.6",
     "prettier-plugin-organize-imports": "^4.3.0",
     "sinon": "^22.1.0",
     "ts-node": "^10.9.2",
