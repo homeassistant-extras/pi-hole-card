@@ -156,7 +156,7 @@ describe('PauseComponent', () => {
 
     // Check pause buttons - should have default values (60, 300, 900)
     const buttons = el.querySelectorAll('mwc-button');
-    expect(buttons.length).to.equal(3);
+    expect(buttons).to.have.lengthOf(3);
     expect(buttons[0]?.textContent?.trim()).to.equal('1 minute');
     expect(buttons[1]?.textContent?.trim()).to.equal('5 minutes');
     expect(buttons[2]?.textContent?.trim()).to.equal('15 minutes');
@@ -173,7 +173,7 @@ describe('PauseComponent', () => {
 
     // Check pause buttons - should have custom values (60, 300, 1800)
     const buttons = el.querySelectorAll('mwc-button');
-    expect(buttons.length).to.equal(3);
+    expect(buttons).to.have.lengthOf(3);
     expect(buttons[0]?.textContent?.trim()).to.equal('1 minute');
     expect(buttons[1]?.textContent?.trim()).to.equal('5 minutes');
     expect(buttons[2]?.textContent?.trim()).to.equal('30 minutes');
@@ -188,7 +188,7 @@ describe('PauseComponent', () => {
     const result = component.render();
     const el = await fixture(html`${result}`);
     const buttons = el.querySelectorAll('mwc-button');
-    expect(buttons.length).to.equal(1);
+    expect(buttons).to.have.lengthOf(1);
     expect(buttons[0]?.textContent?.trim()).to.equal('20 seconds');
   });
 
@@ -204,7 +204,7 @@ describe('PauseComponent', () => {
 
     // Check pause buttons display human-readable format
     const buttons = el.querySelectorAll('mwc-button');
-    expect(buttons.length).to.equal(3);
+    expect(buttons).to.have.lengthOf(3);
     expect(buttons[0]?.textContent?.trim()).to.equal('1 minute');
     expect(buttons[1]?.textContent?.trim()).to.equal('5 minutes');
     expect(buttons[2]?.textContent?.trim()).to.equal('1 hour');
@@ -268,7 +268,7 @@ describe('PauseComponent', () => {
 
     // But pause buttons should still be rendered
     const buttons = el.querySelectorAll('mwc-button');
-    expect(buttons.length).to.equal(3);
+    expect(buttons).to.have.lengthOf(3);
   });
 
   it('should not show switch selector when no switches are available', async () => {

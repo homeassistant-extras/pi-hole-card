@@ -489,11 +489,14 @@ export class PiHoleCardEditor extends LitElement {
         ? { ...config, device_id: [config.device_id] }
         : { ...config };
 
-    // Normalize pause: merge legacy top-level pause_durations into pause for the form
-    if (!next.pause && next.pause_durations != null) {
+    // Normalize pause: merge legacy top-level pause_durations into pause for
+    // the form. Reading the deprecated field here is the point of this
+    // migration step, so the deprecation warning is expected.
+    const legacyDurations = next.pause_durations; // NOSONAR
+    if (!next.pause && legacyDurations != null) {
       next = {
         ...next,
-        pause: { durations: next.pause_durations },
+        pause: { durations: legacyDurations },
       };
     }
 
@@ -503,66 +506,11 @@ export class PiHoleCardEditor extends LitElement {
   private _valueChanged(ev: CustomEvent) {
     const config = ev.detail.value as Config;
 
-    // Normalize device_id: convert single-item array to string for cleaner configs
-    if (Array.isArray(config.device_id) && config.device_id.length === 1) {
-      config.device_id = config.device_id[0]!;
-    }
-
-    const shouldDelete = (obj: SectionConfig | undefined) =>
-      obj &&
-      (Object.keys(obj).length === 0 || Object.values(obj).every((f) => !f));
-
-    if (shouldDelete(config.stats)) {
-      delete config.stats;
-    }
-    if (shouldDelete(config.info)) {
-      delete config.info;
-    }
-    if (shouldDelete(config.controls)) {
-      delete config.controls;
-    }
-    if (shouldDelete(config.badge)) {
-      delete config.badge;
-    }
-
-    if (config.pause) {
-      if (!config.pause.tap_action?.action) {
-        delete config.pause.tap_action;
-      }
-      if (!config.pause.durations?.length) {
-        delete config.pause.durations;
-      }
-      if (Object.keys(config.pause).length === 0) {
-        delete config.pause;
-      } else {
-        delete config.pause_durations;
-      }
-    }
-
-    if (!config.exclude_entities?.length) {
-      delete config.exclude_entities;
-    }
-
-    if (!config.exclude_sections?.length) {
-      delete config.exclude_sections;
-    }
-
-    if (!config.entity_order?.length) {
-      delete config.entity_order;
-    }
-
-    if (!config.collapsed_sections?.length) {
-      delete config.collapsed_sections;
-    }
-
-    // Aggregation block is only meaningful when `mode` is set to a non-default
-    // value. Drop the whole object otherwise so we do not leave noise in YAML.
-    if (
-      config.aggregation &&
-      (!config.aggregation.mode || config.aggregation.mode === 'load_balanced')
-    ) {
-      delete config.aggregation;
-    }
+    normalizeDeviceId(config);
+    normalizeSections(config);
+    normalizePause(config);
+    normalizeEmptyLists(config);
+    normalizeAggregation(config);
 
     // @ts-expect-error -- 'config-changed' is a standard HA lovelace editor event, not typed here
     fireEvent(this, 'config-changed', {
@@ -570,3 +518,76 @@ export class PiHoleCardEditor extends LitElement {
     });
   }
 }
+
+/** Convert single-item device_id array to string for cleaner configs. */
+const normalizeDeviceId = (config: Config): void => {
+  if (Array.isArray(config.device_id) && config.device_id.length === 1) {
+    config.device_id = config.device_id[0]!;
+  }
+};
+
+/** Drop section configs that are empty or fully falsy so they don't clutter YAML. */
+const normalizeSections = (config: Config): void => {
+  const shouldDelete = (obj: SectionConfig | undefined) =>
+    obj &&
+    (Object.keys(obj).length === 0 || Object.values(obj).every((f) => !f));
+
+  if (shouldDelete(config.stats)) {
+    delete config.stats;
+  }
+  if (shouldDelete(config.info)) {
+    delete config.info;
+  }
+  if (shouldDelete(config.controls)) {
+    delete config.controls;
+  }
+  if (shouldDelete(config.badge)) {
+    delete config.badge;
+  }
+};
+
+/** Drop empty pause fields, and clear the legacy top-level durations once `pause` takes over. */
+const normalizePause = (config: Config): void => {
+  if (!config.pause) return;
+
+  if (!config.pause.tap_action?.action) {
+    delete config.pause.tap_action;
+  }
+  if (!config.pause.durations?.length) {
+    delete config.pause.durations;
+  }
+  if (Object.keys(config.pause).length === 0) {
+    delete config.pause;
+  } else {
+    delete config.pause_durations; // NOSONAR: clearing the legacy field once `pause` takes over
+  }
+};
+
+/** Drop list-valued config fields once they're empty. */
+const normalizeEmptyLists = (config: Config): void => {
+  if (!config.exclude_entities?.length) {
+    delete config.exclude_entities;
+  }
+  if (!config.exclude_sections?.length) {
+    delete config.exclude_sections;
+  }
+  if (!config.entity_order?.length) {
+    delete config.entity_order;
+  }
+  if (!config.collapsed_sections?.length) {
+    delete config.collapsed_sections;
+  }
+};
+
+/**
+ * Aggregation block is only meaningful when `mode` is set to a non-default
+ * value. Drop the whole object otherwise so we do not leave noise in YAML.
+ */
+const normalizeAggregation = (config: Config): void => {
+  if (
+    config.aggregation &&
+    (!config.aggregation.mode || config.aggregation.mode === 'load_balanced')
+  ) {
+    delete config.aggregation;
+  }
+};

@@ -168,7 +168,7 @@ describe('pi-footer.ts', () => {
 
     // Verify that version-info container still exists but is empty
     expect(el.classList.contains('version-info')).to.be.true;
-    expect(el.children.length).to.equal(0);
+    expect(el.children).to.have.lengthOf(0);
 
     // Verify that createVersionItem was not called
     expect(createVersionItemStub.called).to.be.false;

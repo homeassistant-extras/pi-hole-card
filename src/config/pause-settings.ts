@@ -10,7 +10,7 @@ export function getPauseDurations(config: Config): (number | string)[] {
   if (nested !== undefined) {
     return nested.length > 0 ? nested : defaultPauseDurations;
   }
-  const legacy = config.pause_durations;
+  const legacy = config.pause_durations; // NOSONAR: reading the deprecated field is this function's backward-compat purpose
   if (legacy !== undefined) {
     return legacy.length > 0 ? legacy : defaultPauseDurations;
   }

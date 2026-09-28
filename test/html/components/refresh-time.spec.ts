@@ -205,7 +205,7 @@ describe('refresh-time.ts', () => {
 
     // Container should be empty (strip comments and whitespace)
     expect(el.innerHTML.replace(/<!--[\s\S]*?-->/g, '').trim()).to.equal('');
-    expect(el.children.length).to.equal(0);
+    expect(el.children).to.have.lengthOf(0);
 
     // Verify no function calls
     expect(actionHandlerStub.called).to.be.false;

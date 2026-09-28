@@ -125,7 +125,7 @@ describe('pi-toppings.ts', () => {
 
     expect(el.tagName.toLowerCase()).to.equal('div');
     expect(el.classList.contains('additional-stats')).to.be.true;
-    expect(el.querySelectorAll('.mocked-additional-stat').length).to.equal(3);
+    expect(el.querySelectorAll('.mocked-additional-stat')).to.have.lengthOf(3);
   });
 
   it('should handle empty sensors array', async () => {
@@ -140,7 +140,7 @@ describe('pi-toppings.ts', () => {
     const el = await fixture(result as TemplateResult);
 
     expect(createAdditionalStatStub.callCount).to.equal(0);
-    expect(el.querySelectorAll('.mocked-additional-stat').length).to.equal(0);
+    expect(el.querySelectorAll('.mocked-additional-stat')).to.have.lengthOf(0);
   });
 
   it('should pass info section config to createAdditionalStat', async () => {

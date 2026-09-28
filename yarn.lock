@@ -428,10 +428,10 @@
   dependencies:
     jsdom "^29.1.1"
 
-"@homeassistant-extras/hass@^0.7.0":
-  version "0.7.0"
-  resolved "https://registry.yarnpkg.com/@homeassistant-extras/hass/-/hass-0.7.0.tgz#5aac430e3cfe58a247c668415edfdd11add314bb"
-  integrity sha512-qXKnYskUxShdJLHsDRaz8hhw8s+VeiF6ZNGitDjQqAYrT58Q123rXIF8oIwZL4p+J2I1HKLid9xSBmISVbi8eA==
+"@homeassistant-extras/hass@^0.8.0":
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/@homeassistant-extras/hass/-/hass-0.8.0.tgz#1d6c315b0f755000e00fc1bbb3a04e4985ac92e9"
+  integrity sha512-VBj/+O1bCy68xAcYACPCzJEnryO20Vp/3Xp/53ONMzehXGnrupdjSmETY03wG57A18qvZIVeNSyZlIKSwf1NIw==
 
 "@humanfs/core@^0.19.2":
   version "0.19.2"

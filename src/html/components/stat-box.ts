@@ -3,7 +3,6 @@ import {
   handleClickAction,
 } from '@delegates/action-handler-delegate';
 import { formatNumber } from '@homeassistant-extras/hass/common/number/format_number';
-import type { FrontendLocaleData } from '@homeassistant-extras/hass/data/translation';
 import type { HomeAssistant } from '@homeassistant-extras/hass/types';
 import { localize } from '@localize/localize';
 import type { SectionConfig, StatBoxConfig } from '@type/config';
@@ -29,11 +28,7 @@ export const createStatBox = (
   if (!entity) return nothing;
 
   const uom = entity.attributes?.unit_of_measurement === '%' ? '%' : '';
-  // TODO: drop this cast once @homeassistant-extras/hass publishes `locale` on
-  // `HomeAssistant` (already staged upstream in the hass package's types.ts).
-  const locale = (hass as HomeAssistant & { locale?: FrontendLocaleData })
-    .locale;
-  const value = formatNumber(entity.state, locale, {
+  const value = formatNumber(entity.state, hass.locale, {
     maximumFractionDigits: 1,
   });
   const footer =

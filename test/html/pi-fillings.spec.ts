@@ -285,12 +285,12 @@ describe('pi-fillings.ts', () => {
 
     // Verify the stat groups structure
     const statGroups = el.querySelectorAll('.stat-group');
-    expect(statGroups.length).to.equal(mockDashboardStats.length);
+    expect(statGroups).to.have.lengthOf(mockDashboardStats.length);
 
     // Verify each group has the correct number of stat boxes
     mockDashboardStats.forEach((group, i) => {
       const statBoxes = statGroups[i]!.querySelectorAll('.test-stat-box');
-      expect(statBoxes.length).to.equal(group.length);
+      expect(statBoxes).to.have.lengthOf(group.length);
     });
   });
 });
