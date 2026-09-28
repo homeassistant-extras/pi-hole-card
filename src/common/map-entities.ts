@@ -31,6 +31,7 @@ export const mapEntitiesByTranslationKey = (
     percent_ads_blocked: 'ads_percentage_blocked_today',
     ads_percentage_today: 'ads_percentage_blocked_today',
     domains_being_blocked: 'domains_blocked',
+    unique_clients: 'dns_unique_clients',
   };
 
   const key = entity.translation_key;

@@ -62,6 +62,8 @@ describe('map-entities.ts', () => {
         },
         { key: 'ads_blocked_today', prop: 'ads_blocked_today' },
         { key: 'dns_unique_clients', prop: 'dns_unique_clients' },
+        // official HA integration key
+        { key: 'unique_clients', prop: 'dns_unique_clients' },
         {
           key: 'remaining_until_blocking_mode',
           prop: 'remaining_until_blocking_mode',
