@@ -1,6 +1,6 @@
 {
   "name": "pi-hole",
-  "version": "0.28.0",
+  "version": "0.29.0",
   "author": {
     "name": "Patrick Masters",
     "url": "https://curiouscat.consulting/projects/ha-pi-hole-card?utm_source=github-pi-hole&utm_medium=package-metadata&utm_campaign=oss-presence&utm_content=author-url"
