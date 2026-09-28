@@ -250,19 +250,11 @@ describe('create-chart-datasets', () => {
         },
       } as unknown as CanvasRenderingContext2D;
 
-      const mockGetCpuGradientWithCtx = (
-        ctx: CanvasRenderingContext2D,
-        chartArea: { left: number; right: number; top: number; bottom: number },
-        lineType: 'normal' | 'gradient' | 'gradient_no_fill',
-      ) => {
+      const mockGetCpuGradientWithCtx = (ctx: CanvasRenderingContext2D) => {
         return ctx.createLinearGradient(0, 0, 0, 100);
       };
 
-      const mockGetMemoryGradientWithCtx = (
-        ctx: CanvasRenderingContext2D,
-        chartArea: { left: number; right: number; top: number; bottom: number },
-        lineType: 'normal' | 'gradient' | 'gradient_no_fill',
-      ) => {
+      const mockGetMemoryGradientWithCtx = (ctx: CanvasRenderingContext2D) => {
         return ctx.createLinearGradient(0, 0, 0, 100);
       };
 
@@ -306,19 +298,11 @@ describe('create-chart-datasets', () => {
         },
       } as unknown as CanvasRenderingContext2D;
 
-      const mockGetCpuGradientWithCtx = (
-        ctx: CanvasRenderingContext2D,
-        chartArea: { left: number; right: number; top: number; bottom: number },
-        lineType: 'normal' | 'gradient' | 'gradient_no_fill',
-      ) => {
+      const mockGetCpuGradientWithCtx = (ctx: CanvasRenderingContext2D) => {
         return ctx.createLinearGradient(0, 0, 0, 100);
       };
 
-      const mockGetMemoryGradientWithCtx = (
-        ctx: CanvasRenderingContext2D,
-        chartArea: { left: number; right: number; top: number; bottom: number },
-        lineType: 'normal' | 'gradient' | 'gradient_no_fill',
-      ) => {
+      const mockGetMemoryGradientWithCtx = (ctx: CanvasRenderingContext2D) => {
         return ctx.createLinearGradient(0, 0, 0, 100);
       };
 
@@ -362,19 +346,11 @@ describe('create-chart-datasets', () => {
         },
       } as unknown as CanvasRenderingContext2D;
 
-      const mockGetCpuGradientWithCtx = (
-        ctx: CanvasRenderingContext2D,
-        chartArea: { left: number; right: number; top: number; bottom: number },
-        lineType: 'normal' | 'gradient' | 'gradient_no_fill',
-      ) => {
+      const mockGetCpuGradientWithCtx = (ctx: CanvasRenderingContext2D) => {
         return ctx.createLinearGradient(0, 0, 0, 100);
       };
 
-      const mockGetMemoryGradientWithCtx = (
-        ctx: CanvasRenderingContext2D,
-        chartArea: { left: number; right: number; top: number; bottom: number },
-        lineType: 'normal' | 'gradient' | 'gradient_no_fill',
-      ) => {
+      const mockGetMemoryGradientWithCtx = (ctx: CanvasRenderingContext2D) => {
         return ctx.createLinearGradient(0, 0, 0, 100);
       };
 

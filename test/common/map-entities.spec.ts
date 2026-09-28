@@ -22,6 +22,8 @@ describe('map-entities.ts', () => {
       const entity: EntityInformation = {
         entity_id: 'sensor.dns_queries_today',
         state: '1234',
+        last_changed: '2024-01-01T00:00:00.000Z',
+        last_updated: '2024-01-01T00:00:00.000Z',
         attributes: { friendly_name: 'DNS Queries Today' },
         translation_key: 'dns_queries_today',
       };
@@ -39,6 +41,8 @@ describe('map-entities.ts', () => {
       const entity: EntityInformation = {
         entity_id: 'button.purge_diagnosis_messages',
         state: 'off',
+        last_changed: '2024-01-01T00:00:00.000Z',
+        last_updated: '2024-01-01T00:00:00.000Z',
         attributes: { friendly_name: 'Purge Diagnosis Messages' },
         translation_key: 'action_ftl_purge_diagnosis_messages',
       };
@@ -83,6 +87,8 @@ describe('map-entities.ts', () => {
         const testEntity: EntityInformation = {
           entity_id: `sensor.test_${item.key}`,
           state: 'test_state',
+          last_changed: '2024-01-01T00:00:00.000Z',
+          last_updated: '2024-01-01T00:00:00.000Z',
           attributes: { friendly_name: `Test ${item.key}` },
           translation_key: item.key,
         };
@@ -100,6 +106,8 @@ describe('map-entities.ts', () => {
       const entity: EntityInformation = {
         entity_id: 'sensor.unknown_entity',
         state: 'unknown',
+        last_changed: '2024-01-01T00:00:00.000Z',
+        last_updated: '2024-01-01T00:00:00.000Z',
         attributes: { friendly_name: 'Unknown Entity' },
         translation_key: 'unknown_key',
       };
@@ -118,6 +126,8 @@ describe('map-entities.ts', () => {
       const entity: EntityInformation = {
         entity_id: 'sensor.no_translation_key',
         state: 'value',
+        last_changed: '2024-01-01T00:00:00.000Z',
+        last_updated: '2024-01-01T00:00:00.000Z',
         attributes: { friendly_name: 'No Translation Key' },
         translation_key: undefined,
       };
@@ -134,6 +144,8 @@ describe('map-entities.ts', () => {
       device.dns_queries_today = {
         entity_id: 'sensor.existing_queries',
         state: '5000',
+        last_changed: '2024-01-01T00:00:00.000Z',
+        last_updated: '2024-01-01T00:00:00.000Z',
         attributes: { friendly_name: 'Existing Queries' },
         translation_key: 'dns_queries_today',
       };
@@ -142,6 +154,8 @@ describe('map-entities.ts', () => {
       const entity: EntityInformation = {
         entity_id: 'sensor.domains_blocked',
         state: '50000',
+        last_changed: '2024-01-01T00:00:00.000Z',
+        last_updated: '2024-01-01T00:00:00.000Z',
         attributes: { friendly_name: 'Domains Blocked' },
         translation_key: 'domains_blocked',
       };

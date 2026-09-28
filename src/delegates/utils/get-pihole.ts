@@ -1,8 +1,8 @@
 import { mapEntitiesByTranslationKey } from '@common/map-entities';
 import { shouldSkipEntity } from '@common/skip-entity';
 import { sortEntitiesByOrder } from '@common/sort-entities';
-import { computeDomain } from '@hass/common/entity/compute_domain';
-import type { HomeAssistant } from '@hass/types';
+import { computeDomain } from '@homeassistant-extras/hass/common/entity/compute_domain';
+import type { HomeAssistant } from '@homeassistant-extras/hass/types';
 import type { Config } from '@type/config';
 import type { PiHoleDevice } from '@type/types';
 import { getDevice } from '../retrievers/device';
@@ -34,7 +34,7 @@ export const getPiHole = (
   }
 
   // Get all entities for the device
-  let entities = getDeviceEntities(hass, hassDevice.id, hassDevice.name);
+  const entities = getDeviceEntities(hass, hassDevice.id, hassDevice.name);
 
   // Map entities to the device object
   sortEntitiesByOrder(config, entities).forEach((entity) => {

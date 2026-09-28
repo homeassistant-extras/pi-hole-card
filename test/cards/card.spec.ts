@@ -2,7 +2,8 @@ import { styles } from '@/styles';
 import { PiHoleCard } from '@cards/card';
 import * as getConfigDeviceModule from '@delegates/utils/get-config-device';
 import * as getPiHoleModule from '@delegates/utils/get-pihole';
-import type { HomeAssistant } from '@hass/types';
+import type { DeviceRegistryEntry } from '@homeassistant-extras/hass/data/device/device_registry';
+import type { HomeAssistant } from '@homeassistant-extras/hass/types';
 import { fixture } from '@open-wc/testing-helpers';
 import type { Config } from '@type/config';
 import type { PiHoleDevice } from '@type/types';
@@ -31,6 +32,10 @@ describe('PiHoleCard', () => {
         },
       },
     } as unknown as HomeAssistant;
+
+    if (!customElements.get('pi-hole')) {
+      customElements.define('pi-hole', PiHoleCard);
+    }
 
     // Create mock device
     mockDevice = {
@@ -71,7 +76,7 @@ describe('PiHoleCard', () => {
       id: 'pi_hole_device',
       config_entries: ['entry_1'],
       name: 'Pi-hole',
-    });
+    } as unknown as DeviceRegistryEntry);
   });
 
   afterEach(() => {
@@ -80,7 +85,7 @@ describe('PiHoleCard', () => {
     getConfigDeviceStub.restore();
   });
 
-  it('should not update when hass changes but device data remains the same', async () => {
+  it('should not update when hass changes but device data remains the same', () => {
     const card = new PiHoleCard();
 
     // Set initial config and hass

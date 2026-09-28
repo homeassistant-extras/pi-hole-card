@@ -1,5 +1,5 @@
-import type { DeviceRegistryEntry } from '@hass/data/device_registry';
-import type { HomeAssistant } from '@hass/types';
+import type { DeviceRegistryEntry } from '@homeassistant-extras/hass/data/device/device_registry';
+import type { HomeAssistant } from '@homeassistant-extras/hass/types';
 
 /**
  * Gets the Pi-hole device information from Home Assistant
@@ -20,8 +20,7 @@ export const getConfigDevice = async (
     return undefined;
   }
 
-  return Object.values(hass.devices).find(
-    (device: DeviceRegistryEntry) =>
-      device.config_entries.includes(registry.entry_id),
+  return Object.values(hass.devices).find((device: DeviceRegistryEntry) =>
+    device.config_entries.includes(registry.entry_id),
   );
 };

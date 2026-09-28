@@ -1,5 +1,5 @@
 import { getState } from '@delegates/retrievers/state';
-import type { HomeAssistant } from '@hass/types';
+import type { HomeAssistant } from '@homeassistant-extras/hass/types';
 import type { EntityState } from '@type/types';
 import { expect } from 'chai';
 
@@ -20,6 +20,8 @@ export const e = (
   return {
     entity_id: `${domain}.${name}`,
     state: state,
+    last_changed: '2024-01-01T00:00:00.000Z',
+    last_updated: '2024-01-01T00:00:00.000Z',
     attributes: attributes,
   };
 };

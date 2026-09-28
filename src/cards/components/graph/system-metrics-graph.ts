@@ -1,5 +1,5 @@
 import { show } from '@common/show-section';
-import type { HomeAssistant } from '@hass/types';
+import type { HomeAssistant } from '@homeassistant-extras/hass/types';
 import type { Config } from '@type/config';
 import type { PiHoleDevice } from '@type/types';
 import type { Chart } from 'chart.js';
@@ -42,7 +42,7 @@ export class SystemMetricsGraph extends LitElement {
     if (!show(this.config, 'chart')) {
       return;
     }
-    this._fetchStatisticsData();
+    void this._fetchStatisticsData();
   }
 
   override disconnectedCallback() {
@@ -121,9 +121,11 @@ export class SystemMetricsGraph extends LitElement {
     return html`
       <div class="chart-container">
         <canvas></canvas>
-        ${this._loading && !this._chart
-          ? html`<div class="loading-overlay">Loading chart...</div>`
-          : nothing}
+        ${
+          this._loading && !this._chart
+            ? html`<div class="loading-overlay">Loading chart...</div>`
+            : nothing
+        }
       </div>
     `;
   }

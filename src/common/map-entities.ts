@@ -1,5 +1,13 @@
 import type { EntityInformation, PiHoleDevice } from '@type/types';
 
+/** Keys of {@link PiHoleDevice} whose value is an {@link EntityInformation}. */
+type EntityInformationKey = {
+  [K in keyof PiHoleDevice]: PiHoleDevice[K] extends
+    EntityInformation | undefined
+    ? K
+    : never;
+}[keyof PiHoleDevice];
+
 /**
  * Maps entities to the Pi-hole device object based on their translation keys.
  * @param entity - The entity information object
@@ -10,7 +18,7 @@ export const mapEntitiesByTranslationKey = (
   entity: EntityInformation,
   device: PiHoleDevice,
 ) => {
-  const keyToPropertyMap = {
+  const keyToPropertyMap: Record<string, EntityInformationKey> = {
     dns_queries_today: 'dns_queries_today',
     domains_blocked: 'domains_blocked',
     ads_percentage_blocked_today: 'ads_percentage_blocked_today',
@@ -36,8 +44,8 @@ export const mapEntitiesByTranslationKey = (
 
   const key = entity.translation_key;
   if (key && key in keyToPropertyMap) {
-    // @ts-ignore
-    device[keyToPropertyMap[key]] = entity;
+    const property = keyToPropertyMap[key]!;
+    device[property] = entity;
     return true;
   }
   return false;

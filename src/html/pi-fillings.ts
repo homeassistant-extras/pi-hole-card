@@ -1,6 +1,6 @@
 import { combineStats, getDashboardStats } from '@common/get-stats';
 import { show } from '@common/show-section';
-import type { HomeAssistant } from '@hass/types';
+import type { HomeAssistant } from '@homeassistant-extras/hass/types';
 import type { Config } from '@type/config';
 import type { EntityInformation, PiHoleSetup } from '@type/types';
 import { html, nothing, type TemplateResult } from 'lit';
@@ -41,8 +41,7 @@ export const createDashboardStats = (
                 element,
                 hass,
                 combinedDevice[statConfig.sensorKey] as
-                  | EntityInformation
-                  | undefined,
+                  EntityInformation | undefined,
                 config.stats,
                 statConfig,
               ),

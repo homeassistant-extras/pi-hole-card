@@ -2,7 +2,7 @@ import {
   actionHandler,
   handleClickAction,
 } from '@delegates/action-handler-delegate';
-import type { HomeAssistant } from '@hass/types';
+import type { HomeAssistant } from '@homeassistant-extras/hass/types';
 import type { SectionConfig } from '@type/config';
 import type { EntityInformation } from '@type/types';
 import { type TemplateResult, html } from 'lit';

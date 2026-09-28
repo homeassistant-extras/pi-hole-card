@@ -1,6 +1,6 @@
 import { isCollapsed } from '@common/collapsed-state';
 import { show } from '@common/show-section';
-import type { HomeAssistant } from '@hass/types';
+import type { HomeAssistant } from '@homeassistant-extras/hass/types';
 import { localize } from '@localize/localize';
 import type { Config, SectionConfig } from '@type/config';
 import type { PiHoleDevice, PiHoleSetup } from '@type/types';
@@ -44,49 +44,52 @@ const controls = (
   const actionsIcon = actionsCollapsed ? 'right' : 'down';
   const actionsClass = actionsCollapsed ? 'hidden' : '';
 
-  return html`${show(config, 'switches')
-    ? html`<div class="collapsible-section">
-        <div
-          class="section-header"
-          @click=${(e: Event) => toggleSection(e, '.switches')}
-        >
-          <span>${localize(hass, 'card.sections.switches')}</span>
-          <ha-icon
-            class="caret-icon"
-            icon="mdi:chevron-${switchIcon}"
-          ></ha-icon>
-        </div>
-        <div
-          class="${[
-            'switches',
-            switchCollapsed ? 'hidden' : undefined,
-            config.switch_spacing,
-          ]
-            .filter(Boolean)
-            .join(' ')}"
-        >
-          ${device.switches.map((piSwitch) => {
-            const orderExists = config.entity_order?.includes(
-              piSwitch.entity_id,
-            );
-            if (orderExists) {
-              const orderIndex = config.entity_order!.indexOf(
+  return html`${
+    show(config, 'switches')
+      ? html`<div class="collapsible-section">
+          <div
+            class="section-header"
+            @click=${(e: Event) => toggleSection(e, '.switches')}
+          >
+            <span>${localize(hass, 'card.sections.switches')}</span>
+            <ha-icon
+              class="caret-icon"
+              icon="mdi:chevron-${switchIcon}"
+            ></ha-icon>
+          </div>
+          <div
+            class="${[
+              'switches',
+              switchCollapsed ? 'hidden' : undefined,
+              config.switch_spacing,
+            ]
+              .filter(Boolean)
+              .join(' ')}"
+          >
+            ${device.switches.map((piSwitch) => {
+              const orderExists = config.entity_order?.includes(
                 piSwitch.entity_id,
               );
-              const nextItem = config.entity_order![orderIndex + 1];
+              if (orderExists) {
+                const orderIndex = config.entity_order!.indexOf(
+                  piSwitch.entity_id,
+                );
+                const nextItem = config.entity_order![orderIndex + 1];
 
-              if (nextItem === 'divider') {
-                return html`${stateContent(hass, piSwitch)}
-                  <div class="divider"></div>`;
+                if (nextItem === 'divider') {
+                  return html`${stateContent(hass, piSwitch)}
+                    <div class="divider"></div>`;
+                }
               }
-            }
-            return stateContent(hass, piSwitch);
-          })}
-        </div>
-      </div>`
-    : nothing}
-  ${show(config, 'actions')
-    ? html`<div class="collapsible-section">
+              return stateContent(hass, piSwitch);
+            })}
+          </div>
+        </div>`
+      : nothing
+  }
+  ${
+    show(config, 'actions')
+      ? html`<div class="collapsible-section">
         <div
           class="section-header"
           @click=${(e: Event) => toggleSection(e, '.actions')}
@@ -104,7 +107,8 @@ const controls = (
         </div>
       </div>
     </div>`
-    : nothing}`;
+      : nothing
+  }`;
 };
 
 /**

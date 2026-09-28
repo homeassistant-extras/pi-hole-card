@@ -9,6 +9,8 @@ describe('version-item.ts', () => {
     const entity: EntityInformation = {
       entity_id: 'update.pi_hole_core',
       state: 'on',
+      last_changed: '2024-01-01T00:00:00.000Z',
+      last_updated: '2024-01-01T00:00:00.000Z',
       translation_key: undefined,
       attributes: {
         friendly_name: 'Pi-hole Core update',
@@ -51,6 +53,8 @@ describe('version-item.ts', () => {
     const entity: EntityInformation = {
       entity_id: 'update.pi_hole_core',
       state: 'on',
+      last_changed: '2024-01-01T00:00:00.000Z',
+      last_updated: '2024-01-01T00:00:00.000Z',
       translation_key: undefined,
       attributes: {
         friendly_name: 'Pi-hole Core update',
@@ -92,6 +96,8 @@ describe('version-item.ts', () => {
     const entity: EntityInformation = {
       entity_id: 'update.pi_hole_core',
       state: 'off',
+      last_changed: '2024-01-01T00:00:00.000Z',
+      last_updated: '2024-01-01T00:00:00.000Z',
       translation_key: undefined,
       attributes: {
         friendly_name: 'Pi-hole Core update',

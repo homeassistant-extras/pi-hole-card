@@ -1,5 +1,5 @@
 import * as actionHandlerModule from '@delegates/action-handler-delegate';
-import type { HomeAssistant } from '@hass/types';
+import type { HomeAssistant } from '@homeassistant-extras/hass/types';
 import { createAdditionalStat } from '@html/components/additional-stat';
 import * as stateDisplayModule from '@html/components/state-display';
 import { fixture } from '@open-wc/testing-helpers';
@@ -46,6 +46,8 @@ describe('additional-stat.ts', () => {
         'sensor.test_sensor': {
           entity_id: 'sensor.test_sensor',
           state: '42',
+          last_changed: '2024-01-01T00:00:00.000Z',
+          last_updated: '2024-01-01T00:00:00.000Z',
           attributes: {
             friendly_name: 'Test Sensor',
             device_class: 'measurement',
@@ -66,6 +68,8 @@ describe('additional-stat.ts', () => {
     mockEntity = {
       entity_id: 'sensor.test_sensor',
       state: '42',
+      last_changed: '2024-01-01T00:00:00.000Z',
+      last_updated: '2024-01-01T00:00:00.000Z',
       translation_key: 'test_sensor',
       attributes: {
         friendly_name: 'Test Sensor',
@@ -160,6 +164,8 @@ describe('additional-stat.ts', () => {
         entity: {
           ...mockEntity,
           state: 'unavailable',
+          last_changed: '2024-01-01T00:00:00.000Z',
+          last_updated: '2024-01-01T00:00:00.000Z',
           attributes: { friendly_name: 'Unavailable Sensor' },
         },
         expectedIcon: 'mdi:alert',
@@ -169,6 +175,8 @@ describe('additional-stat.ts', () => {
         entity: {
           ...mockEntity,
           state: '100',
+          last_changed: '2024-01-01T00:00:00.000Z',
+          last_updated: '2024-01-01T00:00:00.000Z',
           attributes: {
             friendly_name: 'Percentage Sensor',
             unit_of_measurement: '%',

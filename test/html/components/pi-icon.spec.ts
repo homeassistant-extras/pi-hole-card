@@ -89,6 +89,8 @@ describe('icon.ts', () => {
       mockSetup.holes[0]!.info_message_count = {
         entity_id: 'sensor.pi_hole_info_message_count',
         state: '0',
+        last_changed: '2024-01-01T00:00:00.000Z',
+        last_updated: '2024-01-01T00:00:00.000Z',
         attributes: {},
         translation_key: 'info_message_count',
       };
@@ -107,6 +109,8 @@ describe('icon.ts', () => {
       mockSetup.holes[0]!.info_message_count = {
         entity_id: 'sensor.pi_hole_info_message_count',
         state: '3',
+        last_changed: '2024-01-01T00:00:00.000Z',
+        last_updated: '2024-01-01T00:00:00.000Z',
         attributes: {},
         translation_key: 'info_message_count',
       };
@@ -128,6 +132,8 @@ describe('icon.ts', () => {
         info_message_count: {
           entity_id: 'sensor.pi_hole_2_info_message_count',
           state: '2',
+          last_changed: '2024-01-01T00:00:00.000Z',
+          last_updated: '2024-01-01T00:00:00.000Z',
           attributes: {},
           translation_key: 'info_message_count',
         },
@@ -140,6 +146,8 @@ describe('icon.ts', () => {
       mockSetup.holes[0]!.info_message_count = {
         entity_id: 'sensor.pi_hole_info_message_count',
         state: '5',
+        last_changed: '2024-01-01T00:00:00.000Z',
+        last_updated: '2024-01-01T00:00:00.000Z',
         attributes: {},
         translation_key: 'info_message_count',
       };
@@ -160,6 +168,8 @@ describe('icon.ts', () => {
       mockSetup.holes[0]!.info_message_count = {
         entity_id: 'sensor.pi_hole_info_message_count',
         state: '4',
+        last_changed: '2024-01-01T00:00:00.000Z',
+        last_updated: '2024-01-01T00:00:00.000Z',
         attributes: {},
         translation_key: 'info_message_count',
       };
@@ -179,6 +189,8 @@ describe('icon.ts', () => {
         info_message_count: {
           entity_id: 'sensor.pi_hole_3_info_message_count',
           state: '0',
+          last_changed: '2024-01-01T00:00:00.000Z',
+          last_updated: '2024-01-01T00:00:00.000Z',
           attributes: {},
           translation_key: 'info_message_count',
         },
@@ -205,6 +217,8 @@ describe('icon.ts', () => {
       mockSetup.holes[0]!.info_message_count = {
         entity_id: 'sensor.pi_hole_info_message_count',
         state: 'unavailable',
+        last_changed: '2024-01-01T00:00:00.000Z',
+        last_updated: '2024-01-01T00:00:00.000Z',
         attributes: {},
         translation_key: 'info_message_count',
       };
@@ -222,6 +236,8 @@ describe('icon.ts', () => {
       mockSetup.holes[0]!.info_message_count = {
         entity_id: 'sensor.pi_hole_info_message_count',
         state: '',
+        last_changed: '2024-01-01T00:00:00.000Z',
+        last_updated: '2024-01-01T00:00:00.000Z',
         attributes: {},
         translation_key: 'info_message_count',
       };
@@ -239,6 +255,8 @@ describe('icon.ts', () => {
       mockSetup.holes[0]!.info_message_count = {
         entity_id: 'sensor.pi_hole_info_message_count',
         state: '2.5',
+        last_changed: '2024-01-01T00:00:00.000Z',
+        last_updated: '2024-01-01T00:00:00.000Z',
         attributes: {},
         translation_key: 'info_message_count',
       };
@@ -270,6 +288,8 @@ describe('icon.ts', () => {
       mockSetup.holes[0]!.status = {
         entity_id: 'sensor.pi_hole_status',
         state: 'enabled',
+        last_changed: '2024-01-01T00:00:00.000Z',
+        last_updated: '2024-01-01T00:00:00.000Z',
         attributes: {},
         translation_key: 'status',
       };
@@ -296,18 +316,24 @@ describe('icon.ts', () => {
       mockSetup.holes[0]!.status = {
         entity_id: 'sensor.pi_hole_status',
         state: 'enabled',
+        last_changed: '2024-01-01T00:00:00.000Z',
+        last_updated: '2024-01-01T00:00:00.000Z',
         attributes: {},
         translation_key: 'status',
       };
       mockSetup.holes[0]!.info_message_count = {
         entity_id: 'sensor.pi_hole_info_count',
         state: '0',
+        last_changed: '2024-01-01T00:00:00.000Z',
+        last_updated: '2024-01-01T00:00:00.000Z',
         attributes: {},
         translation_key: 'info_message_count',
       };
       mockSetup.holes[0]!.purge_diagnosis_messages = {
         entity_id: 'button.pi_hole_purge',
         state: 'unknown',
+        last_changed: '2024-01-01T00:00:00.000Z',
+        last_updated: '2024-01-01T00:00:00.000Z',
         attributes: {},
         translation_key: 'purge_diagnosis_messages',
       };
@@ -326,12 +352,16 @@ describe('icon.ts', () => {
       mockSetup.holes[0]!.info_message_count = {
         entity_id: 'sensor.pi_hole_info_count',
         state: '3',
+        last_changed: '2024-01-01T00:00:00.000Z',
+        last_updated: '2024-01-01T00:00:00.000Z',
         attributes: {},
         translation_key: 'info_message_count',
       };
       mockSetup.holes[0]!.purge_diagnosis_messages = {
         entity_id: 'button.pi_hole_purge',
         state: 'unknown',
+        last_changed: '2024-01-01T00:00:00.000Z',
+        last_updated: '2024-01-01T00:00:00.000Z',
         attributes: {},
         translation_key: 'purge_diagnosis_messages',
       };
@@ -361,6 +391,8 @@ describe('icon.ts', () => {
       mockSetup.holes[0]!.info_message_count = {
         entity_id: 'sensor.pi_hole_info_count',
         state: '0',
+        last_changed: '2024-01-01T00:00:00.000Z',
+        last_updated: '2024-01-01T00:00:00.000Z',
         attributes: {},
         translation_key: 'info_message_count',
       };
@@ -389,12 +421,16 @@ describe('icon.ts', () => {
       mockSetup.holes[0]!.info_message_count = {
         entity_id: 'sensor.pi_hole_1_info_count',
         state: '2',
+        last_changed: '2024-01-01T00:00:00.000Z',
+        last_updated: '2024-01-01T00:00:00.000Z',
         attributes: {},
         translation_key: 'info_message_count',
       };
       mockSetup.holes[0]!.purge_diagnosis_messages = {
         entity_id: 'button.pi_hole_1_purge',
         state: 'unknown',
+        last_changed: '2024-01-01T00:00:00.000Z',
+        last_updated: '2024-01-01T00:00:00.000Z',
         attributes: {},
         translation_key: 'purge_diagnosis_messages',
       };
@@ -405,6 +441,8 @@ describe('icon.ts', () => {
         status: {
           entity_id: 'sensor.pi_hole_2_status',
           state: 'disabled',
+          last_changed: '2024-01-01T00:00:00.000Z',
+          last_updated: '2024-01-01T00:00:00.000Z',
           attributes: {},
           translation_key: 'status',
         },

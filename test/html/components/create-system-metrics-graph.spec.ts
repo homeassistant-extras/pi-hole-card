@@ -1,6 +1,6 @@
 import { SystemMetricsGraph } from '@cards/components/graph/system-metrics-graph';
 import * as showSectionModule from '@common/show-section';
-import type { HomeAssistant } from '@hass/types';
+import type { HomeAssistant } from '@homeassistant-extras/hass/types';
 import { createSystemMetricsGraph } from '@html/components/create-system-metrics-graph';
 import { fixture } from '@open-wc/testing-helpers';
 import type { Config } from '@type/config';
@@ -32,6 +32,8 @@ describe('create-system-metrics-graph.ts', () => {
     const createSensor = (entity_id: string, translation_key?: string) => ({
       entity_id,
       state: '42',
+      last_changed: '2024-01-01T00:00:00.000Z',
+      last_updated: '2024-01-01T00:00:00.000Z',
       attributes: {},
       translation_key: translation_key || 'test_key',
     });
@@ -68,6 +70,8 @@ describe('create-system-metrics-graph.ts', () => {
       {
         entity_id: 'sensor.seen_clients',
         state: '42',
+        last_changed: '2024-01-01T00:00:00.000Z',
+        last_updated: '2024-01-01T00:00:00.000Z',
         attributes: {},
         translation_key: 'test_key',
       },
@@ -103,11 +107,13 @@ describe('create-system-metrics-graph.ts', () => {
     expect(graphElement.config).to.equal(mockConfig);
   });
 
-  it('should work with only CPU sensor', async () => {
+  it('should work with only CPU sensor', () => {
     showSectionStub.withArgs(mockConfig, 'chart').returns(true);
     mockDevice.cpu_use = {
       entity_id: 'sensor.pi_hole_cpu_use',
       state: '42',
+      last_changed: '2024-01-01T00:00:00.000Z',
+      last_updated: '2024-01-01T00:00:00.000Z',
       attributes: {},
       translation_key: 'cpu_use',
     };
@@ -119,12 +125,14 @@ describe('create-system-metrics-graph.ts', () => {
     expect(result).to.equal(nothing);
   });
 
-  it('should work with only memory sensor', async () => {
+  it('should work with only memory sensor', () => {
     showSectionStub.withArgs(mockConfig, 'chart').returns(true);
     mockDevice.cpu_use = undefined;
     mockDevice.memory_use = {
       entity_id: 'sensor.pi_hole_memory_use',
       state: '42',
+      last_changed: '2024-01-01T00:00:00.000Z',
+      last_updated: '2024-01-01T00:00:00.000Z',
       attributes: {},
       translation_key: 'memory_use',
     };
@@ -140,12 +148,16 @@ describe('create-system-metrics-graph.ts', () => {
     mockDevice.cpu_use = {
       entity_id: 'sensor.pi_hole_cpu_use',
       state: '42',
+      last_changed: '2024-01-01T00:00:00.000Z',
+      last_updated: '2024-01-01T00:00:00.000Z',
       attributes: {},
       translation_key: 'cpu_use',
     };
     mockDevice.memory_use = {
       entity_id: 'sensor.pi_hole_memory_use',
       state: '42',
+      last_changed: '2024-01-01T00:00:00.000Z',
+      last_updated: '2024-01-01T00:00:00.000Z',
       attributes: {},
       translation_key: 'memory_use',
     };
@@ -163,12 +175,16 @@ describe('create-system-metrics-graph.ts', () => {
     mockDevice.cpu_use = {
       entity_id: 'sensor.pi_hole_cpu_use',
       state: '42',
+      last_changed: '2024-01-01T00:00:00.000Z',
+      last_updated: '2024-01-01T00:00:00.000Z',
       attributes: {},
       translation_key: 'cpu_use',
     };
     mockDevice.memory_use = {
       entity_id: 'sensor.pi_hole_memory_use',
       state: '42',
+      last_changed: '2024-01-01T00:00:00.000Z',
+      last_updated: '2024-01-01T00:00:00.000Z',
       attributes: {},
       translation_key: 'memory_use',
     };
@@ -176,6 +192,8 @@ describe('create-system-metrics-graph.ts', () => {
       {
         entity_id: 'sensor.seen_clients',
         state: '42',
+        last_changed: '2024-01-01T00:00:00.000Z',
+        last_updated: '2024-01-01T00:00:00.000Z',
         attributes: {},
         translation_key: 'test_key',
       },

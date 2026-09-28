@@ -1,4 +1,5 @@
 import { substitutePauseActionVars } from '@common/pause-action-vars';
+import type { ActionConfig } from '@homeassistant-extras/hass/data/lovelace/config/action';
 import type { Config } from '@type/config';
 import { expect } from 'chai';
 
@@ -15,7 +16,7 @@ describe('pause-action-vars', () => {
         entity: '{{ entity_id }}',
       },
     };
-    const out = substitutePauseActionVars(action, {
+    const out = substitutePauseActionVars(action as unknown as ActionConfig, {
       seconds: 900,
       config: baseConfig,
       entityId: 'switch.pihole_1',
@@ -37,7 +38,7 @@ describe('pause-action-vars', () => {
       perform_action: 'test.action',
       data: { sec: '{{ pause_seconds }}' },
     };
-    const out = substitutePauseActionVars(action, {
+    const out = substitutePauseActionVars(action as unknown as ActionConfig, {
       seconds: 120,
       config: baseConfig,
     });
@@ -52,7 +53,7 @@ describe('pause-action-vars', () => {
       perform_action: 'x',
       data: { id: '{{ device_id }}' },
     };
-    const out = substitutePauseActionVars(action, {
+    const out = substitutePauseActionVars(action as unknown as ActionConfig, {
       seconds: 60,
       config: { device_id: ['a', 'b'] } as Config,
     });
@@ -65,7 +66,7 @@ describe('pause-action-vars', () => {
       perform_action: 'x',
       data: { note: 'wait {{ pause_minutes }} min for {{ device_id }}' },
     };
-    const out = substitutePauseActionVars(action, {
+    const out = substitutePauseActionVars(action as unknown as ActionConfig, {
       seconds: 120,
       config: { device_id: 'd9' } as Config,
     });
@@ -80,7 +81,7 @@ describe('pause-action-vars', () => {
       perform_action: 'x',
       data: { x: '{{ not_a_var }}' },
     };
-    const out = substitutePauseActionVars(action, {
+    const out = substitutePauseActionVars(action as unknown as ActionConfig, {
       seconds: 60,
       config: baseConfig,
     });
@@ -95,7 +96,7 @@ describe('pause-action-vars', () => {
       perform_action: 'x',
       data: { m: '{{ pause_minutes }}' },
     };
-    substitutePauseActionVars(action, {
+    substitutePauseActionVars(action as unknown as ActionConfig, {
       seconds: 60,
       config: baseConfig,
     });
@@ -108,7 +109,7 @@ describe('pause-action-vars', () => {
       perform_action: 'test.turn_on',
       data: { nested: { duration: '{{ pause_seconds }}' } },
     };
-    const out = substitutePauseActionVars(action, {
+    const out = substitutePauseActionVars(action as unknown as ActionConfig, {
       seconds: 30,
       config: baseConfig,
     });

@@ -28,6 +28,7 @@ device_id: your_pihole_device_id
 - [Features](FEATURES.md)
 - [Multi Pi-hole](MULTI-PIHOLE.md)
 - [Troubleshooting](TROUBLESHOOTING.md)
+
 ---
 
 <p align="center">

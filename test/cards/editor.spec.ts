@@ -1,5 +1,5 @@
 import { PiHoleCardEditor } from '@cards/editor';
-import type { HomeAssistant } from '@hass/types';
+import type { HomeAssistant } from '@homeassistant-extras/hass/types';
 import { fixture } from '@open-wc/testing-helpers';
 import type { Config } from '@type/config';
 import { expect } from 'chai';
@@ -11,7 +11,11 @@ describe('editor.ts', () => {
   let hass: HomeAssistant;
   let dispatchStub: sinon.SinonStub;
 
-  beforeEach(async () => {
+  beforeEach(() => {
+    if (!customElements.get('pi-hole-editor')) {
+      customElements.define('pi-hole-editor', PiHoleCardEditor);
+    }
+
     // Create mock HomeAssistant instance
     hass = {} as HomeAssistant;
     card = new PiHoleCardEditor();
@@ -59,13 +63,13 @@ describe('editor.ts', () => {
   });
 
   describe('render', () => {
-    it('should return nothing when hass is not set', async () => {
+    it('should return nothing when hass is not set', () => {
       card.hass = undefined as any;
       const result = card.render();
       expect(result).to.equal(nothing);
     });
 
-    it('should return nothing when config is not set', async () => {
+    it('should return nothing when config is not set', () => {
       const result = card.render();
       expect(result).to.equal(nothing);
     });

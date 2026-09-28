@@ -71,6 +71,13 @@ export interface EntityState {
   /** Current state value as a string (e.g., "on", "off", "25.5") */
   state: string;
 
+  /** ISO timestamp of when the state last changed */
+  last_changed: string;
+
+  /** ISO timestamp of when the state was last updated */
+  last_updated: string;
+
   /** Additional attributes associated with the state */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- attribute values are dynamic/untyped, mirrors upstream HA
   attributes: Record<string, any>;
 }

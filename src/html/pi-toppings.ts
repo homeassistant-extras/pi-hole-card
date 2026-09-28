@@ -1,5 +1,5 @@
 import { show } from '@common/show-section';
-import type { HomeAssistant } from '@hass/types';
+import type { HomeAssistant } from '@homeassistant-extras/hass/types';
 import type { Config } from '@type/config';
 import type { PiHoleDevice } from '@type/types';
 import { html, nothing, type TemplateResult } from 'lit';

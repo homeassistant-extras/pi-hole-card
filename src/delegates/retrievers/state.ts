@@ -1,4 +1,4 @@
-import type { HomeAssistant } from '@hass/types';
+import type { HomeAssistant } from '@homeassistant-extras/hass/types';
 import type { EntityState } from '@type/types';
 
 /**
@@ -18,9 +18,15 @@ export const getState = (
   if (!entityId) return undefined;
 
   const state =
-    (hass.states as { [key: string]: any })[entityId] ??
+    hass.states[entityId] ??
     (fakeState
-      ? { entity_id: entityId, state: 'off', attributes: {} }
+      ? {
+          entity_id: entityId,
+          state: 'off',
+          attributes: {},
+          last_changed: new Date().toISOString(),
+          last_updated: new Date().toISOString(),
+        }
       : undefined);
 
   if (!state) return undefined;
@@ -29,5 +35,7 @@ export const getState = (
     state: state.state,
     attributes: state.attributes,
     entity_id: state.entity_id,
+    last_changed: state.last_changed,
+    last_updated: state.last_updated,
   };
 };

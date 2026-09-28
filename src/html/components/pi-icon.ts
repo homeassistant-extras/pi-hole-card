@@ -89,8 +89,10 @@ export const icon = (
     @action=${handleMultiPiClickAction(element, actionConfigs)}
     .actionHandler=${actionHandler(actionConfigs[0])}
   >
-    ${infoCount === 0
-      ? html`<ha-icon icon="${config.icon ?? 'mdi:pi-hole'}"></ha-icon>`
-      : html`<div class="warning-badge">${infoCount}</div>`}
+    ${
+      infoCount === 0
+        ? html`<ha-icon icon="${config.icon ?? 'mdi:pi-hole'}"></ha-icon>`
+        : html`<div class="warning-badge">${infoCount}</div>`
+    }
   </div>`;
 };

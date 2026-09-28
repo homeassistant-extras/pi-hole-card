@@ -2,7 +2,7 @@ import {
   actionHandler,
   handleClickAction,
 } from '@delegates/action-handler-delegate';
-import type { HomeAssistant } from '@hass/types';
+import type { HomeAssistant } from '@homeassistant-extras/hass/types';
 import type { SectionConfig } from '@type/config';
 import type { PiHoleDevice } from '@type/types';
 import { html, nothing, type TemplateResult } from 'lit';
@@ -26,19 +26,23 @@ export const refreshTime = (
     },
   };
   return html`<div class="refresh-time">
-    ${device.action_refresh_data
-      ? html`<ha-icon
-          icon="mdi:refresh"
-          @action=${handleClickAction(
-            element,
-            clickConfig,
-            device.action_refresh_data,
-          )}
-          .actionHandler=${actionHandler(clickConfig)}
-        ></ha-icon>`
-      : nothing}
-    ${device.latest_data_refresh
-      ? stateDisplay(hass, device.latest_data_refresh)
-      : nothing}
+    ${
+      device.action_refresh_data
+        ? html`<ha-icon
+            icon="mdi:refresh"
+            @action=${handleClickAction(
+              element,
+              clickConfig,
+              device.action_refresh_data,
+            )}
+            .actionHandler=${actionHandler(clickConfig)}
+          ></ha-icon>`
+        : nothing
+    }
+    ${
+      device.latest_data_refresh
+        ? stateDisplay(hass, device.latest_data_refresh)
+        : nothing
+    }
   </div>`;
 };

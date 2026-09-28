@@ -1,4 +1,4 @@
-import type { ActionConfig } from '@hass/data/lovelace/config/action';
+import type { ActionConfig } from '@homeassistant-extras/hass/data/lovelace/config/action';
 import type { Config } from '@type/config';
 
 /** Context for `{{ … }}` placeholders inside `pause.tap_action`. */

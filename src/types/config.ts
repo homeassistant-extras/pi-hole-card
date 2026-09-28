@@ -1,4 +1,4 @@
-import type { ActionConfig } from '@hass/data/lovelace/config/action';
+import type { ActionConfig } from '@homeassistant-extras/hass/data/lovelace/config/action';
 import type { PiHoleDevice } from '@type/types';
 import type { Translation, TranslationKey } from './locale';
 

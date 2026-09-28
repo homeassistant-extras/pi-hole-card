@@ -1,5 +1,5 @@
 import * as showSectionModule from '@common/show-section';
-import type { HomeAssistant } from '@hass/types';
+import type { HomeAssistant } from '@homeassistant-extras/hass/types';
 import * as refreshTimeModule from '@html/components/refresh-time';
 import * as createVersionItemModule from '@html/components/version-item';
 import { createFooter } from '@html/pi-tin';
@@ -52,6 +52,8 @@ describe('pi-footer.ts', () => {
         {
           entity_id: 'update.pi_hole_core',
           state: 'off',
+          last_changed: '2024-01-01T00:00:00.000Z',
+          last_updated: '2024-01-01T00:00:00.000Z',
           translation_key: undefined,
           attributes: {
             friendly_name: 'Pi-hole Core Update',
@@ -91,7 +93,7 @@ describe('pi-footer.ts', () => {
     refreshTimeStub.restore();
   });
 
-  it('should return nothing when show returns false for footer section', async () => {
+  it('should return nothing when show returns false for footer section', () => {
     // Configure show to return false for footer section
     showSectionStub.withArgs(mockConfig, 'footer').returns(false);
 
@@ -124,7 +126,7 @@ describe('pi-footer.ts', () => {
     expect(refreshTimeEl?.classList.contains('mocked-refresh-time')).to.be.true;
   });
 
-  it('should call createVersionItem for each update in the device', async () => {
+  it('should call createVersionItem for each update in the device', () => {
     // Call createFooter
     createFooter(mockElement, mockHass, mockConfig, mockDevice);
 
@@ -137,7 +139,7 @@ describe('pi-footer.ts', () => {
     });
   });
 
-  it('should call refreshTime with the correct parameters', async () => {
+  it('should call refreshTime with the correct parameters', () => {
     // Call createFooter
     createFooter(mockElement, mockHass, mockConfig, mockDevice);
 

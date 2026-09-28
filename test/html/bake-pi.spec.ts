@@ -1,4 +1,4 @@
-import type { HomeAssistant } from '@hass/types';
+import type { HomeAssistant } from '@homeassistant-extras/hass/types';
 import { renderPiHoleCard } from '@html/bake-pi';
 import * as systemMetricsGraphModule from '@html/components/create-system-metrics-graph';
 import * as piCrustModule from '@html/pi-crust';

@@ -1,4 +1,4 @@
-import type { HomeAssistant } from '@hass/types';
+import type { HomeAssistant } from '@homeassistant-extras/hass/types';
 import type { LitElement } from 'lit';
 import { property } from 'lit/decorators.js';
 
@@ -10,7 +10,8 @@ export interface HassUpdateElement {
   hass?: HomeAssistant;
 }
 
-export type Constructor<T = {}> = new (...args: any[]) => T;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- mixin constructor
+export type Constructor<T = object> = new (...args: any[]) => T;
 
 export const HassUpdateMixin = <T extends Constructor<LitElement>>(
   superClass: T,

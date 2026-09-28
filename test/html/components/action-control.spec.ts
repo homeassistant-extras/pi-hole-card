@@ -40,6 +40,8 @@ describe('action-control.ts', () => {
     mockEntity = {
       entity_id: 'button.test_action',
       state: 'on',
+      last_changed: '2024-01-01T00:00:00.000Z',
+      last_updated: '2024-01-01T00:00:00.000Z',
       translation_key: undefined,
       attributes: {
         friendly_name: 'Test Action',

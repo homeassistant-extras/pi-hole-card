@@ -10,6 +10,7 @@
 !*.ts
 !.prettierrc
 !.nycrc
+!eslint.config.mjs
 !assets/**
 !dist/**
 !.github/**

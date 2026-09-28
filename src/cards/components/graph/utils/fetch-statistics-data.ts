@@ -1,4 +1,4 @@
-import type { HomeAssistant } from '@hass/types';
+import type { HomeAssistant } from '@homeassistant-extras/hass/types';
 import type { PiHoleDevice } from '@type/types';
 import { getTimeRange } from './time-utils';
 import type { StatisticsResponse } from './types';

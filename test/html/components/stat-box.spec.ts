@@ -1,6 +1,6 @@
 import * as actionHandlerModule from '@delegates/action-handler-delegate';
-import * as formatNumberModule from '@hass/common/number/format_number';
-import type { HomeAssistant } from '@hass/types';
+import * as formatNumberModule from '@homeassistant-extras/hass/common/number/format_number';
+import type { HomeAssistant } from '@homeassistant-extras/hass/types';
 import { createStatBox } from '@html/components/stat-box';
 import * as localizeModule from '@localize/localize';
 import { fixture } from '@open-wc/testing-helpers';
@@ -34,6 +34,8 @@ describe('stat-box.ts', () => {
     mockEntity = {
       entity_id: 'sensor.test_entity',
       state: '123',
+      last_changed: '2024-01-01T00:00:00.000Z',
+      last_updated: '2024-01-01T00:00:00.000Z',
       attributes: { friendly_name: 'Test Entity' },
       translation_key: 'test_key',
     };
@@ -68,7 +70,7 @@ describe('stat-box.ts', () => {
 
     // Create stub for localize
     localizeStub = stub(localizeModule, 'localize');
-    localizeStub.callsFake((hass, key, search, replace) => {
+    localizeStub.callsFake((hass, key) => {
       // Simple mock implementation - return a predictable string based on key
       if (key === 'card.stats.total_queries') return 'Total Queries';
       if (key === 'card.stats.active_clients') return 'Active Clients';
@@ -108,7 +110,7 @@ describe('stat-box.ts', () => {
     );
 
     // Render the template
-    const el = await fixture(result as TemplateResult);
+    await fixture(result as TemplateResult);
 
     // Verify localize was called with the complex params
     expect(
@@ -148,7 +150,7 @@ describe('stat-box.ts', () => {
     expect(footerEl?.textContent?.trim()).to.equal('Manage Lists');
   });
 
-  it('should handle missing entity data', async () => {
+  it('should handle missing entity data', () => {
     const result = createStatBox(
       mockElement,
       mockHass,
@@ -204,7 +206,7 @@ describe('stat-box.ts', () => {
     );
 
     // Render the template
-    const el = await fixture(result as TemplateResult);
+    await fixture(result as TemplateResult);
 
     // Should still render, but action handlers should be called with undefined
     expect(actionHandlerStub.calledWith(undefined)).to.be.true;
@@ -225,6 +227,8 @@ describe('stat-box.ts', () => {
     const percentEntity = {
       ...mockEntity,
       state: '45.6',
+      last_changed: '2024-01-01T00:00:00.000Z',
+      last_updated: '2024-01-01T00:00:00.000Z',
       attributes: {
         ...mockEntity.attributes,
         unit_of_measurement: '%',

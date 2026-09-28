@@ -25,7 +25,7 @@ Error: Cannot find package '@cards/...' imported from test/.../foo.spec.ts
 code: 'ERR_MODULE_NOT_FOUND'
 ```
 
-It is usually not a module-resolution problem. The path aliases (`@cards/*`, `@hass/*`, `@delegates/*`, and similar aliases) are configured in `tsconfig.json` and registered at runtime by the test setup.
+It is usually not a module-resolution problem. The path aliases (`@cards/*`, `@delegates/*`, and similar aliases) are configured in `tsconfig.json` and registered at runtime by the test setup.
 
 The common cause is a TypeScript compilation error somewhere in the imported file or its transitive imports. `ts-node` can surface those as a misleading module-resolution error.
 

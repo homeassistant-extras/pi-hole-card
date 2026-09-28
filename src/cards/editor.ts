@@ -1,7 +1,7 @@
-import { fireEvent } from '@hass/common/dom/fire_event';
-import type { HaFormSchema } from '@hass/components/ha-form/types';
-import type { SelectOption } from '@hass/data/selector';
-import type { HomeAssistant } from '@hass/types';
+import { fireEvent } from '@homeassistant-extras/hass/common/dom/fire_event';
+import type { HaFormSchema } from '@homeassistant-extras/hass/components/ha-form/types';
+import type { SelectOption } from '@homeassistant-extras/hass/data/selector';
+import type { HomeAssistant } from '@homeassistant-extras/hass/types';
 import { localize } from '@localize/localize';
 import type { Config, SectionConfig } from '@type/config';
 import type { TranslationKey } from '@type/locale';
@@ -472,7 +472,7 @@ export class PiHoleCardEditor extends LitElement {
         .data=${this._config}
         .schema=${getSchema(this.hass)}
         .computeLabel=${(s: HaFormSchema) =>
-          localize(this.hass, s.label as any)}
+          localize(this.hass, s.label as TranslationKey)}
         @value-changed=${this._valueChanged}
       ></ha-form>
     `;
@@ -559,13 +559,12 @@ export class PiHoleCardEditor extends LitElement {
     // value. Drop the whole object otherwise so we do not leave noise in YAML.
     if (
       config.aggregation &&
-      (!config.aggregation.mode ||
-        config.aggregation.mode === 'load_balanced')
+      (!config.aggregation.mode || config.aggregation.mode === 'load_balanced')
     ) {
       delete config.aggregation;
     }
 
-    // @ts-ignore
+    // @ts-expect-error -- 'config-changed' is a standard HA lovelace editor event, not typed here
     fireEvent(this, 'config-changed', {
       config,
     });

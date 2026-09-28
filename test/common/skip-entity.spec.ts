@@ -9,6 +9,8 @@ describe('entity-filter.ts', () => {
     const testEntity: EntityInformation = {
       entity_id: 'sensor.test_entity',
       state: 'on',
+      last_changed: '2024-01-01T00:00:00.000Z',
+      last_updated: '2024-01-01T00:00:00.000Z',
       attributes: { friendly_name: 'Test Entity' },
       translation_key: undefined,
     };

@@ -1,5 +1,5 @@
 import { getState } from '@delegates/retrievers/state';
-import type { HomeAssistant } from '@hass/types';
+import type { HomeAssistant } from '@homeassistant-extras/hass/types';
 import type { EntityInformation } from '@type/types';
 
 /**
@@ -35,6 +35,8 @@ export const getDeviceEntities = (
         entity_id: entity.entity_id,
         translation_key: entity.translation_key,
         state: state.state,
+        last_changed: state.last_changed,
+        last_updated: state.last_updated,
         attributes: {
           ...state.attributes,
           friendly_name: name,

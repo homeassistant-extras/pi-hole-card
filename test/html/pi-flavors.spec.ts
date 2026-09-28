@@ -1,6 +1,6 @@
 import * as collapsedStateModule from '@common/collapsed-state';
 import * as showSectionModule from '@common/show-section';
-import type { HomeAssistant } from '@hass/types';
+import type { HomeAssistant } from '@homeassistant-extras/hass/types';
 import * as actionControlModule from '@html/components/action-control';
 import * as stateContentModule from '@html/components/state-content';
 import { createCardActions } from '@html/pi-flavors';
@@ -51,6 +51,8 @@ describe('pi-flavors.ts', () => {
     const mockSwitch1: EntityInformation = {
       entity_id: 'switch.pi_hole',
       state: 'on',
+      last_changed: '2024-01-01T00:00:00.000Z',
+      last_updated: '2024-01-01T00:00:00.000Z',
       attributes: {},
       translation_key: undefined,
     };
@@ -58,6 +60,8 @@ describe('pi-flavors.ts', () => {
     const mockSwitch2: EntityInformation = {
       entity_id: 'switch.pi_hole_group',
       state: 'off',
+      last_changed: '2024-01-01T00:00:00.000Z',
+      last_updated: '2024-01-01T00:00:00.000Z',
       attributes: {},
       translation_key: undefined,
     };
@@ -65,6 +69,8 @@ describe('pi-flavors.ts', () => {
     const mockControl1: EntityInformation = {
       entity_id: 'button.refresh_data',
       state: 'off',
+      last_changed: '2024-01-01T00:00:00.000Z',
+      last_updated: '2024-01-01T00:00:00.000Z',
       attributes: {},
       translation_key: undefined,
     };
@@ -72,6 +78,8 @@ describe('pi-flavors.ts', () => {
     const mockControl2: EntityInformation = {
       entity_id: 'button.restart_dns',
       state: 'off',
+      last_changed: '2024-01-01T00:00:00.000Z',
+      last_updated: '2024-01-01T00:00:00.000Z',
       attributes: {},
       translation_key: undefined,
     };
@@ -171,7 +179,7 @@ describe('pi-flavors.ts', () => {
     expect(actionsDiv!.classList.contains('hidden')).to.be.true;
   });
 
-  it('should call stateContent for each switch entity', async () => {
+  it('should call stateContent for each switch entity', () => {
     createCardActions(mockElement, mockHass, mockSetup, mockDevice, mockConfig);
 
     // Verify that stateContent was called for each switch
@@ -184,7 +192,7 @@ describe('pi-flavors.ts', () => {
     );
   });
 
-  it('should call createActionButton for each control entity', async () => {
+  it('should call createActionButton for each control entity', () => {
     createCardActions(mockElement, mockHass, mockSetup, mockDevice, mockConfig);
 
     // Verify that createActionButton was called for each control
@@ -206,7 +214,7 @@ describe('pi-flavors.ts', () => {
     );
   });
 
-  it('should use default config when controls config is missing', async () => {
+  it('should use default config when controls config is missing', () => {
     // Remove controls config
     delete mockConfig.controls;
 

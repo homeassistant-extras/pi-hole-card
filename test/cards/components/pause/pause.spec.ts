@@ -4,7 +4,7 @@ import * as convertTimeModule from '@common/convert-time';
 import * as showSectionModule from '@common/show-section';
 import * as featureModule from '@config/feature';
 import * as pauseHoleModule from '@delegates/utils/pause-hole';
-import type { HomeAssistant } from '@hass/types';
+import type { HomeAssistant } from '@homeassistant-extras/hass/types';
 import * as localizeModule from '@localize/localize';
 import { fixture, html } from '@open-wc/testing-helpers';
 import type { Config } from '@type/config';
@@ -26,7 +26,7 @@ describe('PauseComponent', () => {
   let hasFeatureStub: sinon.SinonStub;
   let localizeStub: sinon.SinonStub;
 
-  beforeEach(async () => {
+  beforeEach(() => {
     // Restore any existing stubs first
     restore();
 
@@ -34,6 +34,10 @@ describe('PauseComponent', () => {
     mockHass = {
       language: 'en',
     } as HomeAssistant;
+
+    if (!customElements.get('pause-component')) {
+      customElements.define('pause-component', PauseComponent);
+    }
 
     // Create mock PiHole setup with switches
     mockSetup = {
@@ -44,12 +48,16 @@ describe('PauseComponent', () => {
             {
               entity_id: 'switch.pihole_1',
               state: 'on',
+              last_changed: '2024-01-01T00:00:00.000Z',
+              last_updated: '2024-01-01T00:00:00.000Z',
               attributes: { friendly_name: 'Pi-hole 1' },
               translation_key: undefined,
             },
             {
               entity_id: 'switch.pihole_2',
               state: 'off',
+              last_changed: '2024-01-01T00:00:00.000Z',
+              last_updated: '2024-01-01T00:00:00.000Z',
               attributes: { friendly_name: 'Pi-hole 2' },
               translation_key: undefined,
             },
@@ -86,7 +94,7 @@ describe('PauseComponent', () => {
     });
 
     formatSecondsToHumanStub = stub(convertTimeModule, 'formatSecondsToHuman');
-    formatSecondsToHumanStub.callsFake((seconds, hass) => {
+    formatSecondsToHumanStub.callsFake((seconds) => {
       if (seconds === 60) return '1 minute';
       if (seconds === 300) return '5 minutes';
       if (seconds === 900) return '15 minutes';
@@ -115,7 +123,7 @@ describe('PauseComponent', () => {
     restore();
   });
 
-  it('should render nothing when show returns false for pause section', async () => {
+  it('should render nothing when show returns false for pause section', () => {
     // Configure show to return false for pause section
     showSectionStub.withArgs(mockConfig, 'pause').returns(false);
 

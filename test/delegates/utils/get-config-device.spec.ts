@@ -1,6 +1,6 @@
 import { getConfigDevice } from '@delegates/utils/get-config-device';
-import type { DeviceRegistryEntry } from '@hass/data/device_registry';
-import type { HomeAssistant } from '@hass/types';
+import type { DeviceRegistryEntry } from '@homeassistant-extras/hass/data/device/device_registry';
+import type { HomeAssistant } from '@homeassistant-extras/hass/types';
 import { expect } from 'chai';
 import { stub } from 'sinon';
 
@@ -28,7 +28,7 @@ describe('get-config-device.ts', () => {
           config_entries: ['other_config_entry'],
           area_id: 'living_room',
         },
-      } as Record<string, DeviceRegistryEntry>,
+      } as unknown as Record<string, DeviceRegistryEntry>,
     } as unknown as HomeAssistant;
   });
 
@@ -86,7 +86,7 @@ describe('get-config-device.ts', () => {
       id: 'pi_hole_device_2',
       config_entries: ['pi_hole_config_entry_1'],
       name: 'Pi-hole 2',
-    };
+    } as unknown as DeviceRegistryEntry;
 
     // Mock config entry
     callWSStub

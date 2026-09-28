@@ -1,6 +1,7 @@
+// eslint-disable-next-line @typescript-eslint/no-unused-vars -- reassigned below to install a stub
 import { getState } from '@delegates/retrievers/state';
 import { getDeviceEntities } from '@delegates/utils/card-entities';
-import type { HomeAssistant } from '@hass/types';
+import type { HomeAssistant } from '@homeassistant-extras/hass/types';
 import { expect } from 'chai';
 import { stub } from 'sinon';
 

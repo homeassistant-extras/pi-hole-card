@@ -1,4 +1,4 @@
-import type { HomeAssistant } from '@hass/types';
+import type { HomeAssistant } from '@homeassistant-extras/hass/types';
 import { stateDisplay } from '@html/components/state-display';
 import { fixture } from '@open-wc/testing-helpers';
 import type { EntityInformation, EntityState } from '@type/types';
@@ -16,6 +16,8 @@ describe('stateDisplay.ts', () => {
     mockState = {
       entity_id: 'light.test_light',
       state: 'on',
+      last_changed: '2024-01-01T00:00:00.000Z',
+      last_updated: '2024-01-01T00:00:00.000Z',
       attributes: {
         friendly_name: 'Test Light',
         icon: 'mdi:lightbulb',

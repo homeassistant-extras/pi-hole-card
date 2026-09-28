@@ -1,9 +1,9 @@
 import { SystemMetricsGraph } from '@cards/components/graph/system-metrics-graph';
-import * as showSectionModule from '@common/show-section';
 import * as fetchStatisticsDataModule from '@cards/components/graph/utils/fetch-statistics-data';
 import * as processStatisticsResponseModule from '@cards/components/graph/utils/process-statistics-response';
 import * as renderChartModule from '@cards/components/graph/utils/render-chart';
-import type { HomeAssistant } from '@hass/types';
+import * as showSectionModule from '@common/show-section';
+import type { HomeAssistant } from '@homeassistant-extras/hass/types';
 import { fixture, html } from '@open-wc/testing-helpers';
 import type { Config } from '@type/config';
 import type { PiHoleDevice } from '@type/types';
@@ -18,7 +18,6 @@ describe('SystemMetricsGraph', () => {
   let mockConfig: Config;
   let showStub: sinon.SinonStub;
   let fetchStatisticsDataStub: sinon.SinonStub;
-  let processStatisticsResponseStub: sinon.SinonStub;
   let renderChartStub: sinon.SinonStub;
 
   beforeEach(() => {
@@ -27,6 +26,10 @@ describe('SystemMetricsGraph', () => {
     mockHass = {
       language: 'en',
     } as HomeAssistant;
+
+    if (!customElements.get('system-metrics-graph')) {
+      customElements.define('system-metrics-graph', SystemMetricsGraph);
+    }
 
     mockDevice = {
       device_id: 'pi_hole_device',
@@ -57,10 +60,7 @@ describe('SystemMetricsGraph', () => {
     );
     fetchStatisticsDataStub.resolves({ response: {}, error: null });
 
-    processStatisticsResponseStub = stub(
-      processStatisticsResponseModule,
-      'processStatisticsResponse',
-    );
+    stub(processStatisticsResponseModule, 'processStatisticsResponse');
 
     renderChartStub = stub(renderChartModule, 'renderChart');
     renderChartStub.returns(null);

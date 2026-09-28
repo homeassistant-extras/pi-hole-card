@@ -1,6 +1,6 @@
 import * as showSectionModule from '@common/show-section';
 import * as actionHandlerDelegate from '@delegates/action-handler-delegate';
-import type { HomeAssistant } from '@hass/types';
+import type { HomeAssistant } from '@homeassistant-extras/hass/types';
 import * as stateDisplayModule from '@html/components/state-display';
 import { createCardHeader } from '@html/pi-crust';
 import { fixture } from '@open-wc/testing-helpers';
@@ -61,6 +61,8 @@ describe('pi-crust.ts', () => {
       status: {
         entity_id: 'binary_sensor.pi_hole_status',
         state: 'on',
+        last_changed: '2024-01-01T00:00:00.000Z',
+        last_updated: '2024-01-01T00:00:00.000Z',
         attributes: { friendly_name: 'Pi-hole Status' },
         translation_key: undefined,
       },
@@ -89,7 +91,7 @@ describe('pi-crust.ts', () => {
     handleMultiPiClickActionStub.restore();
   });
 
-  it('should return nothing when show returns false for header section', async () => {
+  it('should return nothing when show returns false for header section', () => {
     // Configure show to return false for header section
     showSectionStub.withArgs(mockConfig, 'header').returns(false);
 
@@ -209,7 +211,7 @@ describe('pi-crust.ts', () => {
     expect(iconEl?.getAttribute('icon')).to.equal('mdi:close-circle');
   });
 
-  it('should call stateDisplay with the status entity', async () => {
+  it('should call stateDisplay with the status entity', () => {
     // Render the card header
     createCardHeader(mockElement, mockSetup, mockHass, mockConfig);
 
@@ -224,6 +226,8 @@ describe('pi-crust.ts', () => {
     mockSetup.holes[0]!.remaining_until_blocking_mode = {
       entity_id: 'sensor.pi_hole_remaining_until_blocking_mode',
       state: '300', // 5 minutes
+      last_changed: '2024-01-01T00:00:00.000Z',
+      last_updated: '2024-01-01T00:00:00.000Z',
       attributes: { friendly_name: 'Remaining Time' },
       translation_key: 'remaining_until_blocking_mode',
     };

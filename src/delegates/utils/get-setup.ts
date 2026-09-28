@@ -1,5 +1,5 @@
 import { sortEntitiesByOrder } from '@common/sort-entities';
-import type { HomeAssistant } from '@hass/types';
+import type { HomeAssistant } from '@homeassistant-extras/hass/types';
 import type { Config } from '@type/config';
 import type { EntityInformation, PiHoleSetup } from '@type/types';
 import { getPiHole } from './get-pihole';
@@ -27,7 +27,7 @@ export const getPiSetup = (
   const spareSwitches: EntityInformation[] = [];
 
   const holes = deviceIds
-    .map((deviceId, i) => getPiHole(hass, config, deviceId))
+    .map((deviceId) => getPiHole(hass, config, deviceId))
     .filter((hole) => hole !== undefined)
     .map((hole, i) => {
       if (i > 0) {

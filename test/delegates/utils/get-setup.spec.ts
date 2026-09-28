@@ -1,6 +1,6 @@
 import * as getPiHoleModule from '@delegates/utils/get-pihole';
 import { getPiSetup } from '@delegates/utils/get-setup';
-import type { HomeAssistant } from '@hass/types';
+import type { HomeAssistant } from '@homeassistant-extras/hass/types';
 import type { Config } from '@type/config';
 import { expect } from 'chai';
 import { restore, stub } from 'sinon';

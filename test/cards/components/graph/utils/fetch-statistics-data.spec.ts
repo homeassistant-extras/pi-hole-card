@@ -1,5 +1,5 @@
 import { fetchStatisticsData } from '@cards/components/graph/utils/fetch-statistics-data';
-import type { HomeAssistant } from '@hass/types';
+import type { HomeAssistant } from '@homeassistant-extras/hass/types';
 import type { PiHoleDevice } from '@type/types';
 import { expect } from 'chai';
 import { restore, stub } from 'sinon';

@@ -1,5 +1,5 @@
 import * as showSectionModule from '@common/show-section';
-import type { HomeAssistant } from '@hass/types';
+import type { HomeAssistant } from '@homeassistant-extras/hass/types';
 import * as createAdditionalStatModule from '@html/components/additional-stat';
 import { createAdditionalStats } from '@html/pi-toppings';
 import { fixture } from '@open-wc/testing-helpers';
@@ -69,7 +69,7 @@ describe('pi-toppings.ts', () => {
     showSectionStub.restore();
   });
 
-  it('should return nothing when show returns false for sensors section', async () => {
+  it('should return nothing when show returns false for sensors section', () => {
     // Configure show to return false for sensors section
     showSectionStub.withArgs(mockConfig, 'sensors').returns(false);
 
@@ -188,6 +188,8 @@ describe('pi-toppings.ts', () => {
     const createSensor = (entity_id: string, translation_key?: string) => ({
       entity_id,
       state: '42',
+      last_changed: '2024-01-01T00:00:00.000Z',
+      last_updated: '2024-01-01T00:00:00.000Z',
       attributes: {},
       translation_key: translation_key || 'test_key',
     });
@@ -234,6 +236,8 @@ describe('pi-toppings.ts', () => {
     const createSensor = (entity_id: string, translation_key?: string) => ({
       entity_id,
       state: '42',
+      last_changed: '2024-01-01T00:00:00.000Z',
+      last_updated: '2024-01-01T00:00:00.000Z',
       attributes: {},
       translation_key: translation_key || 'test_key',
     });

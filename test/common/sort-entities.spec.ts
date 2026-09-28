@@ -15,6 +15,8 @@ describe('sort-entities-by-order.ts', () => {
       entity_id,
       translation_key,
       state,
+      last_changed: '2024-01-01T00:00:00.000Z',
+      last_updated: '2024-01-01T00:00:00.000Z',
       attributes,
     });
 

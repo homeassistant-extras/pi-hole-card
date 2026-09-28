@@ -1,5 +1,5 @@
-import type { HomeAssistant } from '@hass/types';
-import type { HassEntity } from '@hass/ws/types';
+import type { HomeAssistant } from '@homeassistant-extras/hass/types';
+import type { HassEntity } from '@homeassistant-extras/hass/ws/types';
 import { html, type TemplateResult } from 'lit';
 
 /**

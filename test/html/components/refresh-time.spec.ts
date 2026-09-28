@@ -1,5 +1,5 @@
 import * as actionHandlerModule from '@delegates/action-handler-delegate';
-import type { HomeAssistant } from '@hass/types';
+import type { HomeAssistant } from '@homeassistant-extras/hass/types';
 import { refreshTime } from '@html/components/refresh-time';
 import * as stateDisplayModule from '@html/components/state-display';
 import { fixture } from '@open-wc/testing-helpers';
@@ -38,6 +38,8 @@ describe('refresh-time.ts', () => {
     const refreshDataEntity: EntityInformation = {
       entity_id: 'button.pi_hole_refresh_data',
       state: 'off',
+      last_changed: '2024-01-01T00:00:00.000Z',
+      last_updated: '2024-01-01T00:00:00.000Z',
       translation_key: 'action_refresh_data',
       attributes: {
         friendly_name: 'Refresh Data',
@@ -48,6 +50,8 @@ describe('refresh-time.ts', () => {
     const latestRefreshEntity: EntityInformation = {
       entity_id: 'sensor.pi_hole_latest_data_refresh',
       state: '2023-05-09 10:15:30',
+      last_changed: '2024-01-01T00:00:00.000Z',
+      last_updated: '2024-01-01T00:00:00.000Z',
       translation_key: 'latest_data_refresh',
       attributes: {
         friendly_name: 'Last Refreshed',

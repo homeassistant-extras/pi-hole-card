@@ -1,14 +1,14 @@
 import { renderPiHoleCard } from '@/html/bake-pi';
 import { getConfigDevice } from '@delegates/utils/get-config-device';
 import { getPiSetup } from '@delegates/utils/get-setup';
-import { fireEvent } from '@hass/common/dom/fire_event';
-import type { HomeAssistant } from '@hass/types';
+import { fireEvent } from '@homeassistant-extras/hass/common/dom/fire_event';
+import type { HomeAssistant } from '@homeassistant-extras/hass/types';
 import type { Config } from '@type/config';
-import { CSSResult, html, LitElement } from 'lit';
+import equal from 'fast-deep-equal';
+import { type CSSResult, html, LitElement } from 'lit';
 import { state } from 'lit/decorators.js';
 import { styles } from '../styles';
 import type { PiHoleSetup } from '../types/types';
-const equal = require('fast-deep-equal');
 
 /**
  * Pi-hole card class

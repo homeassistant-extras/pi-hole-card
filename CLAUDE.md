@@ -15,6 +15,9 @@ This is a **Yarn project**. Use `yarn`, not `npm`.
 - `yarn build` — Parcel production build (entry `src/index.ts` → `dist/pi-hole-card.js`)
 - `yarn watch` — Parcel watch mode
 - `yarn format` — Prettier (with import-sort plugins)
+- `yarn lint` / `yarn lint:fix` — ESLint via `@homeassistant-extras/config`.
+- `yarn typecheck` — `tsc --noEmit` for src and test configs.
+- `yarn pass` — format + typecheck + lint + test.
 - `yarn update` — `npm-check-updates -u && yarn install`
 
 ### Test
@@ -29,7 +32,7 @@ This is a **Yarn project**. Use `yarn`, not `npm`.
 
 ### Diagnosing `yarn test` failures
 
-If `yarn test` fails with `ERR_MODULE_NOT_FOUND` on an `@cards/...` / `@hass/...` / `@delegates/...` import, it is almost always a **TypeScript compilation error** in that file or a transitive import — ts-node surfaces type errors as misleading module-resolution errors. Path aliases are wired correctly via `tsconfig-paths/register` in `mocha.setup.ts`.
+If `yarn test` fails with `ERR_MODULE_NOT_FOUND` on an `@cards/...` / `@homeassistant-extras/hass/...` / `@delegates/...` import, it is almost always a **TypeScript compilation error** in that file or a transitive import — ts-node surfaces type errors as misleading module-resolution errors. Path aliases are wired correctly via `tsconfig-paths/register` in `.mocharc.json`.
 
 Diagnose with:
 
@@ -59,7 +62,7 @@ This is a **Home Assistant custom Lovelace card** built with **Lit** (`lit` + `@
 - **`src/delegates/`** — Business logic, action handlers, and `retrievers/` for HA state/registry access. Keep independent of Lit; return data, not DOM.
 - **`src/common/`** — Pure utilities: entity mapping/sorting, section toggling, time/stat conversion, pause-action variables.
 - **`src/config/`** — Card config defaults, feature flags, pause settings.
-- **`src/hass/`** — Vendored Home Assistant types and helpers (`common/`, `components/`, `data/`, `panels/`, `state/`, `ws/`, `types.ts`). Treat as the boundary to HA's API surface.
+- Home Assistant types/helpers come from `@homeassistant-extras/hass` (not vendored in this repo).
 - **`src/localize/` + `src/translations/`** — `localize.ts` plus per-locale JSON (`en`, `de`, `es`, `fr`, `it`, `bg`, `el`). See [TRANSLATIONS.md](./TRANSLATIONS.md) for the translation workflow.
 - **`src/types/`** — `config.ts`, `locale.ts`, `types.ts` for card-wide TypeScript types.
 
@@ -73,11 +76,11 @@ This is a **Home Assistant custom Lovelace card** built with **Lit** (`lit` + `@
 
 ### TypeScript path aliases (`tsconfig.json`)
 
-`@cards/*`, `@delegates/*`, `@hass/*`, `@html/*`, `@common/*`, `@config/*`, `@localize/*`, `@type/*`, `@util/*`, `@test/*`, `@/*` → corresponding `src/*` (and `test/*`) folders. Strict mode is on with `noUncheckedIndexedAccess` and `noImplicitOverride`.
+`@cards/*`, `@delegates/*`, `@html/*`, `@common/*`, `@config/*`, `@localize/*`, `@type/*`, `@util/*`, `@test/*`, `@/*` → corresponding `src/*` (and `test/*`) folders. Strict mode is on with `noUncheckedIndexedAccess` and `noImplicitOverride`. Import Home Assistant types/helpers from `@homeassistant-extras/hass/...`.
 
 ### Test setup
 
-Mocha + Chai + Sinon, JSDOM via `mocha.setup.ts`, `@open-wc/testing` for Lit components. Tests use `tsconfig.test.json` and mirror the `src/` layout under `test/`.
+Mocha + Chai + Sinon, JSDOM via `@homeassistant-extras/config/mocha/setup.card`, `@open-wc/testing` for Lit components. Tests use `tsconfig.test.json` and mirror the `src/` layout under `test/`.
 
 ### Build
 

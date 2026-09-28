@@ -1,6 +1,6 @@
 import { show } from '@common/show-section';
-import { stateActive } from '@hass/common/entity/state_active';
-import type { HomeAssistant } from '@hass/types';
+import { stateActive } from '@homeassistant-extras/hass/common/entity/state_active';
+import type { HomeAssistant } from '@homeassistant-extras/hass/types';
 import { localize } from '@localize/localize';
 import type { Config } from '@type/config';
 import type { PiHoleSetup } from '@type/types';
@@ -54,26 +54,32 @@ export const createCardHeader = (
     <div class="card-header">
       <div class="name">
         ${icon(element, config, setup)}${config.title ?? 'Pi-hole'}
-        ${setup.holes.length > 1
-          ? html`<span class="multi-status"
-              >(${activeCount}/${setup.holes.length})</span
-            >`
-          : ''}
+        ${
+          setup.holes.length > 1
+            ? html`<span class="multi-status"
+                >(${activeCount}/${setup.holes.length})</span
+              >`
+            : ''
+        }
       </div>
       <div style="color: ${getStatusColor()}">
         <ha-icon
           icon="${activeCount > 0 ? 'mdi:check-circle' : 'mdi:close-circle'}"
         ></ha-icon>
-        ${mixedStatus
-          ? html`${localize(hass, 'card.ui.partial')}`
-          : stateDisplay(hass, primary.status!)}
-        ${activeCount <= 0 && hasRemainingTime
-          ? html`${stateDisplay(
-              hass,
-              primary.remaining_until_blocking_mode!,
-              'remaining-time',
-            )}`
-          : ''}
+        ${
+          mixedStatus
+            ? html`${localize(hass, 'card.ui.partial')}`
+            : stateDisplay(hass, primary.status!)
+        }
+        ${
+          activeCount <= 0 && hasRemainingTime
+            ? html`${stateDisplay(
+                hass,
+                primary.remaining_until_blocking_mode!,
+                'remaining-time',
+              )}`
+            : ''
+        }
       </div>
     </div>
   `;

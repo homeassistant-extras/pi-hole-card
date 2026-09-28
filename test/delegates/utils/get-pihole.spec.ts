@@ -1,9 +1,10 @@
 import * as mapEntitiesModule from '@common/map-entities';
 import * as skipEntityModule from '@common/skip-entity';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars -- reassigned below to install a stub
 import { getDevice } from '@delegates/retrievers/device';
 import * as cardEntitiesModule from '@delegates/utils/card-entities';
 import { getPiHole } from '@delegates/utils/get-pihole';
-import type { HomeAssistant } from '@hass/types';
+import type { HomeAssistant } from '@homeassistant-extras/hass/types';
 import type { Config } from '@type/config';
 import type { EntityInformation } from '@type/types';
 import { expect } from 'chai';
@@ -91,7 +92,7 @@ describe('get-pihole.ts', () => {
     getDeviceEntitiesStub.returns(mockEntities);
 
     // Configure mapEntitiesByTranslationKey to return true for translation keys that exist
-    mapEntitiesByTranslationKeyStub.callsFake((entity, device) => {
+    mapEntitiesByTranslationKeyStub.callsFake((entity) => {
       return !!entity.translation_key;
     });
 
@@ -126,11 +127,7 @@ describe('get-pihole.ts', () => {
     // Configure mapEntitiesByTranslationKey to return false (so the entity goes to other arrays)
     mapEntitiesByTranslationKeyStub.returns(false);
 
-    const result = getPiHole(
-      mockHass,
-      mockConfig,
-      mockConfig.device_id as string,
-    );
+    getPiHole(mockHass, mockConfig, mockConfig.device_id as string);
 
     // Verify shouldSkipEntity was called for each entity
     expect(shouldSkipEntityStub.callCount).to.equal(mockEntities.length);
@@ -165,7 +162,7 @@ describe('get-pihole.ts', () => {
     shouldSkipEntityStub.returns(false);
 
     // Get the result
-    const result = getPiHole(mockHass, mockConfig, DEVICE_ID);
+    getPiHole(mockHass, mockConfig, DEVICE_ID);
 
     // Verify that entities were processed in the order specified by entity_order
     // Check calls to mapEntitiesByTranslationKey which should reflect processing order
@@ -206,6 +203,8 @@ function createEntity(
     entity_id,
     translation_key,
     state,
+    last_changed: '2024-01-01T00:00:00.000Z',
+    last_updated: '2024-01-01T00:00:00.000Z',
     attributes,
   };
 }

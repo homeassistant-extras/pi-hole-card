@@ -1,7 +1,9 @@
+// eslint-disable-next-line @typescript-eslint/no-unused-vars -- reassigned below to install a stub
 import { formatSecondsToHHMMSS } from '@common/convert-time';
 import { handlePauseClick } from '@delegates/utils/pause-hole';
-import * as fireEventModule from '@hass/common/dom/fire_event';
-import type { HomeAssistant } from '@hass/types';
+import * as fireEventModule from '@homeassistant-extras/hass/common/dom/fire_event';
+import type { ActionConfig } from '@homeassistant-extras/hass/data/lovelace/config/action';
+import type { HomeAssistant } from '@homeassistant-extras/hass/types';
 import type { Config } from '@type/config';
 import type { PiHoleSetup } from '@type/types';
 import { expect } from 'chai';
@@ -160,7 +162,7 @@ describe('handle-pause-click.ts', () => {
       perform_action: 'script.turn_on',
       data: { entity_id: 'script.test' },
     };
-    mockConfig.pause = { tap_action: action };
+    mockConfig.pause = { tap_action: action as unknown as ActionConfig };
 
     handlePauseClick(
       mockHass,
@@ -192,7 +194,7 @@ describe('handle-pause-click.ts', () => {
         profile_id: ['{{ device_id }}'],
       },
     };
-    mockConfig.pause = { tap_action: action };
+    mockConfig.pause = { tap_action: action as unknown as ActionConfig };
 
     handlePauseClick(mockHass, mockSetup, 900, mockConfig, undefined, host);
 
@@ -212,7 +214,7 @@ describe('handle-pause-click.ts', () => {
       tap_action: {
         action: 'perform-action',
         perform_action: 'script.turn_on',
-      },
+      } as unknown as ActionConfig,
     };
 
     handlePauseClick(mockHass, mockSetup, 60, mockConfig);

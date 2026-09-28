@@ -1,9 +1,9 @@
 import { formatSecondsToHHMMSS } from '@common/convert-time';
 import { substitutePauseActionVars } from '@common/pause-action-vars';
 import { hasFeature } from '@config/feature';
-import { fireEvent } from '@hass/common/dom/fire_event';
-import type { ActionConfigParams } from '@hass/panels/lovelace/common/handle-action';
-import type { HomeAssistant } from '@hass/types';
+import { fireEvent } from '@homeassistant-extras/hass/common/dom/fire_event';
+import type { ActionConfigParams } from '@homeassistant-extras/hass/panels/lovelace/common/handle-action';
+import type { HomeAssistant } from '@homeassistant-extras/hass/types';
 import type { Config } from '@type/config';
 import type { PiHoleSetup } from '@type/types';
 
@@ -38,7 +38,6 @@ export const handlePauseClick = (
         entityId,
       }),
     };
-    // @ts-ignore
     fireEvent(node, 'hass-action', {
       config: actionParams,
       action: 'tap',
@@ -53,14 +52,14 @@ export const handlePauseClick = (
 
   if (entityId) {
     // Use the new entity-based service call
-    hass.callService(domain, service, {
+    void hass.callService(domain, service, {
       duration: formatSecondsToHHMMSS(seconds),
       entity_id: [entityId],
     });
   } else {
     // Fall back to device-based service call for backward compatibility
     setup.holes.forEach((hole) => {
-      hass.callService(domain, service, {
+      void hass.callService(domain, service, {
         device_id: hole.device_id,
         duration: formatSecondsToHHMMSS(seconds),
       });

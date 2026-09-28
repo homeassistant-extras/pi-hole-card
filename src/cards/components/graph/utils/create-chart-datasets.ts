@@ -1,5 +1,5 @@
 import type { ChartConfig } from '@type/config';
-import type { ChartDataset } from 'chart.js';
+import type { ChartDataset, ScriptableContext } from 'chart.js';
 
 type LineType = ChartConfig['line_type'] | undefined;
 
@@ -40,9 +40,9 @@ export const createChartDatasets = (
 
   const getCpuBackgroundColor = ():
     | string
-    | ((context: any) => string | CanvasGradient) => {
+    | ((context: ScriptableContext<'line'>) => string | CanvasGradient) => {
     if (effectiveLineType === 'gradient') {
-      return function (context: any) {
+      return function (context: ScriptableContext<'line'>) {
         const chart = context.chart;
         const { ctx, chartArea } = chart;
         if (!chartArea) {
@@ -59,9 +59,9 @@ export const createChartDatasets = (
 
   const getMemoryBackgroundColor = ():
     | string
-    | ((context: any) => string | CanvasGradient) => {
+    | ((context: ScriptableContext<'line'>) => string | CanvasGradient) => {
     if (effectiveLineType === 'gradient') {
-      return function (context: any) {
+      return function (context: ScriptableContext<'line'>) {
         const chart = context.chart;
         const { ctx, chartArea } = chart;
         if (!chartArea) {
@@ -81,7 +81,7 @@ export const createChartDatasets = (
       label: 'CPU Usage',
       data: cpuValues,
       borderColor: isGradient
-        ? function (context: any) {
+        ? function (context: ScriptableContext<'line'>) {
             const chart = context.chart;
             const { ctx, chartArea } = chart;
             if (!chartArea) {
@@ -97,7 +97,7 @@ export const createChartDatasets = (
       label: 'Memory Usage',
       data: memoryValues,
       borderColor: isGradient
-        ? function (context: any) {
+        ? function (context: ScriptableContext<'line'>) {
             const chart = context.chart;
             const { ctx, chartArea } = chart;
             if (!chartArea) {
