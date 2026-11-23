@@ -53,7 +53,7 @@
     "@types/node": "^26.6.6",
     "@types/sinon": "^22.0.2",
     "chai": "^6.3.0",
-    "eslint": "^10.14.0",
+    "eslint": "^10.15.0",
     "eslint-plugin-lit": "^2.3.1",
     "eslint-plugin-wc": "^3.1.0",
     "globals": "^17.14.0",
@@ -67,7 +67,7 @@
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
     "typescript": "^6.0.3",
-    "typescript-eslint": "^8.72.2"
+    "typescript-eslint": "^8.73.0"
   },
   "dependencies": {
     "@homeassistant-extras/hass": "^0.8.0",
